@@ -40,14 +40,21 @@ def parse_markdown(md_text, current_url):
         path = match.group(1)
         if not path or path == "/":
             return f'href="{relative_prefix}index.html"'
-        path = path.lstrip('/')
-        # Remove trailing slash
-        path = path.rstrip('/')
+        path = path.strip('/')
         return f'href="{relative_prefix}{path}/index.html"'
         
     md_text = re.sub(r'href="/matcha/([^"]*)"', rewrite_matcha_link, md_text)
     md_text = re.sub(r'href="/matcha"', f'href="{relative_prefix}index.html"', md_text)
-    md_text = re.sub(r'\[([^\]]+)\]\(/matcha/([^\)]*)\)', lambda m: f'[{m.group(1)}]({relative_prefix}{m.group(2)}index.html)' if m.group(2) else f'[{m.group(1)}]({relative_prefix}index.html)', md_text)
+    
+    def rewrite_markdown_link(match):
+        link_text = match.group(1)
+        path = match.group(2) or ""
+        if not path or path == "/":
+            return f'[{link_text}]({relative_prefix}index.html)'
+        path = path.strip('/')
+        return f'[{link_text}]({relative_prefix}{path}/index.html)'
+        
+    md_text = re.sub(r'\[([^\]]+)\]\(/matcha/([^\)]*)\)', rewrite_markdown_link, md_text)
     md_text = re.sub(r'\[([^\]]+)\]\(/matcha\)', f'[\\1]({relative_prefix}index.html)', md_text)
     
     # Also fix standard external link markup style
