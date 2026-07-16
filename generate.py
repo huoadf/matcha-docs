@@ -15,7 +15,8 @@ PAGES = [
     {"id": "lua-base-library", "title": "Lua base library", "group": "Functions", "src": "lua-base-library.md", "url": "lua-base-library/index.html", "breadcrumb": "Lua base library"},
     {"id": "classes", "title": "Classes", "group": "Reference", "src": "classes.md", "url": "classes/index.html", "breadcrumb": "Classes"},
     {"id": "datatypes", "title": "Datatypes", "group": "Reference", "src": "datatypes.md", "url": "datatypes/index.html", "breadcrumb": "Datatypes"},
-    {"id": "drawing", "title": "Drawing", "group": "Reference", "src": "drawing.md", "url": "drawing/index.html", "breadcrumb": "Drawing"}
+    {"id": "drawing", "title": "Drawing", "group": "Reference", "src": "drawing.md", "url": "drawing/index.html", "breadcrumb": "Drawing"},
+    {"id": "gc-guide", "title": "GC modding guide", "group": "Reference", "src": "gc-guide.md", "url": "gc-guide/index.html", "breadcrumb": "GC modding guide"}
 ]
 
 # Load layout template
@@ -415,4 +416,50 @@ with open("search-index.json", "w", encoding="utf-8") as f_idx:
     json.dump(search_index_db, f_idx, indent=2)
 
 print("Generated search-index.json")
+
+# Generate llms-full.txt
+llms_full_content = ["# Matcha documentation\n\n> LuaVM documentation\n\n"]
+for page in PAGES:
+    src_file = os.path.join("src", page["src"])
+    if os.path.exists(src_file):
+        with open(src_file, "r", encoding="utf-8") as f_in:
+            page_md = f_in.read()
+        # Clean up GitBook specific tags for LLM readability
+        page_md = re.sub(r'\{% hint style="([^"]+)" %\}', r'> **[\1]**', page_md)
+        page_md = page_md.replace('{% endhint %}', '')
+        page_md = page_md.replace('::: cards', '').replace(':::', '')
+        
+        url_subpath = page['url'].replace('index.html', '')
+        llms_full_content.append(f"---\n\n# {page['title']}\n\nSource: https://huoadf.github.io/matcha-docs/{url_subpath}\n\n{page_md}\n")
+
+with open("llms-full.txt", "w", encoding="utf-8") as f_llms_full:
+    f_llms_full.write("\n".join(llms_full_content))
+print("Generated llms-full.txt")
+
+# Generate llms.txt (brief summary)
+llms_summary = """# Matcha Docs
+> LuaVM documentation for Matcha
+
+## Directory
+- [Getting started](https://huoadf.github.io/matcha-docs/) - Introduction to Matcha LuaVM.
+- [Globals](https://huoadf.github.io/matcha-docs/functions-globals/) - Globals loadstring, identifyexecutor, decompile, gethwid, getrbxversion...
+- [Console & input](https://huoadf.github.io/matcha-docs/functions-console-input/) - print, warn, mouse clicks, key presses...
+- [Scheduler & misc](https://huoadf.github.io/matcha-docs/functions-misc/) - wait, spawn, require, run_secure...
+- [Memory](https://huoadf.github.io/matcha-docs/memory/) - getbase, memory_read, memory_write...
+- [Garbage collector](https://huoadf.github.io/matcha-docs/garbage-collector/) - getgc, setgc, applygc...
+- [File system](https://huoadf.github.io/matcha-docs/filesystem/) - readfile, writefile, appendfile, makefolder...
+- [HTTP](https://huoadf.github.io/matcha-docs/http/) - httpget, httppost...
+- [Lua base library](https://huoadf.github.io/matcha-docs/lua-base-library/) - type, tostring, unpack, pcall...
+- [Classes](https://huoadf.github.io/matcha-docs/classes/) - BasePart, Camera, DataModel, Workspace...
+- [Datatypes](https://huoadf.github.io/matcha-docs/datatypes/) - Vector3, CFrame, Vector2, Color3, Ray, UDim, UDim2...
+- [Drawing](https://huoadf.github.io/matcha-docs/drawing/) - Drawing API, Square, Line, Circle, ESP Overlay example...
+- [GC modding guide](https://huoadf.github.io/matcha-docs/gc-guide/) - Step-by-step tutorial on weapon modifier scripts using GC scans.
+
+For the full detailed documentation text, visit [llms-full.txt](https://huoadf.github.io/matcha-docs/llms-full.txt).
+"""
+
+with open("llms.txt", "w", encoding="utf-8") as f_llms:
+    f_llms.write(llms_summary)
+print("Generated llms.txt")
+
 print("All documentation generated successfully!")

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HTTP · Matcha docs</title>
-  <meta name="description" content="Matcha LuaVM documentation - HTTP">
+  <title>GC modding guide · Matcha docs</title>
+  <meta name="description" content="Matcha LuaVM documentation - GC modding guide">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050505'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%237bc96f'/%3E%3C/svg%3E">
   
   <!-- Fonts -->
@@ -93,14 +93,14 @@
         <a class="nav-item " href="../memory/">Memory</a>
         <a class="nav-item " href="../garbage-collector/">Garbage collector</a>
         <a class="nav-item " href="../filesystem/">File system</a>
-        <a class="nav-item active" href="../http/">HTTP</a>
+        <a class="nav-item " href="../http/">HTTP</a>
         <a class="nav-item " href="../lua-base-library/">Lua base library</a>
         
         <div class="nav-group">Reference</div>
         <a class="nav-item " href="../classes/">Classes</a>
         <a class="nav-item " href="../datatypes/">Datatypes</a>
         <a class="nav-item " href="../drawing/">Drawing</a>
-        <a class="nav-item " href="../gc-guide/">GC modding guide</a>
+        <a class="nav-item active" href="../gc-guide/">GC modding guide</a>
       </div>
     </nav>
     
@@ -109,34 +109,107 @@
         <div class="breadcrumb">
           <a href="../">Matcha</a> 
           <span>/</span> 
-          HTTP
+          GC modding guide
         </div>
-        <h1 id="http" tabindex="-1">
-          HTTP 
-          <a class="header-anchor" href="#http" aria-hidden="true">#</a>
+        <h1 id="gc-guide" tabindex="-1">
+          GC modding guide 
+          <a class="header-anchor" href="#gc-guide" aria-hidden="true">#</a>
         </h1>
-        <div class="callout callout-info"><span class="callout-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg></span><div class="callout-body"><p><code>httpget</code> and <code>httppost</code> are <strong>synchronous</strong> — they block until the response arrives and return the response body as a string. They never raise an error: an HTTP error status (e.g. 404) returns the server's response body, and a connection failure (e.g. an unreachable host) returns an empty string. They are the global equivalents of <code>game:HttpGet</code> / <code>game:HttpPost</code>.</p></div></div>
-<h2 id="httpget" tabindex="-1">httpget <a class="header-anchor" href="#httpget" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function httpget(url: string, headers: table?): string</code></pre>
-<p>Sends a GET request to <code>url</code> and returns the response body. Optionally pass a table of request headers.</p>
-<pre><code class="language-lua">local body = httpget("https://example.com/data.json")
-if body ~= "" then
-    local data = game:GetService("HttpService"):JSONDecode(body)
-end</code></pre>
-<h2 id="httppost" tabindex="-1">httppost <a class="header-anchor" href="#httppost" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function httppost(url: string, body: string, contentType: string?, headers: table?): string</code></pre>
-<p>Sends a POST request to <code>url</code> with <code>body</code> and returns the response body. <code>contentType</code> defaults to <code>"application/json"</code>. Optionally pass a table of request headers as the fourth argument.</p>
-<pre><code class="language-lua">local resp = httppost("https://example.com/api", '{"action":"ping"}', "application/json")</code></pre>
+        <p>This guide explains how to find and modify values held in the game's Lua garbage collector (GC), such as weapon stats, flight speeds, or cooldowns.</p>
+<p>In Luau, many games store configuration tables (like gun modules or physics settings) inside local variables or local tables. Because these are tracked by the Lua garbage collector, Matcha's GC functions allow you to scan the collector memory, find these values by name, and modify them directly.</p>
+<hr>
+<h2 id="gc-functions-overview" tabindex="-1">GC Functions Overview <a class="header-anchor" href="#gc-functions-overview" aria-hidden="true">#</a></h2>
+<p>Matcha provides three functions for interacting with the garbage collector:</p>
+<ol>
+<li><strong><code>getgc</code></strong>: Scans the garbage collector and returns matching objects. Since scanning the entire GC is slow, you should run <code>getgc</code> <strong>once</strong> at the start of your script and save the results (caching them).</li>
+<li><strong><code>applygc</code></strong>: Updates values inside a previously cached scan. This is extremely fast and can be safely run inside loops or events.</li>
+<li><strong><code>setgc</code></strong>: Scans the GC and updates matching values instantly. Because this scans on every call, <strong>do not run this inside loops</strong> as it will lag the game client.</li>
+</ol>
+<hr>
+<h2 id="method-1-cached-modding-recommended" tabindex="-1">Method 1: Cached Modding (Recommended) <a class="header-anchor" href="#method-1-cached-modding-recommended" aria-hidden="true">#</a></h2>
+<p>This is the standard and most performant method. You scan the GC once, retrieve a cache of references, and repeatedly apply modifications. This is perfect for values that the game checks constantly or resets (e.g. ammo or recoil).</p>
+<h3 id="step-1-scan-and-cache" tabindex="-1">Step 1: Scan and Cache <a class="header-anchor" href="#step-1-scan-and-cache" aria-hidden="true">#</a></h3>
+<p>We use <code>getgc</code> to search the collector for specific keys we want to modify (e.g. <code>"FireRate"</code>, <code>"SpreadAngle"</code>, <code>"MagAmmo"</code>):</p>
+<pre><code class="language-lua">-- Scan the garbage collector once for our target keys and cache them
+local cache = getgc({"FireRate", "SpreadAngle", "MagAmmo"})</code></pre>
+<h3 id="step-2-apply-modifications" tabindex="-1">Step 2: Apply Modifications <a class="header-anchor" href="#step-2-apply-modifications" aria-hidden="true">#</a></h3>
+<p>Once you have the cache, you can modify singular values or apply modifications in groups using <code>applygc</code>.</p>
+<h4>Modifying a single value:</h4>
+<pre><code class="language-lua">-- Set FireRate to 0 (rapid fire)
+applygc(cache, "FireRate", 0)
+
+-- Set MagAmmo to 999999
+applygc(cache, "MagAmmo", 999999)</code></pre>
+<h4>Modifying a group of values:</h4>
+<pre><code class="language-lua">-- Apply multiple modifications in one fast operation
+applygc(cache, {
+    FireRate = 0,
+    SpreadAngle = 0,
+    MagAmmo = 999999
+})</code></pre>
+<hr>
+<h2 id="method-2-instant-modding-one-offs" tabindex="-1">Method 2: Instant Modding (One-Offs) <a class="header-anchor" href="#method-2-instant-modding-one-offs" aria-hidden="true">#</a></h2>
+<p>If you only need to modify a value once (e.g., unlocking a game pass state or setting a one-time configuration) and do not need to repeat it, you can use <code>setgc</code>.</p>
+<pre><code class="language-lua">-- Singular modification
+setgc("FireRate", 0)
+
+-- Group modification
+setgc({
+    FireRate = 0,
+    SpreadAngle = 0,
+    CameraRecoilMult = 0,
+    MagAmmo = 999999
+})</code></pre>
+<hr>
+<h2 id="practical-example-auto-updating-gun-modifier" tabindex="-1">Practical Example: Auto-Updating Gun Modifier <a class="header-anchor" href="#practical-example-auto-updating-gun-modifier" aria-hidden="true">#</a></h2>
+<p>Many modern Roblox games (like *Blackhawk Rescue Mission 5*) rebuild or reset your gun configuration tables whenever you respawn, change weapons, or customize a weapon.</p>
+<p>To ensure your modifications remain active, you should:</p>
+<ol>
+<li>Listen for character spawns or weapon changes.</li>
+<li>Re-run <code>getgc</code> to scan for the new tables.</li>
+<li>Apply modifications.</li>
+</ol>
+<p>Here is a complete, ready-to-run template:</p>
+<pre><code class="language-lua">local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+-- Function to modify our stats
+local function modifyWeaponStats()
+    print("Scanning garbage collector...")
+    
+    -- Scan and cache the target properties
+    local cache = getgc({
+        "FireRate",
+        "SpreadAngle",
+        "CameraRecoilMult",
+        "MagAmmo"
+    })
+    
+    -- Apply modifications
+    local modifiedCount = applygc(cache, {
+        FireRate = 0.01,         -- Insanely fast fire rate
+        SpreadAngle = 0,         -- Zero spread (laser accuracy)
+        CameraRecoilMult = 0,    -- Zero recoil
+        MagAmmo = 999999         -- Infinite magazine
+    })
+    
+    print("Weapon stats modified! Total changes applied: " .. tostring(modifiedCount))
+end
+
+-- Run once on script load
+modifyWeaponStats()
+
+-- Automatically re-apply modifications when character respawns
+LocalPlayer.CharacterAdded:Connect(function()
+    task.wait(1.5) -- Wait a moment for gun tables to load into memory
+    modifyWeaponStats()
+end)</code></pre>
       </article>
       
       <nav class="pager">
-<a class="pager-link prev" href="../filesystem/">
+<a class="pager-link prev" href="../drawing/">
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg)"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-<span><em>Previous</em>File system</span>
-</a>
-<a class="pager-link next" href="../lua-base-library/">
-<span><em>Next</em>Lua base library</span>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+<span><em>Previous</em>Drawing</span>
 </a>
 </nav>
     </main>
@@ -144,8 +217,12 @@ end</code></pre>
     <aside class="toc">
       <div class="toc-title">On this page</div>
       <ul class="toc-list">
-<li class="toc-l2"><a href="#httpget">httpget</a></li>
-<li class="toc-l2"><a href="#httppost">httppost</a></li>
+<li class="toc-l2"><a href="#gc-functions-overview">GC Functions Overview</a></li>
+<li class="toc-l2"><a href="#method-1-cached-modding-recommended">Method 1 Cached Modding (Recommended)</a></li>
+<li class="toc-l3"><a href="#step-1-scan-and-cache">Step 1 Scan and Cache</a></li>
+<li class="toc-l3"><a href="#step-2-apply-modifications">Step 2 Apply Modifications</a></li>
+<li class="toc-l2"><a href="#method-2-instant-modding-one-offs">Method 2 Instant Modding (One-Offs)</a></li>
+<li class="toc-l2"><a href="#practical-example-auto-updating-gun-modifier">Practical Example Auto-Updating Gun Modifier</a></li>
 </ul>
     </aside>
   </div>
