@@ -34,28 +34,28 @@ def parse_markdown(md_text, current_url):
     relative_prefix = "../" * depth
     
     # 1. Pre-process links starting with /matcha/ to use relative prefix
-    # E.g. /matcha/functions-globals/ -> relative_prefix + functions-globals/index.html
-    # /matcha/ -> relative_prefix + index.html
+    # E.g. /matcha/functions-globals/ -> relative_prefix + functions-globals/
+    # /matcha/ -> relative_prefix
     def rewrite_matcha_link(match):
         path = match.group(1)
         if not path or path == "/":
-            return f'href="{relative_prefix}index.html"'
+            return f'href="{relative_prefix}"'
         path = path.strip('/')
-        return f'href="{relative_prefix}{path}/index.html"'
+        return f'href="{relative_prefix}{path}/"'
         
     md_text = re.sub(r'href="/matcha/([^"]*)"', rewrite_matcha_link, md_text)
-    md_text = re.sub(r'href="/matcha"', f'href="{relative_prefix}index.html"', md_text)
+    md_text = re.sub(r'href="/matcha"', f'href="{relative_prefix}"', md_text)
     
     def rewrite_markdown_link(match):
         link_text = match.group(1)
         path = match.group(2) or ""
         if not path or path == "/":
-            return f'[{link_text}]({relative_prefix}index.html)'
+            return f'[{link_text}]({relative_prefix})'
         path = path.strip('/')
-        return f'[{link_text}]({relative_prefix}{path}/index.html)'
+        return f'[{link_text}]({relative_prefix}{path}/)'
         
     md_text = re.sub(r'\[([^\]]+)\]\(/matcha/([^\)]*)\)', rewrite_markdown_link, md_text)
-    md_text = re.sub(r'\[([^\]]+)\]\(/matcha\)', f'[\\1]({relative_prefix}index.html)', md_text)
+    md_text = re.sub(r'\[([^\]]+)\]\(/matcha\)', f'[\\1]({relative_prefix})', md_text)
     
     # Also fix standard external link markup style
     md_text = re.sub(r'<([^>]+)>', r'<a href="\1">\1</a>', md_text)
@@ -314,10 +314,15 @@ def build_pager(index):
     depth = current_page["url"].count('/')
     relative_prefix = "../" * depth
     
+    def get_link_url(url):
+        if url == "index.html":
+            return ""
+        return url.replace("index.html", "")
+
     pager_html = ['<nav class="pager">']
     
     if prev_page:
-        prev_url = f"{relative_prefix}{prev_page['url']}"
+        prev_url = f"{relative_prefix}{get_link_url(prev_page['url'])}"
         pager_html.append(f'<a class="pager-link prev" href="{prev_url}">')
         pager_html.append('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg)"><path d="M5 12h14M12 5l7 7-7 7"/></svg>')
         pager_html.append(f'<span><em>Previous</em>{prev_page["title"]}</span>')
@@ -326,7 +331,7 @@ def build_pager(index):
         pager_html.append('<span></span>') # empty space
         
     if next_page:
-        next_url = f"{relative_prefix}{next_page['url']}"
+        next_url = f"{relative_prefix}{get_link_url(next_page['url'])}"
         pager_html.append(f'<a class="pager-link next" href="{next_url}">')
         pager_html.append(f'<span><em>Next</em>{next_page["title"]}</span>')
         pager_html.append('<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>')
@@ -392,9 +397,14 @@ for idx, page in enumerate(PAGES):
     search_body = re.sub(r'<[^>]+>', ' ', html_content)
     search_body = re.sub(r'\s+', ' ', search_body).strip()
     
+    def get_link_url(url):
+        if url == "index.html":
+            return ""
+        return url.replace("index.html", "")
+
     search_index_db.append({
         "title": page["title"],
-        "url": page["url"],
+        "url": get_link_url(page["url"]),
         "group": page["group"],
         "headings": headings_titles,
         "body": search_body

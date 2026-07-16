@@ -1,7 +1,7 @@
 [
   {
     "title": "Getting started",
-    "url": "index.html",
+    "url": "",
     "group": "",
     "headings": [
       "Browse the docs",
@@ -11,7 +11,7 @@
   },
   {
     "title": "Globals",
-    "url": "functions-globals/index.html",
+    "url": "functions-globals/",
     "group": "Functions",
     "headings": [
       "loadstring / load",
@@ -37,7 +37,7 @@
   },
   {
     "title": "Console & input",
-    "url": "functions-console-input/index.html",
+    "url": "functions-console-input/",
     "group": "Functions",
     "headings": [
       "Console",
@@ -68,7 +68,7 @@
   },
   {
     "title": "Miscellaneous & scheduler",
-    "url": "functions-misc/index.html",
+    "url": "functions-misc/",
     "group": "Functions",
     "headings": [
       "run_secure",
@@ -86,7 +86,7 @@
   },
   {
     "title": "Memory",
-    "url": "memory/index.html",
+    "url": "memory/",
     "group": "Functions",
     "headings": [
       "Memory Types",
@@ -98,7 +98,7 @@
   },
   {
     "title": "Garbage collector",
-    "url": "garbage-collector/index.html",
+    "url": "garbage-collector/",
     "group": "Functions",
     "headings": [
       "getgc",
@@ -109,7 +109,7 @@
   },
   {
     "title": "File system",
-    "url": "filesystem/index.html",
+    "url": "filesystem/",
     "group": "Functions",
     "headings": [
       "writefile",
@@ -126,7 +126,7 @@
   },
   {
     "title": "HTTP",
-    "url": "http/index.html",
+    "url": "http/",
     "group": "Functions",
     "headings": [
       "httpget",
@@ -136,7 +136,7 @@
   },
   {
     "title": "Lua base library",
-    "url": "lua-base-library/index.html",
+    "url": "lua-base-library/",
     "group": "Functions",
     "headings": [
       "Type & conversion",
@@ -163,7 +163,7 @@
   },
   {
     "title": "Classes",
-    "url": "classes/index.html",
+    "url": "classes/",
     "group": "Reference",
     "headings": [
       "BasePart",
@@ -252,7 +252,7 @@
   },
   {
     "title": "Datatypes",
-    "url": "datatypes/index.html",
+    "url": "datatypes/",
     "group": "Reference",
     "headings": [
       "Vector3",
@@ -329,7 +329,7 @@
   },
   {
     "title": "Drawing",
-    "url": "drawing/index.html",
+    "url": "drawing/",
     "group": "Reference",
     "headings": [
       "Drawing.new",
