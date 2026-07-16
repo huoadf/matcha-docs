@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Globals · Matcha docs</title>
+  <meta name="description" content="Matcha LuaVM documentation - Globals">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050505'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%237bc96f'/%3E%3C/svg%3E">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  
+  <!-- Theme CSS -->
+  <link rel="stylesheet" href="../assets/main.css">
+  <style>:root{--accent:#7bc96f}</style>
+  
+  <script>
+    (function(){try{var t=localStorage.getItem("wd-theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}})();
+  </script>
+</head>
+<body data-project="matcha" data-search-path="../search-index.json">
+  <header class="topbar">
+    <button class="iconbtn menu-btn" data-menu aria-label="Open navigation">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+    <a class="brand" href="../index.html">
+      <span class="brand-dot" style="background:#7bc96f"></span>Matcha docs
+    </a>
+    <div class="switcher">
+      <button class="switcher-btn" data-switcher aria-haspopup="true" aria-expanded="false">
+        Matcha 
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+          <path d="m6 9 6 6 6-6"/>
+        </svg>
+      </button>
+      <div class="switcher-menu" data-switcher-menu hidden>
+        <a href="../index.html" class="switcher-item active">
+          <span>Matcha</span>
+          <em>LuaVM documentation</em>
+        </a>
+      </div>
+    </div>
+    
+    <div class="topbar-spacer"></div>
+    
+    <button class="searchbtn" data-search-open>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7"/>
+        <path d="m21 21-4.3-4.3"/>
+      </svg>
+      <span>Search</span>
+      <kbd>⌘K</kbd>
+    </button>
+    
+    <button class="connectbtn" data-connect-open aria-label="Connect to AI">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 2v6M15 2v6"/>
+        <path d="M6 8h12v2a6 6 0 0 1-6 6 6 6 0 0 1-6-6z"/>
+        <path d="M12 16v6"/>
+      </svg>
+      <span>Connect</span>
+    </button>
+    
+    <button class="iconbtn" data-theme-toggle aria-label="Toggle theme">
+      <span class="theme-sun">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+        </svg>
+      </span>
+      <span class="theme-moon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+        </svg>
+      </span>
+    </button>
+  </header>
+  
+  <div class="layout">
+    <div class="scrim" data-scrim></div>
+    <nav class="sidebar" data-sidebar>
+      <div class="sidebar-inner">
+        <a class="nav-item " href="../index.html">Getting started</a>
+        
+        <div class="nav-group">Functions</div>
+        <a class="nav-item active" href="../functions-globals/index.html">Globals</a>
+        <a class="nav-item " href="../functions-console-input/index.html">Console &amp; input</a>
+        <a class="nav-item " href="../functions-misc/index.html">Miscellaneous &amp; scheduler</a>
+        <a class="nav-item " href="../memory/index.html">Memory</a>
+        <a class="nav-item " href="../garbage-collector/index.html">Garbage collector</a>
+        <a class="nav-item " href="../filesystem/index.html">File system</a>
+        <a class="nav-item " href="../http/index.html">HTTP</a>
+        <a class="nav-item " href="../lua-base-library/index.html">Lua base library</a>
+        
+        <div class="nav-group">Reference</div>
+        <a class="nav-item " href="../classes/index.html">Classes</a>
+        <a class="nav-item " href="../datatypes/index.html">Datatypes</a>
+        <a class="nav-item " href="../drawing/index.html">Drawing</a>
+      </div>
+    </nav>
+    
+    <main class="content">
+      <article class="prose">
+        <div class="breadcrumb">
+          <a href="../index.html">Matcha</a> 
+          <span>/</span> 
+          Globals
+        </div>
+        <h1 id="functions-globals" tabindex="-1">
+          Globals 
+          <a class="header-anchor" href="#functions-globals" aria-hidden="true">#</a>
+        </h1>
+        <h2 id="loadstring-load" tabindex="-1">loadstring / load <a class="header-anchor" href="#loadstring-load" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function loadstring(chunk: string, chunkname: string?): function
+function load(chunk: string, chunkname: string?): function</code></pre>
+<p>Compiles <code>chunk</code> into a callable function (<code>load</code> is equivalent for string chunks).</p>
+<div class="callout callout-warning"><span class="callout-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg></span><div class="callout-body"><p>Two Matcha-specific differences: a syntax error still returns a function (the error only prints when the function is called — never <code>nil</code> + message, so it isn't catchable), and a chunk's top-level <code>return</code> values are dropped (<code>loadstring("return 5")()</code> yields nothing — pass results out via globals).</p></div></div>
+<h2 id="decompile" tabindex="-1">decompile <a class="header-anchor" href="#decompile" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function decompile(script: Instance): string</code></pre>
+<p>Returns the decompiled source of <code>script</code> (a <code>LocalScript</code>, <code>ModuleScript</code>, or <code>Script</code>) as a string. If decompilation fails, an error message is printed to the console.</p>
+<h2 id="worldtoscreen" tabindex="-1">WorldToScreen <a class="header-anchor" href="#worldtoscreen" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function WorldToScreen(position: Vector3): (Vector2, boolean)</code></pre>
+<p>Projects a 3D world <code>position</code> into 2D screen space. Returns the screen position in <strong>pixels</strong> (top-left origin) and a boolean that is <code>true</code> when the point is on screen; off screen or behind the camera returns <code>(0, 0)</code> and <code>false</code>.</p>
+<pre><code class="language-lua">local pos, onScreen = WorldToScreen(part.Position)
+if onScreen then
+    -- pos.X, pos.Y are valid pixel coordinates
+end</code></pre>
+<h2 id="notify" tabindex="-1">notify <a class="header-anchor" href="#notify" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function notify(message: string, title: string, duration: number)</code></pre>
+<p>Shows a Matcha notification with the given message, title, and duration (seconds). Returns nothing.</p>
+<h2 id="identifyexecutor" tabindex="-1">identifyexecutor <a class="header-anchor" href="#identifyexecutor" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function identifyexecutor(): (string, string)</code></pre>
+<p>Returns <strong>two</strong> strings — the executor name (<code>"Matcha"</code>) and its version (e.g. <code>"1.0.0"</code>).</p>
+<h2 id="getscripthash" tabindex="-1">getscripthash <a class="header-anchor" href="#getscripthash" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function getscripthash(script: Instance): string</code></pre>
+<p>Returns the FNV-1a 64-bit hash of <code>script</code>'s bytecode, as a decimal string (e.g. <code>"9950850631277792934"</code>).</p>
+<h2 id="getgamename" tabindex="-1">getgamename <a class="header-anchor" href="#getgamename" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function getgamename(): string</code></pre>
+<p>Returns the name of the current place (e.g. <code>"Baseplate"</code>). This is the place title, distinct from <code>game.Name</code>.</p>
+<h2 id="getscripts" tabindex="-1">getscripts <a class="header-anchor" href="#getscripts" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function getscripts(): { Instance }</code></pre>
+<p>Returns an array of every loaded script instance (<code>LocalScript</code>, <code>ModuleScript</code>, <code>Script</code>) — a large list on a real place.</p>
+<h2 id="getscriptbytecode" tabindex="-1">getscriptbytecode <a class="header-anchor" href="#getscriptbytecode" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function getscriptbytecode(script: Instance): string</code></pre>
+<p>Returns the raw compiled bytecode of <code>script</code> as a binary string.</p>
+<h2 id="base64encode" tabindex="-1">base64encode <a class="header-anchor" href="#base64encode" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function base64encode(data: string): string</code></pre>
+<p>Encodes <code>data</code> to a standard Base64 string.</p>
+<div class="callout callout-warning"><span class="callout-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg></span><div class="callout-body"><p><code>data</code> is treated as null-terminated: encoding <strong>stops at the first <code>\0</code> byte</strong> (<code>base64encode("a\0b")</code> encodes only <code>"a"</code>). Base64 here is therefore not safe for arbitrary binary that may contain null bytes.</p></div></div>
+<h2 id="base64decode" tabindex="-1">base64decode <a class="header-anchor" href="#base64decode" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function base64decode(data: string): string</code></pre>
+<p>Decodes a Base64 string back to the original bytes. <code>base64decode("")</code> returns <code>""</code>.</p>
+<h2 id="getpingvalue" tabindex="-1">GetPingValue <a class="header-anchor" href="#getpingvalue" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function GetPingValue(): number</code></pre>
+<p>Returns the current ping value (latency to the server) in milliseconds.</p>
+<h2 id="tick" tabindex="-1">tick <a class="header-anchor" href="#tick" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function tick(): number</code></pre>
+<p>Returns a high-precision time in seconds, advancing in real time. It's a <strong>monotonic clock</strong>, not a Unix timestamp like Roblox's <code>tick</code> — use it for measuring elapsed time.</p>
+<h2 id="typeof" tabindex="-1">typeof <a class="header-anchor" href="#typeof" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function typeof(value: any): string</code></pre>
+<p>Like <code>type</code>, but returns the specific name for Roblox datatypes and objects (<code>Vector3</code>, <code>CFrame</code>, <code>Instance</code>, <code>Drawing</code>, …) instead of <code>userdata</code>.</p>
+<h2 id="getfenv" tabindex="-1">getfenv <a class="header-anchor" href="#getfenv" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function getfenv(target: function | number): table</code></pre>
+<p>Returns an environment table. With no argument, <code>0</code>, or <code>1</code>, it returns the global environment (<code>_G</code>). Passing a function returns that function's environment (which differs from <code>_G</code> only if it was changed with <code>setfenv</code>).</p>
+<h2 id="setfenv" tabindex="-1">setfenv <a class="header-anchor" href="#setfenv" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function setfenv(f: function, env: table): function</code></pre>
+<p>Sets the environment of function <code>f</code> to <code>env</code> and returns <code>f</code>. Global lookups inside <code>f</code> are then resolved from <code>env</code> instead of <code>_G</code>.</p>
+<pre><code class="language-lua">local sandbox = { print = print }
+setfenv(f, sandbox) -- f now only sees `sandbox` as its globals</code></pre>
+<h2 id="getrbxversion" tabindex="-1">getrbxversion <a class="header-anchor" href="#getrbxversion" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function getrbxversion(): string</code></pre>
+<p>Returns the current Roblox client version (e.g. <code>"0.635.0.6350567"</code>).</p>
+<h2 id="gethwid" tabindex="-1">gethwid <a class="header-anchor" href="#gethwid" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function gethwid(): string</code></pre>
+<p>Returns the unique hardware identifier (HWID) of the current machine.</p>
+      </article>
+      
+      <nav class="pager">
+<a class="pager-link prev" href="../index.html">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg)"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+<span><em>Previous</em>Getting started</span>
+</a>
+<a class="pager-link next" href="../functions-console-input/index.html">
+<span><em>Next</em>Console & input</span>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+</a>
+</nav>
+    </main>
+    
+    <aside class="toc">
+      <div class="toc-title">On this page</div>
+      <ul class="toc-list">
+<li class="toc-l2"><a href="#loadstring-load">loadstring / load</a></li>
+<li class="toc-l2"><a href="#decompile">decompile</a></li>
+<li class="toc-l2"><a href="#worldtoscreen">WorldToScreen</a></li>
+<li class="toc-l2"><a href="#notify">notify</a></li>
+<li class="toc-l2"><a href="#identifyexecutor">identifyexecutor</a></li>
+<li class="toc-l2"><a href="#getscripthash">getscripthash</a></li>
+<li class="toc-l2"><a href="#getgamename">getgamename</a></li>
+<li class="toc-l2"><a href="#getscripts">getscripts</a></li>
+<li class="toc-l2"><a href="#getscriptbytecode">getscriptbytecode</a></li>
+<li class="toc-l2"><a href="#base64encode">base64encode</a></li>
+<li class="toc-l2"><a href="#base64decode">base64decode</a></li>
+<li class="toc-l2"><a href="#getpingvalue">GetPingValue</a></li>
+<li class="toc-l2"><a href="#tick">tick</a></li>
+<li class="toc-l2"><a href="#typeof">typeof</a></li>
+<li class="toc-l2"><a href="#getfenv">getfenv</a></li>
+<li class="toc-l2"><a href="#setfenv">setfenv</a></li>
+<li class="toc-l2"><a href="#getrbxversion">getrbxversion</a></li>
+<li class="toc-l2"><a href="#gethwid">gethwid</a></li>
+</ul>
+    </aside>
+  </div>
+  
+  <!-- Search Overlay -->
+  <div class="search-overlay" data-search-overlay hidden>
+    <div class="search-panel">
+      <div class="search-head">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"/>
+          <path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="search" placeholder="Search Matcha docs" data-search-input autocomplete="off" spellcheck="false">
+        <kbd>Esc</kbd>
+      </div>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  
+  <!-- Connect Overlay -->
+  <div class="connect-overlay" data-connect-overlay hidden>
+    <div class="connect-panel">
+      <div class="connect-head">
+        <div>
+          <h2 class="connect-title">Connect Matcha docs to your AI</h2>
+          <p class="connect-sub">Give any MCP-capable agent live search &amp; read access to these docs.</p>
+        </div>
+        <button class="iconbtn connect-close" type="button" data-connect-close aria-label="Close">✕</button>
+      </div>
+      <div class="connect-url-label">MCP server URL</div>
+      <div class="connect-url">
+        <code>https://doc.wabisabi.mom/matcha/mcp</code>
+        <button class="copy-btn" type="button">Copy</button>
+      </div>
+      <div class="tabs connect-tabs" data-tabs>
+        <div class="tab-panel" data-tab="Claude Code">
+          <p class="connect-note">Run in your terminal:</p>
+          <div class="connect-snippet">
+            <pre><code>claude mcp add --transport http wabi-matcha https://doc.wabisabi.mom/matcha/mcp</code></pre>
+            <button class="copy-btn" type="button">Copy</button>
+          </div>
+        </div>
+        <div class="tab-panel" data-tab="Cursor">
+          <p class="connect-note">Add to <code>.cursor/mcp.json</code>:</p>
+          <div class="connect-snippet">
+            <pre><code>{
+  &quot;mcpServers&quot;: {
+    &quot;wabi-matcha&quot;: {
+      &quot;url&quot;: &quot;https://doc.wabisabi.mom/matcha/mcp&quot;
+    }
+  }
+}</code></pre>
+            <button class="copy-btn" type="button">Copy</button>
+          </div>
+        </div>
+        <div class="tab-panel" data-tab="VS Code">
+          <p class="connect-note">Add to <code>.vscode/mcp.json</code>:</p>
+          <div class="connect-snippet">
+            <pre><code>{
+  &quot;servers&quot;: {
+    &quot;wabi-matcha&quot;: {
+      &quot;type&quot;: &quot;http&quot;,
+      &quot;url&quot;: &quot;https://doc.wabisabi.mom/matcha/mcp&quot;
+    }
+  }
+}</code></pre>
+            <button class="copy-btn" type="button">Copy</button>
+          </div>
+        </div>
+      </div>
+      <p class="connect-foot">No setup? Point any agent at <code>llms.txt</code> or <code>llms-full.txt</code>.</p>
+    </div>
+  </div>
+  
+  <!-- Scripts -->
+  <script src="../assets/highlight.min.js"></script>
+  <script src="../assets/client.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Classes · Matcha docs</title>
+  <meta name="description" content="Matcha LuaVM documentation - Classes">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050505'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%237bc96f'/%3E%3C/svg%3E">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  
+  <!-- Theme CSS -->
+  <link rel="stylesheet" href="../assets/main.css">
+  <style>:root{--accent:#7bc96f}</style>
+  
+  <script>
+    (function(){try{var t=localStorage.getItem("wd-theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}})();
+  </script>
+</head>
+<body data-project="matcha" data-search-path="../search-index.json">
+  <header class="topbar">
+    <button class="iconbtn menu-btn" data-menu aria-label="Open navigation">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+    <a class="brand" href="../index.html">
+      <span class="brand-dot" style="background:#7bc96f"></span>Matcha docs
+    </a>
+    <div class="switcher">
+      <button class="switcher-btn" data-switcher aria-haspopup="true" aria-expanded="false">
+        Matcha 
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+          <path d="m6 9 6 6 6-6"/>
+        </svg>
+      </button>
+      <div class="switcher-menu" data-switcher-menu hidden>
+        <a href="../index.html" class="switcher-item active">
+          <span>Matcha</span>
+          <em>LuaVM documentation</em>
+        </a>
+      </div>
+    </div>
+    
+    <div class="topbar-spacer"></div>
+    
+    <button class="searchbtn" data-search-open>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7"/>
+        <path d="m21 21-4.3-4.3"/>
+      </svg>
+      <span>Search</span>
+      <kbd>⌘K</kbd>
+    </button>
+    
+    <button class="connectbtn" data-connect-open aria-label="Connect to AI">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 2v6M15 2v6"/>
+        <path d="M6 8h12v2a6 6 0 0 1-6 6 6 6 0 0 1-6-6z"/>
+        <path d="M12 16v6"/>
+      </svg>
+      <span>Connect</span>
+    </button>
+    
+    <button class="iconbtn" data-theme-toggle aria-label="Toggle theme">
+      <span class="theme-sun">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+        </svg>
+      </span>
+      <span class="theme-moon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+        </svg>
+      </span>
+    </button>
+  </header>
+  
+  <div class="layout">
+    <div class="scrim" data-scrim></div>
+    <nav class="sidebar" data-sidebar>
+      <div class="sidebar-inner">
+        <a class="nav-item " href="../index.html">Getting started</a>
+        
+        <div class="nav-group">Functions</div>
+        <a class="nav-item " href="../functions-globals/index.html">Globals</a>
+        <a class="nav-item " href="../functions-console-input/index.html">Console &amp; input</a>
+        <a class="nav-item " href="../functions-misc/index.html">Miscellaneous &amp; scheduler</a>
+        <a class="nav-item " href="../memory/index.html">Memory</a>
+        <a class="nav-item " href="../garbage-collector/index.html">Garbage collector</a>
+        <a class="nav-item " href="../filesystem/index.html">File system</a>
+        <a class="nav-item " href="../http/index.html">HTTP</a>
+        <a class="nav-item " href="../lua-base-library/index.html">Lua base library</a>
+        
+        <div class="nav-group">Reference</div>
+        <a class="nav-item active" href="../classes/index.html">Classes</a>
+        <a class="nav-item " href="../datatypes/index.html">Datatypes</a>
+        <a class="nav-item " href="../drawing/index.html">Drawing</a>
+      </div>
+    </nav>
+    
+    <main class="content">
+      <article class="prose">
+        <div class="breadcrumb">
+          <a href="../index.html">Matcha</a> 
+          <span>/</span> 
+          Classes
+        </div>
+        <h1 id="classes" tabindex="-1">
+          Classes 
+          <a class="header-anchor" href="#classes" aria-hidden="true">#</a>
+        </h1>
+        <h2 id="basepart" tabindex="-1">BasePart <a class="header-anchor" href="#basepart" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/classes/BasePart">https://create.roblox.com/docs/reference/engine/classes/BasePart</a></p>
+<p><strong>Properties</strong></p>
+<h3 id="size" tabindex="-1">Size <a class="header-anchor" href="#size" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">BasePart.Size: Vector3</code></pre>
+<h3 id="position" tabindex="-1">Position <a class="header-anchor" href="#position" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">BasePart.Position: Vector3</code></pre>
+<h3 id="transparency" tabindex="-1">Transparency <a class="header-anchor" href="#transparency" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">BasePart.Transparency: number</code></pre>
+<h3 id="color" tabindex="-1">Color <a class="header-anchor" href="#color" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">BasePart.Color: Color3</code></pre>
+<h3 id="velocity" tabindex="-1">Velocity <a class="header-anchor" href="#velocity" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">BasePart.Velocity: Vector3</code></pre>
+<h3 id="assemblylinearvelocity" tabindex="-1">AssemblyLinearVelocity <a class="header-anchor" href="#assemblylinearvelocity" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">BasePart.AssemblyLinearVelocity: Vector3</code></pre>
+<h3 id="cancollide" tabindex="-1">CanCollide <a class="header-anchor" href="#cancollide" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">BasePart.CanCollide: bool</code></pre>
+<h2 id="camera" tabindex="-1">Camera <a class="header-anchor" href="#camera" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/classes/Camera">https://create.roblox.com/docs/reference/engine/classes/Camera</a></p>
+<p><strong>Constructors</strong></p>
+<h3 id="lookat" tabindex="-1">lookAt <a class="header-anchor" href="#lookat" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Camera.lookAt(at: Vector3, lookAt: Vector3)</code></pre>
+<p><strong>Properties</strong></p>
+<h3 id="viewportsize" tabindex="-1">ViewportSize <a class="header-anchor" href="#viewportsize" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Camera.ViewportSize: Vector2</code></pre>
+<h3 id="fieldofview" tabindex="-1">FieldOfView <a class="header-anchor" href="#fieldofview" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Camera.FieldOfView: number</code></pre>
+<h3 id="position" tabindex="-1">Position <a class="header-anchor" href="#position" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Camera.Position: Vector3</code></pre>
+<h3 id="cframe" tabindex="-1">CFrame <a class="header-anchor" href="#cframe" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Camera.CFrame: CFrame</code></pre>
+<h2 id="datamodel" tabindex="-1">DataModel <a class="header-anchor" href="#datamodel" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/classes/DataModel">https://create.roblox.com/docs/reference/engine/classes/DataModel</a></p>
+<p><strong>Properties</strong></p>
+<h3 id="placeid" tabindex="-1">PlaceId <a class="header-anchor" href="#placeid" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Instance.PlaceId: number</code></pre>
+<h3 id="gameid" tabindex="-1">GameId <a class="header-anchor" href="#gameid" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Instance.GameId: number</code></pre>
+<h3 id="jobid" tabindex="-1">JobId <a class="header-anchor" href="#jobid" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Instance.JobId: string</code></pre>
+<p><strong>Methods</strong></p>
+<h3 id="httpget" tabindex="-1">HttpGet <a class="header-anchor" href="#httpget" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function DataModel:HttpGet(url: string, headers: table?): string</code></pre>
+<h3 id="httppost" tabindex="-1">HttpPost <a class="header-anchor" href="#httppost" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function DataModel:HttpPost(url: string, data: string, contentType: string?, headers: table?): string</code></pre>
+<h3 id="getservice" tabindex="-1">GetService <a class="header-anchor" href="#getservice" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function DataModel:GetService(name: string): Instance</code></pre>
+<h3 id="isloaded" tabindex="-1">isLoaded <a class="header-anchor" href="#isloaded" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function DataModel:isLoaded(): boolean</code></pre>
+<p>Returns <code>true</code> if the game is fully loaded, else <code>false</code>.</p>
+<h2 id="httpservice" tabindex="-1">HttpService <a class="header-anchor" href="#httpservice" aria-hidden="true">#</a></h2>
+<p><strong>Methods</strong></p>
+<h3 id="jsonencode" tabindex="-1">JSONEncode <a class="header-anchor" href="#jsonencode" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function HttpService:JSONEncode(tbl: table): string</code></pre>
+<h3 id="jsondecode" tabindex="-1">JSONDecode <a class="header-anchor" href="#jsondecode" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function HttpService:JSONDecode(str: string): table</code></pre>
+<h3 id="generateguid" tabindex="-1">GenerateGUID <a class="header-anchor" href="#generateguid" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function HttpService:GenerateGUID(): string</code></pre>
+<h2 id="humanoid" tabindex="-1">Humanoid <a class="header-anchor" href="#humanoid" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/classes/Humanoid">https://create.roblox.com/docs/reference/engine/classes/Humanoid</a></p>
+<p><strong>Properties</strong></p>
+<h3 id="maxhealth" tabindex="-1">MaxHealth <a class="header-anchor" href="#maxhealth" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Humanoid.MaxHealth: number</code></pre>
+<h3 id="health" tabindex="-1">Health <a class="header-anchor" href="#health" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Humanoid.Health: number</code></pre>
+<h2 id="model" tabindex="-1">Model <a class="header-anchor" href="#model" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/classes/Model">https://create.roblox.com/docs/reference/engine/classes/Model</a></p>
+<p><strong>Properties</strong></p>
+<h3 id="primarypart" tabindex="-1">PrimaryPart <a class="header-anchor" href="#primarypart" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Model.PrimaryPart: BasePart</code></pre>
+<h2 id="workspace" tabindex="-1">Workspace <a class="header-anchor" href="#workspace" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/classes/Workspace">https://create.roblox.com/docs/reference/engine/classes/Workspace</a></p>
+<p><strong>Properties</strong></p>
+<h3 id="currentcamera" tabindex="-1">CurrentCamera <a class="header-anchor" href="#currentcamera" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Workspace.CurrentCamera: Camera</code></pre>
+<p><strong>Methods</strong></p>
+<h3 id="raycast" tabindex="-1">Raycast <a class="header-anchor" href="#raycast" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Workspace:Raycast(origin: Vector3, direction: Vector3, params: RaycastParams?): RaycastResult?</code></pre>
+<p>Projects a ray from <code>origin</code> in the direction of <code>direction</code> using optional <code>RaycastParams</code>. Returns the first <code>RaycastResult</code> hit, or <code>nil</code> if no hit.</p>
+<h2 id="instance" tabindex="-1">Instance <a class="header-anchor" href="#instance" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/classes/Instance">https://create.roblox.com/docs/reference/engine/classes/Instance</a></p>
+<p><strong>Properties</strong></p>
+<h3 id="name" tabindex="-1">Name <a class="header-anchor" href="#name" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Instance.Name: string</code></pre>
+<h3 id="classname" tabindex="-1">ClassName <a class="header-anchor" href="#classname" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Instance.ClassName: string</code></pre>
+<h3 id="parent" tabindex="-1">Parent <a class="header-anchor" href="#parent" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Instance.Parent: Instance</code></pre>
+<h3 id="address" tabindex="-1">Address <a class="header-anchor" href="#address" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Instance.Address: number</code></pre>
+<p>Hexadecimal number representing the Instance’s memory address.</p>
+<p><strong>Methods</strong></p>
+<h3 id="findfirstchildofclass" tabindex="-1">FindFirstChildOfClass <a class="header-anchor" href="#findfirstchildofclass" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Instance:FindFirstChildOfClass(name: string): Instance</code></pre>
+<h3 id="findfirstchild" tabindex="-1">FindFirstChild <a class="header-anchor" href="#findfirstchild" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Instance:FindFirstChild(name: string): Instance</code></pre>
+<h3 id="isa" tabindex="-1">IsA <a class="header-anchor" href="#isa" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Instance:IsA(name: string): boolean</code></pre>
+<h3 id="getfullname" tabindex="-1">GetFullName <a class="header-anchor" href="#getfullname" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Instance:GetFullName(): string</code></pre>
+<h3 id="getchildren" tabindex="-1">GetChildren <a class="header-anchor" href="#getchildren" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Instance:GetChildren(): { Instance }</code></pre>
+<h3 id="getattribute" tabindex="-1">GetAttribute <a class="header-anchor" href="#getattribute" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Instance:GetAttribute(name: string): any</code></pre>
+<h3 id="getattributes" tabindex="-1">GetAttributes <a class="header-anchor" href="#getattributes" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Instance:GetAttributes(): { string }</code></pre>
+<h3 id="setattribute" tabindex="-1">SetAttribute <a class="header-anchor" href="#setattribute" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Instance:SetAttribute(name: string, value: any): nil</code></pre>
+<h3 id="getdescendants" tabindex="-1">GetDescendants <a class="header-anchor" href="#getdescendants" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Instance:GetDescendants(): { Instance }</code></pre>
+<h3 id="isdescendantof" tabindex="-1">IsDescendantOf <a class="header-anchor" href="#isdescendantof" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Instance:IsDescendantOf(parent: Instance): boolean</code></pre>
+<h3 id="findfirstchildwhichisa" tabindex="-1">FindFirstChildWhichIsA <a class="header-anchor" href="#findfirstchildwhichisa" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Instance:FindFirstChildWhichIsA(class: string): Instance</code></pre>
+<h3 id="waitforchild" tabindex="-1">WaitForChild <a class="header-anchor" href="#waitforchild" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Instance:WaitForChild(name: string): Instance</code></pre>
+<h2 id="mouse" tabindex="-1">Mouse <a class="header-anchor" href="#mouse" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/classes/Mouse">https://create.roblox.com/docs/reference/engine/classes/Mouse</a></p>
+<p><strong>Properties</strong></p>
+<h3 id="x" tabindex="-1">X <a class="header-anchor" href="#x" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Mouse.X: number</code></pre>
+<h3 id="y" tabindex="-1">Y <a class="header-anchor" href="#y" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Mouse.Y: number</code></pre>
+<h2 id="players" tabindex="-1">Players <a class="header-anchor" href="#players" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/classes/Players">https://create.roblox.com/docs/reference/engine/classes/Players</a></p>
+<p><strong>Properties</strong></p>
+<h3 id="localplayer" tabindex="-1">LocalPlayer <a class="header-anchor" href="#localplayer" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Players.LocalPlayer: Player</code></pre>
+<h3 id="getplayers" tabindex="-1">GetPlayers <a class="header-anchor" href="#getplayers" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Players:GetPlayers(): Table</code></pre>
+<p><strong>Events</strong></p>
+<h3 id="playeradded" tabindex="-1">PlayerAdded <a class="header-anchor" href="#playeradded" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Players.PlayerAdded:Connect(function(player))</code></pre>
+<h3 id="playerremoving" tabindex="-1">PlayerRemoving <a class="header-anchor" href="#playerremoving" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Players.PlayerRemoving:Connect(function(player))</code></pre>
+<h2 id="player" tabindex="-1">Player <a class="header-anchor" href="#player" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/classes/Player">https://create.roblox.com/docs/reference/engine/classes/Player</a></p>
+<p><strong>Properties</strong></p>
+<h3 id="character" tabindex="-1">Character <a class="header-anchor" href="#character" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Player.Character: Model</code></pre>
+<h3 id="team" tabindex="-1">Team <a class="header-anchor" href="#team" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Player.Team: Team</code></pre>
+<h3 id="userid" tabindex="-1">UserId <a class="header-anchor" href="#userid" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Player.UserId: number</code></pre>
+<p><strong>Methods</strong></p>
+<h3 id="getmouse" tabindex="-1">GetMouse <a class="header-anchor" href="#getmouse" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Player:GetMouse(): Mouse</code></pre>
+<h2 id="valuebase" tabindex="-1">ValueBase <a class="header-anchor" href="#valuebase" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/classes/ValueBase">https://create.roblox.com/docs/reference/engine/classes/ValueBase</a></p>
+<p><code>ObjectValue</code>, <code>Color3Value</code>, <code>NumberValue</code>, <code>IntValue</code>, <code>FloatValue</code>, <code>BoolValue</code>, and <code>StringValue</code> all inherit from this class. For simplicity, they do not have separate sub-pages.</p>
+<p><strong>Properties</strong></p>
+<h3 id="value" tabindex="-1">Value <a class="header-anchor" href="#value" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">ValueBase.Value: any</code></pre>
+<h2 id="guiobject" tabindex="-1">GuiObject <a class="header-anchor" href="#guiobject" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/classes/GuiObject">https://create.roblox.com/docs/reference/engine/classes/GuiObject</a></p>
+<p><strong>Properties</strong></p>
+<h3 id="absolutesize" tabindex="-1">AbsoluteSize <a class="header-anchor" href="#absolutesize" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">GuiObject.AbsoluteSize: Vector2</code></pre>
+<h3 id="absoluteposition" tabindex="-1">AbsolutePosition <a class="header-anchor" href="#absoluteposition" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">GuiObject.AbsolutePosition: Vector2</code></pre>
+<h2 id="textlabel" tabindex="-1">TextLabel <a class="header-anchor" href="#textlabel" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/classes/TextLabel">https://create.roblox.com/docs/reference/engine/classes/TextLabel</a></p>
+<p><strong>Properties</strong></p>
+<h3 id="text" tabindex="-1">Text <a class="header-anchor" href="#text" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">TextLabel.Text: string</code></pre>
+<h2 id="meshpart" tabindex="-1">MeshPart <a class="header-anchor" href="#meshpart" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/classes/MeshPart">https://create.roblox.com/docs/reference/engine/classes/MeshPart</a></p>
+<p><strong>Properties</strong></p>
+<h3 id="textureid" tabindex="-1">TextureId <a class="header-anchor" href="#textureid" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">MeshPart.TextureId: string</code></pre>
+<h3 id="meshid" tabindex="-1">MeshId <a class="header-anchor" href="#meshid" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">MeshPart.MeshId: string</code></pre>
+<h2 id="userinputservice" tabindex="-1">UserInputService <a class="header-anchor" href="#userinputservice" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">local UserInputService = game:GetService("UserInputService")</code></pre>
+<p><strong>Events</strong></p>
+<h3 id="inputbegan" tabindex="-1">InputBegan <a class="header-anchor" href="#inputbegan" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua"> UserInputService.InputBegan:Connect(function(input: InputObject, gameProcessed: boolean))</code></pre>
+<h3 id="inputended" tabindex="-1">InputEnded <a class="header-anchor" href="#inputended" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">UserInputService.InputEnded:Connect(function(input: InputObject, gameProcessed: boolean))</code></pre>
+<h2 id="runservice" tabindex="-1">RunService <a class="header-anchor" href="#runservice" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/classes/RunService">https://create.roblox.com/docs/reference/engine/classes/RunService</a></p>
+<p>The <code>RunService</code> service contains methods and events for managing the execution of the game/simulation.</p>
+<p><strong>Events</strong></p>
+<h3 id="renderstepped" tabindex="-1">RenderStepped <a class="header-anchor" href="#renderstepped" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">RunService.RenderStepped:Connect(function(deltaTime: number))</code></pre>
+<p>Fires every frame, prior to the frame being rendered. Passes the time elapsed since the last frame (<code>deltaTime</code>) as a number.</p>
+<h3 id="heartbeat" tabindex="-1">Heartbeat <a class="header-anchor" href="#heartbeat" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">RunService.Heartbeat:Connect(function(deltaTime: number))</code></pre>
+<p>Fires every frame, after the physics simulation has completed. Passes the time elapsed since the last frame (<code>deltaTime</code>) as a number.</p>
+<h3 id="stepped" tabindex="-1">Stepped <a class="header-anchor" href="#stepped" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">RunService.Stepped:Connect(function(deltaTime: number))</code></pre>
+<p>Fires every frame, prior to the physics simulation step. Passes the time elapsed since the last frame (<code>deltaTime</code>) as a number.</p>
+<div class="callout callout-warning"><span class="callout-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg></span><div class="callout-body"><p>In the Matcha VM, the <code>Stepped</code> event only receives one argument (<code>deltaTime: number</code>), unlike the standard Roblox API which receives both <code>time</code> and <code>deltaTime</code>.</p></div></div>
+      </article>
+      
+      <nav class="pager">
+<a class="pager-link prev" href="../lua-base-library/index.html">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg)"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+<span><em>Previous</em>Lua base library</span>
+</a>
+<a class="pager-link next" href="../datatypes/index.html">
+<span><em>Next</em>Datatypes</span>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+</a>
+</nav>
+    </main>
+    
+    <aside class="toc">
+      <div class="toc-title">On this page</div>
+      <ul class="toc-list">
+<li class="toc-l2"><a href="#basepart">BasePart</a></li>
+<li class="toc-l3"><a href="#size">Size</a></li>
+<li class="toc-l3"><a href="#position">Position</a></li>
+<li class="toc-l3"><a href="#transparency">Transparency</a></li>
+<li class="toc-l3"><a href="#color">Color</a></li>
+<li class="toc-l3"><a href="#velocity">Velocity</a></li>
+<li class="toc-l3"><a href="#assemblylinearvelocity">AssemblyLinearVelocity</a></li>
+<li class="toc-l3"><a href="#cancollide">CanCollide</a></li>
+<li class="toc-l2"><a href="#camera">Camera</a></li>
+<li class="toc-l3"><a href="#lookat">lookAt</a></li>
+<li class="toc-l3"><a href="#viewportsize">ViewportSize</a></li>
+<li class="toc-l3"><a href="#fieldofview">FieldOfView</a></li>
+<li class="toc-l3"><a href="#position">Position</a></li>
+<li class="toc-l3"><a href="#cframe">CFrame</a></li>
+<li class="toc-l2"><a href="#datamodel">DataModel</a></li>
+<li class="toc-l3"><a href="#placeid">PlaceId</a></li>
+<li class="toc-l3"><a href="#gameid">GameId</a></li>
+<li class="toc-l3"><a href="#jobid">JobId</a></li>
+<li class="toc-l3"><a href="#httpget">HttpGet</a></li>
+<li class="toc-l3"><a href="#httppost">HttpPost</a></li>
+<li class="toc-l3"><a href="#getservice">GetService</a></li>
+<li class="toc-l3"><a href="#isloaded">isLoaded</a></li>
+<li class="toc-l2"><a href="#httpservice">HttpService</a></li>
+<li class="toc-l3"><a href="#jsonencode">JSONEncode</a></li>
+<li class="toc-l3"><a href="#jsondecode">JSONDecode</a></li>
+<li class="toc-l3"><a href="#generateguid">GenerateGUID</a></li>
+<li class="toc-l2"><a href="#humanoid">Humanoid</a></li>
+<li class="toc-l3"><a href="#maxhealth">MaxHealth</a></li>
+<li class="toc-l3"><a href="#health">Health</a></li>
+<li class="toc-l2"><a href="#model">Model</a></li>
+<li class="toc-l3"><a href="#primarypart">PrimaryPart</a></li>
+<li class="toc-l2"><a href="#workspace">Workspace</a></li>
+<li class="toc-l3"><a href="#currentcamera">CurrentCamera</a></li>
+<li class="toc-l3"><a href="#raycast">Raycast</a></li>
+<li class="toc-l2"><a href="#instance">Instance</a></li>
+<li class="toc-l3"><a href="#name">Name</a></li>
+<li class="toc-l3"><a href="#classname">ClassName</a></li>
+<li class="toc-l3"><a href="#parent">Parent</a></li>
+<li class="toc-l3"><a href="#address">Address</a></li>
+<li class="toc-l3"><a href="#findfirstchildofclass">FindFirstChildOfClass</a></li>
+<li class="toc-l3"><a href="#findfirstchild">FindFirstChild</a></li>
+<li class="toc-l3"><a href="#isa">IsA</a></li>
+<li class="toc-l3"><a href="#getfullname">GetFullName</a></li>
+<li class="toc-l3"><a href="#getchildren">GetChildren</a></li>
+<li class="toc-l3"><a href="#getattribute">GetAttribute</a></li>
+<li class="toc-l3"><a href="#getattributes">GetAttributes</a></li>
+<li class="toc-l3"><a href="#setattribute">SetAttribute</a></li>
+<li class="toc-l3"><a href="#getdescendants">GetDescendants</a></li>
+<li class="toc-l3"><a href="#isdescendantof">IsDescendantOf</a></li>
+<li class="toc-l3"><a href="#findfirstchildwhichisa">FindFirstChildWhichIsA</a></li>
+<li class="toc-l3"><a href="#waitforchild">WaitForChild</a></li>
+<li class="toc-l2"><a href="#mouse">Mouse</a></li>
+<li class="toc-l3"><a href="#x">X</a></li>
+<li class="toc-l3"><a href="#y">Y</a></li>
+<li class="toc-l2"><a href="#players">Players</a></li>
+<li class="toc-l3"><a href="#localplayer">LocalPlayer</a></li>
+<li class="toc-l3"><a href="#getplayers">GetPlayers</a></li>
+<li class="toc-l3"><a href="#playeradded">PlayerAdded</a></li>
+<li class="toc-l3"><a href="#playerremoving">PlayerRemoving</a></li>
+<li class="toc-l2"><a href="#player">Player</a></li>
+<li class="toc-l3"><a href="#character">Character</a></li>
+<li class="toc-l3"><a href="#team">Team</a></li>
+<li class="toc-l3"><a href="#userid">UserId</a></li>
+<li class="toc-l3"><a href="#getmouse">GetMouse</a></li>
+<li class="toc-l2"><a href="#valuebase">ValueBase</a></li>
+<li class="toc-l3"><a href="#value">Value</a></li>
+<li class="toc-l2"><a href="#guiobject">GuiObject</a></li>
+<li class="toc-l3"><a href="#absolutesize">AbsoluteSize</a></li>
+<li class="toc-l3"><a href="#absoluteposition">AbsolutePosition</a></li>
+<li class="toc-l2"><a href="#textlabel">TextLabel</a></li>
+<li class="toc-l3"><a href="#text">Text</a></li>
+<li class="toc-l2"><a href="#meshpart">MeshPart</a></li>
+<li class="toc-l3"><a href="#textureid">TextureId</a></li>
+<li class="toc-l3"><a href="#meshid">MeshId</a></li>
+<li class="toc-l2"><a href="#userinputservice">UserInputService</a></li>
+<li class="toc-l3"><a href="#inputbegan">InputBegan</a></li>
+<li class="toc-l3"><a href="#inputended">InputEnded</a></li>
+<li class="toc-l2"><a href="#runservice">RunService</a></li>
+<li class="toc-l3"><a href="#renderstepped">RenderStepped</a></li>
+<li class="toc-l3"><a href="#heartbeat">Heartbeat</a></li>
+<li class="toc-l3"><a href="#stepped">Stepped</a></li>
+</ul>
+    </aside>
+  </div>
+  
+  <!-- Search Overlay -->
+  <div class="search-overlay" data-search-overlay hidden>
+    <div class="search-panel">
+      <div class="search-head">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"/>
+          <path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="search" placeholder="Search Matcha docs" data-search-input autocomplete="off" spellcheck="false">
+        <kbd>Esc</kbd>
+      </div>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  
+  <!-- Connect Overlay -->
+  <div class="connect-overlay" data-connect-overlay hidden>
+    <div class="connect-panel">
+      <div class="connect-head">
+        <div>
+          <h2 class="connect-title">Connect Matcha docs to your AI</h2>
+          <p class="connect-sub">Give any MCP-capable agent live search &amp; read access to these docs.</p>
+        </div>
+        <button class="iconbtn connect-close" type="button" data-connect-close aria-label="Close">✕</button>
+      </div>
+      <div class="connect-url-label">MCP server URL</div>
+      <div class="connect-url">
+        <code>https://doc.wabisabi.mom/matcha/mcp</code>
+        <button class="copy-btn" type="button">Copy</button>
+      </div>
+      <div class="tabs connect-tabs" data-tabs>
+        <div class="tab-panel" data-tab="Claude Code">
+          <p class="connect-note">Run in your terminal:</p>
+          <div class="connect-snippet">
+            <pre><code>claude mcp add --transport http wabi-matcha https://doc.wabisabi.mom/matcha/mcp</code></pre>
+            <button class="copy-btn" type="button">Copy</button>
+          </div>
+        </div>
+        <div class="tab-panel" data-tab="Cursor">
+          <p class="connect-note">Add to <code>.cursor/mcp.json</code>:</p>
+          <div class="connect-snippet">
+            <pre><code>{
+  &quot;mcpServers&quot;: {
+    &quot;wabi-matcha&quot;: {
+      &quot;url&quot;: &quot;https://doc.wabisabi.mom/matcha/mcp&quot;
+    }
+  }
+}</code></pre>
+            <button class="copy-btn" type="button">Copy</button>
+          </div>
+        </div>
+        <div class="tab-panel" data-tab="VS Code">
+          <p class="connect-note">Add to <code>.vscode/mcp.json</code>:</p>
+          <div class="connect-snippet">
+            <pre><code>{
+  &quot;servers&quot;: {
+    &quot;wabi-matcha&quot;: {
+      &quot;type&quot;: &quot;http&quot;,
+      &quot;url&quot;: &quot;https://doc.wabisabi.mom/matcha/mcp&quot;
+    }
+  }
+}</code></pre>
+            <button class="copy-btn" type="button">Copy</button>
+          </div>
+        </div>
+      </div>
+      <p class="connect-foot">No setup? Point any agent at <code>llms.txt</code> or <code>llms-full.txt</code>.</p>
+    </div>
+  </div>
+  
+  <!-- Scripts -->
+  <script src="../assets/highlight.min.js"></script>
+  <script src="../assets/client.js" defer></script>
+</body>
+</html>

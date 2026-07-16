@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Datatypes · Matcha docs</title>
+  <meta name="description" content="Matcha LuaVM documentation - Datatypes">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050505'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%237bc96f'/%3E%3C/svg%3E">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  
+  <!-- Theme CSS -->
+  <link rel="stylesheet" href="../assets/main.css">
+  <style>:root{--accent:#7bc96f}</style>
+  
+  <script>
+    (function(){try{var t=localStorage.getItem("wd-theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}})();
+  </script>
+</head>
+<body data-project="matcha" data-search-path="../search-index.json">
+  <header class="topbar">
+    <button class="iconbtn menu-btn" data-menu aria-label="Open navigation">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+    <a class="brand" href="../index.html">
+      <span class="brand-dot" style="background:#7bc96f"></span>Matcha docs
+    </a>
+    <div class="switcher">
+      <button class="switcher-btn" data-switcher aria-haspopup="true" aria-expanded="false">
+        Matcha 
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+          <path d="m6 9 6 6 6-6"/>
+        </svg>
+      </button>
+      <div class="switcher-menu" data-switcher-menu hidden>
+        <a href="../index.html" class="switcher-item active">
+          <span>Matcha</span>
+          <em>LuaVM documentation</em>
+        </a>
+      </div>
+    </div>
+    
+    <div class="topbar-spacer"></div>
+    
+    <button class="searchbtn" data-search-open>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7"/>
+        <path d="m21 21-4.3-4.3"/>
+      </svg>
+      <span>Search</span>
+      <kbd>⌘K</kbd>
+    </button>
+    
+    <button class="connectbtn" data-connect-open aria-label="Connect to AI">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 2v6M15 2v6"/>
+        <path d="M6 8h12v2a6 6 0 0 1-6 6 6 6 0 0 1-6-6z"/>
+        <path d="M12 16v6"/>
+      </svg>
+      <span>Connect</span>
+    </button>
+    
+    <button class="iconbtn" data-theme-toggle aria-label="Toggle theme">
+      <span class="theme-sun">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+        </svg>
+      </span>
+      <span class="theme-moon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+        </svg>
+      </span>
+    </button>
+  </header>
+  
+  <div class="layout">
+    <div class="scrim" data-scrim></div>
+    <nav class="sidebar" data-sidebar>
+      <div class="sidebar-inner">
+        <a class="nav-item " href="../index.html">Getting started</a>
+        
+        <div class="nav-group">Functions</div>
+        <a class="nav-item " href="../functions-globals/index.html">Globals</a>
+        <a class="nav-item " href="../functions-console-input/index.html">Console &amp; input</a>
+        <a class="nav-item " href="../functions-misc/index.html">Miscellaneous &amp; scheduler</a>
+        <a class="nav-item " href="../memory/index.html">Memory</a>
+        <a class="nav-item " href="../garbage-collector/index.html">Garbage collector</a>
+        <a class="nav-item " href="../filesystem/index.html">File system</a>
+        <a class="nav-item " href="../http/index.html">HTTP</a>
+        <a class="nav-item " href="../lua-base-library/index.html">Lua base library</a>
+        
+        <div class="nav-group">Reference</div>
+        <a class="nav-item " href="../classes/index.html">Classes</a>
+        <a class="nav-item active" href="../datatypes/index.html">Datatypes</a>
+        <a class="nav-item " href="../drawing/index.html">Drawing</a>
+      </div>
+    </nav>
+    
+    <main class="content">
+      <article class="prose">
+        <div class="breadcrumb">
+          <a href="../index.html">Matcha</a> 
+          <span>/</span> 
+          Datatypes
+        </div>
+        <h1 id="datatypes" tabindex="-1">
+          Datatypes 
+          <a class="header-anchor" href="#datatypes" aria-hidden="true">#</a>
+        </h1>
+        <h2 id="vector3" tabindex="-1">Vector3 <a class="header-anchor" href="#vector3" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">https://create.roblox.com/docs/reference/engine/datatypes/Vector3</a></p>
+<p>The <a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> data type represents a vector in 3D space, typically used as a point in 3D space or the dimensions of a rectangular prism.</p>
+<p><strong>Constructors</strong></p>
+<h3 id="new" tabindex="-1">new <a class="header-anchor" href="#new" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Vector3.new(x: number, y: number, z: number)</code></pre>
+<p>Returns a new <a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> from the given x, y, and z components.</p>
+<h3 id="zero" tabindex="-1">zero <a class="header-anchor" href="#zero" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Vector3.zero: Vector3</code></pre>
+<p>Returns a <a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> with coordinates (0, 0, 0).</p>
+<h3 id="one" tabindex="-1">one <a class="header-anchor" href="#one" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Vector3.one: Vector3</code></pre>
+<p>Returns a <a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> with coordinates (1, 1, 1).</p>
+<h3 id="xaxis" tabindex="-1">xAxis <a class="header-anchor" href="#xaxis" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Vector3.xAxis: Vector3</code></pre>
+<p>Returns a <a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> with coordinates (1, 0, 0).</p>
+<h3 id="yaxis" tabindex="-1">yAxis <a class="header-anchor" href="#yaxis" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Vector3.yAxis: Vector3</code></pre>
+<p>Returns a <a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> with coordinates (0, 1, 0).</p>
+<h3 id="zaxis" tabindex="-1">zAxis <a class="header-anchor" href="#zaxis" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Vector3.zAxis: Vector3</code></pre>
+<p>Returns a <a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a> with coordinates (0, 0, 1).</p>
+<p><strong>Properties</strong></p>
+<h3 id="x" tabindex="-1">X <a class="header-anchor" href="#x" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Vector3.X: number</code></pre>
+<h3 id="y" tabindex="-1">Y <a class="header-anchor" href="#y" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Vector3.Y: number</code></pre>
+<h3 id="z" tabindex="-1">Z <a class="header-anchor" href="#z" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Vector3.Z: number</code></pre>
+<h3 id="magnitude" tabindex="-1">Magnitude <a class="header-anchor" href="#magnitude" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Vector3.Magnitude: number</code></pre>
+<p>Returns the length of the vector.</p>
+<h3 id="unit" tabindex="-1">Unit <a class="header-anchor" href="#unit" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Vector3.Unit: Vector3</code></pre>
+<p>Returns a vector of length 1 pointing in the same direction as the original vector.</p>
+<p><strong>Operations</strong></p>
+<p>Matcha supports the following mathematical operations on <code>Vector3</code> types:</p>
+<ul>
+<li><strong>Addition / Subtraction</strong>: <code>Vector3 + Vector3</code>, <code>Vector3 - Vector3</code></li>
+<li><strong>Multiplication / Division</strong>: <code>Vector3 * Vector3</code>, <code>Vector3 / Vector3</code>, <code>Vector3 * number</code>, <code>Vector3 / number</code>, <code>number * Vector3</code></li>
+<li><strong>Unary Minus</strong>: <code>-Vector3</code></li>
+<li><strong>Equality</strong>: <code>Vector3 == Vector3</code></li>
+</ul>
+<p><strong>Methods</strong></p>
+<h3 id="abs" tabindex="-1">Abs <a class="header-anchor" href="#abs" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Vector3:Abs(): Vector3</code></pre>
+<p>Returns a Vector3 with the absolute value of each component.</p>
+<h3 id="angle" tabindex="-1">Angle <a class="header-anchor" href="#angle" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Vector3:Angle(other: Vector3): number</code></pre>
+<p>Returns the angle between the two vectors in radians.</p>
+<h3 id="ceil" tabindex="-1">Ceil <a class="header-anchor" href="#ceil" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Vector3:Ceil(): Vector3</code></pre>
+<p>Returns a Vector3 with the components rounded up to the nearest integer.</p>
+<h3 id="cross" tabindex="-1">Cross <a class="header-anchor" href="#cross" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Vector3:Cross(other: Vector3): Vector3</code></pre>
+<p>Returns the cross product of the two vectors.</p>
+<h3 id="dot" tabindex="-1">Dot <a class="header-anchor" href="#dot" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Vector3:Dot(other: Vector3): number</code></pre>
+<p>Returns the dot product of the two vectors.</p>
+<h3 id="floor" tabindex="-1">Floor <a class="header-anchor" href="#floor" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Vector3:Floor(): Vector3</code></pre>
+<p>Returns a Vector3 with the components rounded down to the nearest integer.</p>
+<h3 id="fuzzyeq" tabindex="-1">FuzzyEq <a class="header-anchor" href="#fuzzyeq" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Vector3:FuzzyEq(other: Vector3, epsilon: number): boolean</code></pre>
+<p>Returns true if the two vectors are approximately equal within the specified epsilon.</p>
+<h3 id="lerp" tabindex="-1">Lerp <a class="header-anchor" href="#lerp" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Vector3:Lerp(target: Vector3, alpha: number): Vector3</code></pre>
+<p>Linearly interpolates between the vector and the target vector by alpha.</p>
+<h3 id="max" tabindex="-1">Max <a class="header-anchor" href="#max" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Vector3:Max(other: Vector3): Vector3</code></pre>
+<p>Returns a Vector3 where each component is the maximum of the corresponding components in the two vectors.</p>
+<h3 id="min" tabindex="-1">Min <a class="header-anchor" href="#min" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Vector3:Min(other: Vector3): Vector3</code></pre>
+<p>Returns a Vector3 where each component is the minimum of the corresponding components in the two vectors.</p>
+<h3 id="sign" tabindex="-1">Sign <a class="header-anchor" href="#sign" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function Vector3:Sign(): Vector3</code></pre>
+<p>Returns a Vector3 indicating the sign of each component (-1, 0, or 1).</p>
+<h2 id="cframe" tabindex="-1">CFrame <a class="header-anchor" href="#cframe" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/datatypes/CFrame">https://create.roblox.com/docs/reference/engine/datatypes/CFrame</a></p>
+<p>The <a href="https://create.roblox.com/docs/reference/engine/datatypes/CFrame">CFrame</a> (Coordinate Frame) data type describes a position and rotation in 3D space.</p>
+<p><strong>Constructors</strong></p>
+<h3 id="new" tabindex="-1">new <a class="header-anchor" href="#new" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">CFrame.new()</code></pre>
+<p>Returns an identity CFrame at position (0, 0, 0) with no rotation.</p>
+<pre><code class="language-lua">CFrame.new(x: number, y: number, z: number)</code></pre>
+<p>Returns a CFrame at position (x, y, z) with no rotation.</p>
+<pre><code class="language-lua">CFrame.new(x: number, y: number, z: number, qx: number, qy: number, qz: number, qw: number)</code></pre>
+<p>Returns a CFrame with position (x, y, z) and rotation defined by quaternion components (qx, qy, qz, qw).</p>
+<pre><code class="language-lua">CFrame.new(x: number, y: number, z: number, r00: number, r01: number, r02: number, r10: number, r11: number, r12: number, r20: number, r21: number, r22: number)</code></pre>
+<p>Returns a CFrame with position (x, y, z) and rotation defined by the rotation matrix components.</p>
+<div class="callout callout-info"><span class="callout-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg></span><div class="callout-body"><p><code>CFrame.new</code> expects exactly 0, 3, 6, or 12 arguments.</p></div></div>
+<h3 id="angles" tabindex="-1">Angles <a class="header-anchor" href="#angles" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">CFrame.Angles(rx: number, ry: number, rz: number)</code></pre>
+<p>Returns a CFrame with position (0, 0, 0) and rotation defined by the specified Euler angles (in radians).</p>
+<h3 id="fromorientation" tabindex="-1">fromOrientation <a class="header-anchor" href="#fromorientation" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">CFrame.fromOrientation(rx: number, ry: number, rz: number)</code></pre>
+<p>Returns a CFrame with position (0, 0, 0) and rotation defined by the specified Euler angles (in radians), applied in YXZ order.</p>
+<p><strong>Properties</strong></p>
+<h3 id="x" tabindex="-1">X <a class="header-anchor" href="#x" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">CFrame.X: number</code></pre>
+<p>The X coordinate of the CFrame's position.</p>
+<h3 id="y" tabindex="-1">Y <a class="header-anchor" href="#y" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">CFrame.Y: number</code></pre>
+<p>The Y coordinate of the CFrame's position.</p>
+<h3 id="z" tabindex="-1">Z <a class="header-anchor" href="#z" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">CFrame.Z: number</code></pre>
+<p>The Z coordinate of the CFrame's position.</p>
+<h3 id="position" tabindex="-1">Position <a class="header-anchor" href="#position" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">CFrame.Position: Vector3</code></pre>
+<p>The position of the CFrame as a <a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector3">Vector3</a>.</p>
+<h3 id="lookvector" tabindex="-1">LookVector <a class="header-anchor" href="#lookvector" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">CFrame.LookVector: Vector3</code></pre>
+<p>The forward-pointing unit vector of the CFrame (the negative Z axis).</p>
+<h3 id="rightvector" tabindex="-1">RightVector <a class="header-anchor" href="#rightvector" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">CFrame.RightVector: Vector3</code></pre>
+<p>The right-pointing unit vector of the CFrame (the X axis).</p>
+<h3 id="upvector" tabindex="-1">UpVector <a class="header-anchor" href="#upvector" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">CFrame.UpVector: Vector3</code></pre>
+<p>The upward-pointing unit vector of the CFrame (the Y axis).</p>
+<p><strong>Operations</strong></p>
+<p>Matcha supports the following mathematical operations on <code>CFrame</code> types:</p>
+<ul>
+<li><strong>CFrame Multiplication</strong>: <code>CFrame * CFrame</code> composition.</li>
+<li><strong>Vector Transformation</strong>: <code>CFrame * Vector3</code> to transform a point into world space.</li>
+<li><strong>Equality</strong>: <code>CFrame == CFrame</code> (uses reference equality).</li>
+</ul>
+<p><strong>Methods</strong></p>
+<h3 id="getcomponents" tabindex="-1">GetComponents <a class="header-anchor" href="#getcomponents" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function CFrame:GetComponents(): (number, number, number, number, number, number, number, number, number, number, number, number)</code></pre>
+<p>Returns the components of the CFrame: position <code>x</code>, <code>y</code>, <code>z</code> and the 9 rotation matrix components <code>r00</code>, <code>r01</code>, <code>r02</code>, <code>r10</code>, <code>r11</code>, <code>r12</code>, <code>r20</code>, <code>r21</code>, <code>r22</code>.</p>
+<h3 id="inverse" tabindex="-1">Inverse <a class="header-anchor" href="#inverse" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function CFrame:Inverse(): CFrame</code></pre>
+<p>Returns the inverse of this CFrame.</p>
+<h3 id="lerp" tabindex="-1">Lerp <a class="header-anchor" href="#lerp" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function CFrame:Lerp(target: CFrame, alpha: number): CFrame</code></pre>
+<p>Linearly interpolates between this CFrame and the target CFrame by alpha.</p>
+<h3 id="pointtoobjectspace" tabindex="-1">PointToObjectSpace <a class="header-anchor" href="#pointtoobjectspace" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function CFrame:PointToObjectSpace(v: Vector3): Vector3</code></pre>
+<p>Transforms a Vector3 point from world space to the CFrame's local object space.</p>
+<h3 id="pointtoworldspace" tabindex="-1">PointToWorldSpace <a class="header-anchor" href="#pointtoworldspace" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function CFrame:PointToWorldSpace(v: Vector3): Vector3</code></pre>
+<p>Transforms a Vector3 point from the CFrame's local object space to world space.</p>
+<h3 id="toeuleranglesxyz" tabindex="-1">ToEulerAnglesXYZ <a class="header-anchor" href="#toeuleranglesxyz" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function CFrame:ToEulerAnglesXYZ(): (number, number, number)</code></pre>
+<p>Returns the Euler angles (in radians) of this CFrame using XYZ order.</p>
+<h3 id="toorientation" tabindex="-1">ToOrientation <a class="header-anchor" href="#toorientation" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function CFrame:ToOrientation(): (number, number, number)</code></pre>
+<p>Returns the Euler angles (in radians) of this CFrame using YXZ order.</p>
+<h3 id="vectortoobjectspace" tabindex="-1">VectorToObjectSpace <a class="header-anchor" href="#vectortoobjectspace" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function CFrame:VectorToObjectSpace(v: Vector3): Vector3</code></pre>
+<p>Transforms a Vector3 vector from world space to local object space.</p>
+<h3 id="vectortoworldspace" tabindex="-1">VectorToWorldSpace <a class="header-anchor" href="#vectortoworldspace" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function CFrame:VectorToWorldSpace(v: Vector3): Vector3</code></pre>
+<p>Transforms a Vector3 vector from local object space to world space.</p>
+<h2 id="vector2" tabindex="-1">Vector2 <a class="header-anchor" href="#vector2" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector2">https://create.roblox.com/docs/reference/engine/datatypes/Vector2</a></p>
+<p>The <a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector2">Vector2</a> data type represents a 2D value with direction and magnitude. Some applications include GUI elements and 2D mouse positions.</p>
+<p><strong>Constructors</strong></p>
+<h3 id="new" tabindex="-1">new <a class="header-anchor" href="#new" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Vector2.new(x : number, y : number)</code></pre>
+<p>Returns a <a href="https://create.roblox.com/docs/reference/engine/datatypes/Vector2">Vector2</a> from the given x and y components.</p>
+<p><strong>Properties</strong></p>
+<h3 id="x" tabindex="-1">X <a class="header-anchor" href="#x" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Vector2.X: number</code></pre>
+<h3 id="y" tabindex="-1">Y <a class="header-anchor" href="#y" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Vector2.Y: number</code></pre>
+<h2 id="color3" tabindex="-1">Color3 <a class="header-anchor" href="#color3" aria-hidden="true">#</a></h2>
+<p>The <a href="https://create.roblox.com/docs/reference/engine/datatypes/Color3">Color3</a> data type describes a color using red, green, and blue components in the range of 0 to 1. Unlike the <a href="https://create.roblox.com/docs/reference/engine/datatypes/BrickColor">BrickColor</a> data type which describes named colors, <a href="https://create.roblox.com/docs/reference/engine/datatypes/Color3">Color3</a> is used for precise coloring of objects on screen through properties like <a href="https://create.roblox.com/docs/reference/engine/classes/BasePart#Color">BasePart.Color</a>.</p>
+<p><strong>Constructors</strong></p>
+<h3 id="new" tabindex="-1">new <a class="header-anchor" href="#new" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Color3.new(red: number, green: number, blue: number)</code></pre>
+<p>Returns a <a href="https://create.roblox.com/docs/reference/engine/datatypes/Color3">Color3</a> with the given red, green, and blue values.</p>
+<h3 id="fromrgb" tabindex="-1">fromRGB <a class="header-anchor" href="#fromrgb" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Color3.fromRGB(red: number, green: number, blue: number)</code></pre>
+<p>Returns a <a href="https://create.roblox.com/docs/reference/engine/datatypes/Color3">Color3</a> from given components within the range of 0 to 255.</p>
+<h3 id="fromhsv" tabindex="-1">fromHSV <a class="header-anchor" href="#fromhsv" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Color3.fromHSV(hue: number, saturation: number, value: number)</code></pre>
+<p>Returns a <a href="https://create.roblox.com/docs/reference/engine/datatypes/Color3">Color3</a> from the given hue, saturation, and value components.</p>
+<h3 id="fromhex" tabindex="-1">fromHex <a class="header-anchor" href="#fromhex" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Color3.fromHex(hex: string)</code></pre>
+<p>Returns a <a href="https://create.roblox.com/docs/reference/engine/datatypes/Color3">Color3</a> from a given hex value.</p>
+<p><strong>Properties</strong></p>
+<h3 id="r" tabindex="-1">R <a class="header-anchor" href="#r" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Color3.R: number</code></pre>
+<h3 id="g" tabindex="-1">G <a class="header-anchor" href="#g" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Color3.G: number</code></pre>
+<h3 id="b" tabindex="-1">B <a class="header-anchor" href="#b" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Color3.B: number</code></pre>
+<h2 id="ray" tabindex="-1">Ray <a class="header-anchor" href="#ray" aria-hidden="true">#</a></h2>
+<p>The <a href="https://create.roblox.com/docs/reference/engine/datatypes/Ray">Ray</a> data type represents a ray in 3D space, consisting of an origin and a direction.</p>
+<p><strong>Constructors</strong></p>
+<h3 id="new" tabindex="-1">new <a class="header-anchor" href="#new" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Ray.new(origin: Vector3, direction: Vector3)</code></pre>
+<p>Returns a Ray with the given origin and direction.</p>
+<p><strong>Properties</strong></p>
+<h3 id="origin" tabindex="-1">Origin <a class="header-anchor" href="#origin" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Ray.Origin: Vector3</code></pre>
+<h3 id="direction" tabindex="-1">Direction <a class="header-anchor" href="#direction" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Ray.Direction: Vector3</code></pre>
+<h2 id="udim" tabindex="-1">UDim <a class="header-anchor" href="#udim" aria-hidden="true">#</a></h2>
+<p>The <a href="https://create.roblox.com/docs/reference/engine/datatypes/UDim">UDim</a> data type represents a single dimension of a UI coordinate, consisting of a scale (relative size) and an offset (pixel size).</p>
+<p><strong>Constructors</strong></p>
+<h3 id="new" tabindex="-1">new <a class="header-anchor" href="#new" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">UDim.new(scale: number, offset: number)</code></pre>
+<p>Returns a UDim with the given scale and offset.</p>
+<p><strong>Properties</strong></p>
+<h3 id="scale" tabindex="-1">Scale <a class="header-anchor" href="#scale" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">UDim.Scale: number</code></pre>
+<h3 id="offset" tabindex="-1">Offset <a class="header-anchor" href="#offset" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">UDim.Offset: number</code></pre>
+<h2 id="udim2" tabindex="-1">UDim2 <a class="header-anchor" href="#udim2" aria-hidden="true">#</a></h2>
+<p>The <a href="https://create.roblox.com/docs/reference/engine/datatypes/UDim2">UDim2</a> data type represents a 2D size or position of a UI element, consisting of two UDims (X and Y).</p>
+<p><strong>Constructors</strong></p>
+<h3 id="new" tabindex="-1">new <a class="header-anchor" href="#new" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">UDim2.new(xScale: number, xOffset: number, yScale: number, yOffset: number)
+UDim2.new(x: UDim, y: UDim)</code></pre>
+<p>Returns a UDim2 with the given components.</p>
+<h3 id="fromoffset" tabindex="-1">fromOffset <a class="header-anchor" href="#fromoffset" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">UDim2.fromOffset(x: number, y: number)</code></pre>
+<p>Returns a UDim2 with only pixel offset components.</p>
+<h3 id="fromscale" tabindex="-1">fromScale <a class="header-anchor" href="#fromscale" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">UDim2.fromScale(x: number, y: number)</code></pre>
+<p>Returns a UDim2 with only scale components.</p>
+<p><strong>Properties</strong></p>
+<h3 id="x" tabindex="-1">X <a class="header-anchor" href="#x" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">UDim2.X: UDim</code></pre>
+<h3 id="y" tabindex="-1">Y <a class="header-anchor" href="#y" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">UDim2.Y: UDim</code></pre>
+      </article>
+      
+      <nav class="pager">
+<a class="pager-link prev" href="../classes/index.html">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg)"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+<span><em>Previous</em>Classes</span>
+</a>
+<a class="pager-link next" href="../drawing/index.html">
+<span><em>Next</em>Drawing</span>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+</a>
+</nav>
+    </main>
+    
+    <aside class="toc">
+      <div class="toc-title">On this page</div>
+      <ul class="toc-list">
+<li class="toc-l2"><a href="#vector3">Vector3</a></li>
+<li class="toc-l3"><a href="#new">new</a></li>
+<li class="toc-l3"><a href="#zero">zero</a></li>
+<li class="toc-l3"><a href="#one">one</a></li>
+<li class="toc-l3"><a href="#xaxis">xAxis</a></li>
+<li class="toc-l3"><a href="#yaxis">yAxis</a></li>
+<li class="toc-l3"><a href="#zaxis">zAxis</a></li>
+<li class="toc-l3"><a href="#x">X</a></li>
+<li class="toc-l3"><a href="#y">Y</a></li>
+<li class="toc-l3"><a href="#z">Z</a></li>
+<li class="toc-l3"><a href="#magnitude">Magnitude</a></li>
+<li class="toc-l3"><a href="#unit">Unit</a></li>
+<li class="toc-l3"><a href="#abs">Abs</a></li>
+<li class="toc-l3"><a href="#angle">Angle</a></li>
+<li class="toc-l3"><a href="#ceil">Ceil</a></li>
+<li class="toc-l3"><a href="#cross">Cross</a></li>
+<li class="toc-l3"><a href="#dot">Dot</a></li>
+<li class="toc-l3"><a href="#floor">Floor</a></li>
+<li class="toc-l3"><a href="#fuzzyeq">FuzzyEq</a></li>
+<li class="toc-l3"><a href="#lerp">Lerp</a></li>
+<li class="toc-l3"><a href="#max">Max</a></li>
+<li class="toc-l3"><a href="#min">Min</a></li>
+<li class="toc-l3"><a href="#sign">Sign</a></li>
+<li class="toc-l2"><a href="#cframe">CFrame</a></li>
+<li class="toc-l3"><a href="#new">new</a></li>
+<li class="toc-l3"><a href="#angles">Angles</a></li>
+<li class="toc-l3"><a href="#fromorientation">fromOrientation</a></li>
+<li class="toc-l3"><a href="#x">X</a></li>
+<li class="toc-l3"><a href="#y">Y</a></li>
+<li class="toc-l3"><a href="#z">Z</a></li>
+<li class="toc-l3"><a href="#position">Position</a></li>
+<li class="toc-l3"><a href="#lookvector">LookVector</a></li>
+<li class="toc-l3"><a href="#rightvector">RightVector</a></li>
+<li class="toc-l3"><a href="#upvector">UpVector</a></li>
+<li class="toc-l3"><a href="#getcomponents">GetComponents</a></li>
+<li class="toc-l3"><a href="#inverse">Inverse</a></li>
+<li class="toc-l3"><a href="#lerp">Lerp</a></li>
+<li class="toc-l3"><a href="#pointtoobjectspace">PointToObjectSpace</a></li>
+<li class="toc-l3"><a href="#pointtoworldspace">PointToWorldSpace</a></li>
+<li class="toc-l3"><a href="#toeuleranglesxyz">ToEulerAnglesXYZ</a></li>
+<li class="toc-l3"><a href="#toorientation">ToOrientation</a></li>
+<li class="toc-l3"><a href="#vectortoobjectspace">VectorToObjectSpace</a></li>
+<li class="toc-l3"><a href="#vectortoworldspace">VectorToWorldSpace</a></li>
+<li class="toc-l2"><a href="#vector2">Vector2</a></li>
+<li class="toc-l3"><a href="#new">new</a></li>
+<li class="toc-l3"><a href="#x">X</a></li>
+<li class="toc-l3"><a href="#y">Y</a></li>
+<li class="toc-l2"><a href="#color3">Color3</a></li>
+<li class="toc-l3"><a href="#new">new</a></li>
+<li class="toc-l3"><a href="#fromrgb">fromRGB</a></li>
+<li class="toc-l3"><a href="#fromhsv">fromHSV</a></li>
+<li class="toc-l3"><a href="#fromhex">fromHex</a></li>
+<li class="toc-l3"><a href="#r">R</a></li>
+<li class="toc-l3"><a href="#g">G</a></li>
+<li class="toc-l3"><a href="#b">B</a></li>
+<li class="toc-l2"><a href="#ray">Ray</a></li>
+<li class="toc-l3"><a href="#new">new</a></li>
+<li class="toc-l3"><a href="#origin">Origin</a></li>
+<li class="toc-l3"><a href="#direction">Direction</a></li>
+<li class="toc-l2"><a href="#udim">UDim</a></li>
+<li class="toc-l3"><a href="#new">new</a></li>
+<li class="toc-l3"><a href="#scale">Scale</a></li>
+<li class="toc-l3"><a href="#offset">Offset</a></li>
+<li class="toc-l2"><a href="#udim2">UDim2</a></li>
+<li class="toc-l3"><a href="#new">new</a></li>
+<li class="toc-l3"><a href="#fromoffset">fromOffset</a></li>
+<li class="toc-l3"><a href="#fromscale">fromScale</a></li>
+<li class="toc-l3"><a href="#x">X</a></li>
+<li class="toc-l3"><a href="#y">Y</a></li>
+</ul>
+    </aside>
+  </div>
+  
+  <!-- Search Overlay -->
+  <div class="search-overlay" data-search-overlay hidden>
+    <div class="search-panel">
+      <div class="search-head">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"/>
+          <path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="search" placeholder="Search Matcha docs" data-search-input autocomplete="off" spellcheck="false">
+        <kbd>Esc</kbd>
+      </div>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  
+  <!-- Connect Overlay -->
+  <div class="connect-overlay" data-connect-overlay hidden>
+    <div class="connect-panel">
+      <div class="connect-head">
+        <div>
+          <h2 class="connect-title">Connect Matcha docs to your AI</h2>
+          <p class="connect-sub">Give any MCP-capable agent live search &amp; read access to these docs.</p>
+        </div>
+        <button class="iconbtn connect-close" type="button" data-connect-close aria-label="Close">✕</button>
+      </div>
+      <div class="connect-url-label">MCP server URL</div>
+      <div class="connect-url">
+        <code>https://doc.wabisabi.mom/matcha/mcp</code>
+        <button class="copy-btn" type="button">Copy</button>
+      </div>
+      <div class="tabs connect-tabs" data-tabs>
+        <div class="tab-panel" data-tab="Claude Code">
+          <p class="connect-note">Run in your terminal:</p>
+          <div class="connect-snippet">
+            <pre><code>claude mcp add --transport http wabi-matcha https://doc.wabisabi.mom/matcha/mcp</code></pre>
+            <button class="copy-btn" type="button">Copy</button>
+          </div>
+        </div>
+        <div class="tab-panel" data-tab="Cursor">
+          <p class="connect-note">Add to <code>.cursor/mcp.json</code>:</p>
+          <div class="connect-snippet">
+            <pre><code>{
+  &quot;mcpServers&quot;: {
+    &quot;wabi-matcha&quot;: {
+      &quot;url&quot;: &quot;https://doc.wabisabi.mom/matcha/mcp&quot;
+    }
+  }
+}</code></pre>
+            <button class="copy-btn" type="button">Copy</button>
+          </div>
+        </div>
+        <div class="tab-panel" data-tab="VS Code">
+          <p class="connect-note">Add to <code>.vscode/mcp.json</code>:</p>
+          <div class="connect-snippet">
+            <pre><code>{
+  &quot;servers&quot;: {
+    &quot;wabi-matcha&quot;: {
+      &quot;type&quot;: &quot;http&quot;,
+      &quot;url&quot;: &quot;https://doc.wabisabi.mom/matcha/mcp&quot;
+    }
+  }
+}</code></pre>
+            <button class="copy-btn" type="button">Copy</button>
+          </div>
+        </div>
+      </div>
+      <p class="connect-foot">No setup? Point any agent at <code>llms.txt</code> or <code>llms-full.txt</code>.</p>
+    </div>
+  </div>
+  
+  <!-- Scripts -->
+  <script src="../assets/highlight.min.js"></script>
+  <script src="../assets/client.js" defer></script>
+</body>
+</html>
