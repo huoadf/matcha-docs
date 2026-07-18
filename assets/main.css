@@ -5,7 +5,7 @@
    near-black canvas, hairline white-alpha borders, white as the accent. */
 :root {
   color-scheme: dark;
-  --accent: #7bc96f; /* Per-project accent for Matcha from original: #7bc96f */
+  --accent: #ee8aff; /* Per-project accent for Matcha from original: #ee8aff */
   --accent-ink: #050505;
   --bg: #050505;
   --bg-elev: #0c0c0e;
@@ -40,7 +40,7 @@
 
 [data-theme="light"] {
   color-scheme: light;
-  --accent: #7bc96f; /* Keep Matcha green accent in light theme too */
+  --accent: #ee8aff; /* Keep Matcha violet accent in light theme too */
   --accent-ink: #ffffff;
   --bg: #ffffff;
   --bg-elev: #f7f7f8;
