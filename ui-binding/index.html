@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UI / Menu Binding · Matcha docs</title>
+  <meta name="description" content="Matcha LuaVM documentation - UI / Menu Binding">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050505'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%237bc96f'/%3E%3C/svg%3E">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  
+  <!-- Theme CSS -->
+  <link rel="stylesheet" href="../assets/main.css">
+  <style>:root{--accent:#7bc96f}</style>
+  
+  <script>
+    (function(){try{var t=localStorage.getItem("wd-theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}})();
+  </script>
+</head>
+<body data-project="matcha" data-search-path="../search-index.json">
+  <header class="topbar">
+    <button class="iconbtn menu-btn" data-menu aria-label="Open navigation">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+    <a class="brand" href="../">
+      <span class="brand-dot" style="background:#7bc96f"></span>Matcha docs
+    </a>
+    <div class="switcher">
+      <button class="switcher-btn" data-switcher aria-haspopup="true" aria-expanded="false">
+        Matcha 
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+          <path d="m6 9 6 6 6-6"/>
+        </svg>
+      </button>
+      <div class="switcher-menu" data-switcher-menu hidden>
+        <a href="../" class="switcher-item active">
+          <span>Matcha</span>
+          <em>LuaVM documentation</em>
+        </a>
+      </div>
+    </div>
+    
+    <div class="topbar-spacer"></div>
+    
+    <button class="searchbtn" data-search-open>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7"/>
+        <path d="m21 21-4.3-4.3"/>
+      </svg>
+      <span>Search</span>
+      <kbd>⌘K</kbd>
+    </button>
+    
+    <button class="connectbtn" data-connect-open aria-label="Connect to AI">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 2v6M15 2v6"/>
+        <path d="M6 8h12v2a6 6 0 0 1-6 6 6 6 0 0 1-6-6z"/>
+        <path d="M12 16v6"/>
+      </svg>
+      <span>Connect</span>
+    </button>
+    
+    <button class="iconbtn" data-theme-toggle aria-label="Toggle theme">
+      <span class="theme-sun">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+        </svg>
+      </span>
+      <span class="theme-moon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+        </svg>
+      </span>
+    </button>
+  </header>
+  
+  <div class="layout">
+    <div class="scrim" data-scrim></div>
+    <nav class="sidebar" data-sidebar>
+      <div class="sidebar-inner">
+        <a class="nav-item " href="../">Getting started</a>
+        
+        <div class="nav-group">Functions</div>
+        <a class="nav-item " href="../functions-globals/">Globals</a>
+        <a class="nav-item " href="../functions-console-input/">Console &amp; input</a>
+        <a class="nav-item " href="../functions-misc/">Miscellaneous &amp; scheduler</a>
+        <a class="nav-item " href="../memory/">Memory</a>
+        <a class="nav-item " href="../garbage-collector/">Garbage collector</a>
+        <a class="nav-item " href="../filesystem/">File system</a>
+        <a class="nav-item " href="../http/">HTTP</a>
+        <a class="nav-item " href="../lua-base-library/">Lua base library</a>
+        
+        <div class="nav-group">Reference</div>
+        <a class="nav-item " href="../classes/">Classes</a>
+        <a class="nav-item " href="../datatypes/">Datatypes</a>
+        <a class="nav-item " href="../drawing/">Drawing</a>
+        <a class="nav-item active" href="../ui-binding/">UI / Menu Binding</a>
+        <a class="nav-item " href="../gc-guide/">GC modding guide</a>
+      </div>
+    </nav>
+    
+    <main class="content">
+      <article class="prose">
+        <div class="breadcrumb">
+          <a href="../">Matcha</a> 
+          <span>/</span> 
+          UI / Menu Binding
+        </div>
+        <h1 id="ui-binding" tabindex="-1">
+          UI / Menu Binding 
+          <a class="header-anchor" href="#ui-binding" aria-hidden="true">#</a>
+        </h1>
+        <p>The <code>UI</code> global library allows you to create custom menu tabs, sections, and interactive widgets (like toggles, keybinds, and sliders) directly from your Lua scripts.</p>
+<p>Using these functions, you can build custom graphical interfaces that integrate seamlessly with the Matcha cheat client.</p>
+<hr>
+<h2 id="ui-library-api" tabindex="-1">UI Library API <a class="header-anchor" href="#ui-library-api" aria-hidden="true">#</a></h2>
+<p>These functions are available on the global <code>UI</code> table:</p>
+<h3 id="uiaddtab" tabindex="-1"><code>UI.AddTab</code> <a class="header-anchor" href="#uiaddtab" aria-hidden="true">#</a></h3>
+<p>Creates a new menu tab. The callback function <code>fn(tab)</code> runs every frame to draw the tab content.</p>
+<pre><code class="language-lua">UI.AddTab(name: string, fn: function)</code></pre>
+<pre><code class="language-lua">UI.AddTab("My Script", function(tab)
+    -- Create sections and widgets here
+end)</code></pre>
+<h3 id="uiremovetab" tabindex="-1"><code>UI.RemoveTab</code> <a class="header-anchor" href="#uiremovetab" aria-hidden="true">#</a></h3>
+<p>Removes a tab by name.</p>
+<pre><code class="language-lua">UI.RemoveTab(name: string)</code></pre>
+<h3 id="uigetvalue" tabindex="-1"><code>UI.GetValue</code> <a class="header-anchor" href="#uigetvalue" aria-hidden="true">#</a></h3>
+<p>Reads the current value of any widget by its unique ID. This is useful for reading settings from other threads or scripts.</p>
+<pre><code class="language-lua">UI.GetValue(id: string): any</code></pre>
+<pre><code class="language-lua">while true do
+    if UI.GetValue("aim_on") then
+        local fov = UI.GetValue("aim_fov")
+        -- run aimbot logic
+    end
+    task.wait()
+end</code></pre>
+<h3 id="uisetvalue" tabindex="-1"><code>UI.SetValue</code> <a class="header-anchor" href="#uisetvalue" aria-hidden="true">#</a></h3>
+<p>Programmatically changes the value of any widget by ID.</p>
+<pre><code class="language-lua">UI.SetValue(id: string, val: any)</code></pre>
+<hr>
+<h2 id="tabs-sections" tabindex="-1">Tabs & Sections <a class="header-anchor" href="#tabs-sections" aria-hidden="true">#</a></h2>
+<p>The <code>tab</code> object passed to <code>UI.AddTab</code>'s callback is used to divide your tab into structural sections.</p>
+<p>Sections are arranged in two columns: <code>"Left"</code> and <code>"Right"</code>.</p>
+<pre><code class="language-lua">tab:Section(name: string, side: string) -&gt; Section
+tab:Section(name: string, side: string, pages: table) -&gt; Section (tabbed)
+tab:Section(name: string, side: string, pages: table, max_height: number) -&gt; Section (scrollable)</code></pre>
+<h3 id="examples" tabindex="-1">Examples: <a class="header-anchor" href="#examples" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">-- Simple left-column section
+local sec = tab:Section("Settings", "Left")
+
+-- Tabbed section with multiple sub-pages and scrollable height limit
+local aimSec = tab:Section("Aimbot", "Left", {"Main", "Advanced"}, 400)
+if aimSec.page == 0 then
+    -- Draw main aimbot settings
+elseif aimSec.page == 1 then
+    -- Draw advanced aimbot settings
+end</code></pre>
+<p>> [!NOTE]</p>
+<p>> Sections close automatically when a new section starts in the same column.</p>
+<hr>
+<h2 id="widgets" tabindex="-1">Widgets <a class="header-anchor" href="#widgets" aria-hidden="true">#</a></h2>
+<p>All widget methods return a <strong>Widget object</strong> you can interact with programmatically:</p>
+<pre><code class="language-lua">local toggle = sec:Toggle("aim_on", "Enabled")
+print(toggle.value)         -- current value
+print(toggle:GetValue())    -- fresh retrieved value
+toggle:SetValue(true)       -- programmatically enable</code></pre>
+<p>Every widget accepts an <strong>optional callback</strong> as its last argument which triggers whenever the widget value changes.</p>
+<h3 id="toggle" tabindex="-1">Toggle <a class="header-anchor" href="#toggle" aria-hidden="true">#</a></h3>
+<p>Creates a boolean checkbox.</p>
+<pre><code class="language-lua">sec:Toggle(id: string, label: string [, default: boolean] [, callback: function]) -&gt; Widget</code></pre>
+<pre><code class="language-lua">sec:Toggle("aim_on", "Aimbot", false, function(state)
+    print("Aimbot toggled: " .. tostring(state))
+end)</code></pre>
+<h3 id="keybind" tabindex="-1">Keybind <a class="header-anchor" href="#keybind" aria-hidden="true">#</a></h3>
+<p>Allows users to bind hotkeys. Place it immediately after a <code>Toggle</code> to bind it to that setting.</p>
+<ul>
+<li><strong>Interaction:</strong> Left-click the widget in the UI to rebind, right-click to choose keybind mode.</li>
+<pre><code class="language-lua">sec:Keybind(id: string [, key: number [, type: string]]) -&gt; KeybindWidget</code></pre>
+</ul>
+<table><thead><tr><th>Argument</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td><code>key</code></td><td><code>number</code></td><td>Virtual key (VK) code. <code>0</code> = unbound.</td></tr><tr><td><code>type</code></td><td><code>string</code></td><td>Keybind mode: <code>"toggle"</code>, <code>"hold"</code>, <code>"always"</code>, or <code>"click"</code>.</td></tr></tbody></table>
+<pre><code class="language-lua">sec:Toggle("aim_on", "Aimbot")
+local kb = sec:Keybind("aim_kb", 0x46, "hold") -- Binds "F" key to Hold mode
+
+-- Automatically shows the keybind in the client hotkey list overlay when active
+kb:AddToHotkey("Aimbot", "aim_on")</code></pre>
+<h4>KeybindWidget Methods:</h4>
+<ul>
+<li><strong><code>:IsEnabled()</code></strong> (or <code>.value</code>): Returns <code>true</code> if the keybind is currently active.</li>
+<li><strong><code>:GetKey()</code></strong>: Returns the current virtual key code (<code>number</code>) or <code>Enum.KeyCode</code> object.</li>
+<li><strong><code>:SetKey(vk: number)</code></strong>: Programmatically changes the keybind.</li>
+<li><strong><code>:GetKeyName()</code></strong>: Returns a friendly string name for the key (e.g. <code>"f"</code>, <code>"lmb"</code>, <code>"none"</code>).</li>
+<li><strong><code>:GetType()</code></strong>: Returns the current mode (<code>"toggle"</code>, <code>"hold"</code>, <code>"always"</code>, <code>"click"</code>).</li>
+<li><strong><code>:SetType(type: string)</code></strong>: Changes the mode.</li>
+<li><strong><code>:AddToHotkey(label: string, toggle_id: string)</code></strong>: Displays in the screen hotkey overlay when the associated toggle is active.</li>
+<li><strong><code>:RemoveFromHotkey()</code></strong>: Hides the keybind from the hotkey list.</li>
+</ul>
+<hr>
+<h2 id="virtual-key-vk-codes-enums" tabindex="-1">Virtual Key (VK) Codes & Enums <a class="header-anchor" href="#virtual-key-vk-codes-enums" aria-hidden="true">#</a></h2>
+<p>You can use raw VK hex codes or standard Roblox <code>Enum.KeyCode</code> properties when binding keys:</p>
+<h3 id="virtual-key-vk-codes" tabindex="-1">Virtual Key (VK) Codes <a class="header-anchor" href="#virtual-key-vk-codes" aria-hidden="true">#</a></h3>
+<ul>
+<li><strong>Mouse Buttons:</strong> <code>0x01</code> (LMB) · <code>0x02</code> (RMB) · <code>0x04</code> (MMB) · <code>0x05</code> (X1 Extra Button) · <code>0x06</code> (X2 Extra Button)</li>
+<li><strong>Keyboard Keys:</strong> <code>0x41</code> - <code>0x5A</code> (Keys A - Z) · <code>0x10</code> (Shift) · <code>0x11</code> (Ctrl) · <code>0x12</code> (Alt)</li>
+</ul>
+<h3 id="enum-keycodes" tabindex="-1">Enum KeyCodes <a class="header-anchor" href="#enum-keycodes" aria-hidden="true">#</a></h3>
+<ul>
+<li><code>Enum.KeyCode.MouseButton1</code> (LMB) · <code>Enum.KeyCode.MouseButton2</code> (RMB) · <code>Enum.KeyCode.MouseButton3</code> (MMB)</li>
+<li><code>Enum.KeyCode.A</code> - <code>Enum.KeyCode.Z</code> (Keys A - Z)</li>
+</ul>
+      </article>
+      
+      <nav class="pager">
+<a class="pager-link prev" href="../drawing/">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg)"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+<span><em>Previous</em>Drawing</span>
+</a>
+<a class="pager-link next" href="../gc-guide/">
+<span><em>Next</em>GC modding guide</span>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+</a>
+</nav>
+    </main>
+    
+    <aside class="toc">
+      <div class="toc-title">On this page</div>
+      <ul class="toc-list">
+<li class="toc-l2"><a href="#ui-library-api">UI Library API</a></li>
+<li class="toc-l3"><a href="#uiaddtab">UI.AddTab</a></li>
+<li class="toc-l3"><a href="#uiremovetab">UI.RemoveTab</a></li>
+<li class="toc-l3"><a href="#uigetvalue">UI.GetValue</a></li>
+<li class="toc-l3"><a href="#uisetvalue">UI.SetValue</a></li>
+<li class="toc-l2"><a href="#tabs-sections">Tabs & Sections</a></li>
+<li class="toc-l3"><a href="#examples">Examples</a></li>
+<li class="toc-l2"><a href="#widgets">Widgets</a></li>
+<li class="toc-l3"><a href="#toggle">Toggle</a></li>
+<li class="toc-l3"><a href="#keybind">Keybind</a></li>
+<li class="toc-l2"><a href="#virtual-key-vk-codes-enums">Virtual Key (VK) Codes & Enums</a></li>
+<li class="toc-l3"><a href="#virtual-key-vk-codes">Virtual Key (VK) Codes</a></li>
+<li class="toc-l3"><a href="#enum-keycodes">Enum KeyCodes</a></li>
+</ul>
+    </aside>
+  </div>
+  
+  <!-- Search Overlay -->
+  <div class="search-overlay" data-search-overlay hidden>
+    <div class="search-panel">
+      <div class="search-head">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"/>
+          <path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="search" placeholder="Search Matcha docs" data-search-input autocomplete="off" spellcheck="false">
+        <kbd>Esc</kbd>
+      </div>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  
+  <!-- Connect Overlay -->
+  <div class="connect-overlay" data-connect-overlay hidden>
+    <div class="connect-panel">
+      <div class="connect-head">
+        <div>
+          <h2 class="connect-title">Connect Matcha docs to your AI</h2>
+          <p class="connect-sub">Give any MCP-capable agent live search &amp; read access to these docs.</p>
+        </div>
+        <button class="iconbtn connect-close" type="button" data-connect-close aria-label="Close">✕</button>
+      </div>
+      <div class="connect-url-label">MCP server URL</div>
+      <div class="connect-url">
+        <code>https://huoadf.github.io/matcha-docs/mcp</code>
+        <button class="copy-btn" type="button">Copy</button>
+      </div>
+      <div class="tabs connect-tabs" data-tabs>
+        <div class="tab-panel" data-tab="Claude Code">
+          <p class="connect-note">Run in your terminal:</p>
+          <div class="connect-snippet">
+            <pre><code>claude mcp add --transport http matcha-docs https://huoadf.github.io/matcha-docs/mcp</code></pre>
+            <button class="copy-btn" type="button">Copy</button>
+          </div>
+        </div>
+        <div class="tab-panel" data-tab="Cursor">
+          <p class="connect-note">Add to <code>.cursor/mcp.json</code>:</p>
+          <div class="connect-snippet">
+            <pre><code>{
+  &quot;mcpServers&quot;: {
+    &quot;matcha-docs&quot;: {
+      &quot;url&quot;: &quot;https://huoadf.github.io/matcha-docs/mcp&quot;
+    }
+  }
+}</code></pre>
+            <button class="copy-btn" type="button">Copy</button>
+          </div>
+        </div>
+        <div class="tab-panel" data-tab="VS Code">
+          <p class="connect-note">Add to <code>.vscode/mcp.json</code>:</p>
+          <div class="connect-snippet">
+            <pre><code>{
+  &quot;servers&quot;: {
+    &quot;matcha-docs&quot;: {
+      &quot;type&quot;: &quot;http&quot;,
+      &quot;url&quot;: &quot;https://huoadf.github.io/matcha-docs/mcp&quot;
+    }
+  }
+}</code></pre>
+            <button class="copy-btn" type="button">Copy</button>
+          </div>
+        </div>
+      </div>
+      <p class="connect-foot">No setup? Point any agent at <code>llms.txt</code> or <code>llms-full.txt</code>.</p>
+    </div>
+  </div>
+  
+  <!-- Scripts -->
+  <script src="../assets/highlight.min.js"></script>
+  <script src="../assets/client.js" defer></script>
+</body>
+</html>
