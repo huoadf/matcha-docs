@@ -4,6 +4,10 @@ This is the documentation for the Matcha LuaVM.
 Matcha **is not an executor** — it does not hook any functions in the Roblox engine. Instead it emulates them externally, which makes it completely undetected, but also means it has no direct access to internal Roblox API functions.
 {% endhint %}
 
+{% hint style="success" %}
+**New (Jul 20 2026):** Matcha now features a built-in **Remote Spy** in Hybrid mode! You can also invoke remote methods programmatically using `FireServer` and `InvokeFunction`.
+{% endhint %}
+
 ## Browse the docs
 
 ::: cards

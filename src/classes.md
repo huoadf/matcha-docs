@@ -531,3 +531,37 @@ Fires every frame, prior to the physics simulation step. Passes the time elapsed
 {% hint style="warning" %}
 In the Matcha VM, the `Stepped` event only receives one argument (`deltaTime: number`), unlike the standard Roblox API which receives both `time` and `deltaTime`.
 {% endhint %}
+
+
+## RemoteEvent
+
+<https://create.roblox.com/docs/reference/engine/classes/RemoteEvent>
+
+**Methods**
+
+### FireServer
+
+```lua
+RemoteEvent:FireServer(...any)
+```
+
+Fires the `RemoteEvent` to the server with the given arguments. *(Added in Hybrid mode - Jul 20 2026).*
+
+
+## RemoteFunction
+
+<https://create.roblox.com/docs/reference/engine/classes/RemoteFunction>
+
+**Methods**
+
+### InvokeFunction
+
+```lua
+RemoteFunction:InvokeFunction(...any): ...any
+```
+
+Invokes the `RemoteFunction` on the server and yields until it returns a result. *(Added in Hybrid mode - Jul 20 2026).*
+
+{% hint style="warning" %}
+Unlike the standard Roblox `InvokeServer`, Matcha uses `InvokeFunction` to call `RemoteFunction`s externally.
+{% endhint %}

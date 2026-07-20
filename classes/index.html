@@ -309,6 +309,19 @@
 <pre><code class="language-lua">RunService.Stepped:Connect(function(deltaTime: number))</code></pre>
 <p>Fires every frame, prior to the physics simulation step. Passes the time elapsed since the last frame (<code>deltaTime</code>) as a number.</p>
 <div class="callout callout-warning"><span class="callout-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg></span><div class="callout-body"><p>In the Matcha VM, the <code>Stepped</code> event only receives one argument (<code>deltaTime: number</code>), unlike the standard Roblox API which receives both <code>time</code> and <code>deltaTime</code>.</p></div></div>
+<h2 id="remoteevent" tabindex="-1">RemoteEvent <a class="header-anchor" href="#remoteevent" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/classes/RemoteEvent">https://create.roblox.com/docs/reference/engine/classes/RemoteEvent</a></p>
+<p><strong>Methods</strong></p>
+<h3 id="fireserver" tabindex="-1">FireServer <a class="header-anchor" href="#fireserver" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">RemoteEvent:FireServer(...any)</code></pre>
+<p>Fires the <code>RemoteEvent</code> to the server with the given arguments. *(Added in Hybrid mode - Jul 20 2026).*</p>
+<h2 id="remotefunction" tabindex="-1">RemoteFunction <a class="header-anchor" href="#remotefunction" aria-hidden="true">#</a></h2>
+<p><a href="https://create.roblox.com/docs/reference/engine/classes/RemoteFunction">https://create.roblox.com/docs/reference/engine/classes/RemoteFunction</a></p>
+<p><strong>Methods</strong></p>
+<h3 id="invokefunction" tabindex="-1">InvokeFunction <a class="header-anchor" href="#invokefunction" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">RemoteFunction:InvokeFunction(...any): ...any</code></pre>
+<p>Invokes the <code>RemoteFunction</code> on the server and yields until it returns a result. *(Added in Hybrid mode - Jul 20 2026).*</p>
+<div class="callout callout-warning"><span class="callout-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg></span><div class="callout-body"><p>Unlike the standard Roblox <code>InvokeServer</code>, Matcha uses <code>InvokeFunction</code> to call <code>RemoteFunction</code>s externally.</p></div></div>
       </article>
       
       <nav class="pager">
@@ -407,6 +420,10 @@
 <li class="toc-l3"><a href="#renderstepped">RenderStepped</a></li>
 <li class="toc-l3"><a href="#heartbeat">Heartbeat</a></li>
 <li class="toc-l3"><a href="#stepped">Stepped</a></li>
+<li class="toc-l2"><a href="#remoteevent">RemoteEvent</a></li>
+<li class="toc-l3"><a href="#fireserver">FireServer</a></li>
+<li class="toc-l2"><a href="#remotefunction">RemoteFunction</a></li>
+<li class="toc-l3"><a href="#invokefunction">InvokeFunction</a></li>
 </ul>
     </aside>
   </div>

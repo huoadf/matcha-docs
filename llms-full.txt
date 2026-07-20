@@ -15,6 +15,10 @@ This is the documentation for the Matcha LuaVM.
 Matcha **is not an executor** — it does not hook any functions in the Roblox engine. Instead it emulates them externally, which makes it completely undetected, but also means it has no direct access to internal Roblox API functions.
 
 
+> **[success]**
+**New (Jul 20 2026):** Matcha now features a built-in **Remote Spy** in Hybrid mode! You can also invoke remote methods programmatically using `FireServer` and `InvokeFunction`.
+
+
 ## Browse the docs
 
 
@@ -1411,6 +1415,40 @@ Fires every frame, prior to the physics simulation step. Passes the time elapsed
 
 > **[warning]**
 In the Matcha VM, the `Stepped` event only receives one argument (`deltaTime: number`), unlike the standard Roblox API which receives both `time` and `deltaTime`.
+
+
+
+## RemoteEvent
+
+<https://create.roblox.com/docs/reference/engine/classes/RemoteEvent>
+
+**Methods**
+
+### FireServer
+
+```lua
+RemoteEvent:FireServer(...any)
+```
+
+Fires the `RemoteEvent` to the server with the given arguments. *(Added in Hybrid mode - Jul 20 2026).*
+
+
+## RemoteFunction
+
+<https://create.roblox.com/docs/reference/engine/classes/RemoteFunction>
+
+**Methods**
+
+### InvokeFunction
+
+```lua
+RemoteFunction:InvokeFunction(...any): ...any
+```
+
+Invokes the `RemoteFunction` on the server and yields until it returns a result. *(Added in Hybrid mode - Jul 20 2026).*
+
+> **[warning]**
+Unlike the standard Roblox `InvokeServer`, Matcha uses `InvokeFunction` to call `RemoteFunction`s externally.
 
 
 ---
