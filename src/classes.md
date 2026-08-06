@@ -249,6 +249,10 @@ Instance.Address: number
 
 Hexadecimal number representing the Instance’s memory address.
 
+{% hint style="info" %}
+As of Aug 6 2026, comparing instances directly via `==` is supported, so comparing `.Address` manually is no longer required.
+{% endhint %}
+
 **Methods**
 
 ### FindFirstChildOfClass
@@ -287,6 +291,10 @@ function Instance:GetChildren(): { Instance }
 function Instance:GetAttribute(name: string): any
 ```
 
+{% hint style="success" %}
+**Fixed (Aug 6 2026):** Attribute retrieval issues have been resolved.
+{% endhint %}
+
 ### GetAttributes
 
 ```lua
@@ -298,6 +306,10 @@ function Instance:GetAttributes(): { string }
 ```lua
 function Instance:SetAttribute(name: string, value: any): nil
 ```
+
+{% hint style="success" %}
+**Fixed (Aug 6 2026):** Attribute assignment issues have been resolved.
+{% endhint %}
 
 ### GetDescendants
 
@@ -442,6 +454,10 @@ GuiObject.AbsoluteSize: Vector2
 GuiObject.AbsolutePosition: Vector2
 ```
 
+{% hint style="success" %}
+**Fixed (Aug 6 2026):** Absolute position and size metrics now return accurate values.
+{% endhint %}
+
 
 ## TextLabel
 
@@ -454,6 +470,10 @@ GuiObject.AbsolutePosition: Vector2
 ```lua
 TextLabel.Text: string
 ```
+
+{% hint style="success" %}
+**Fixed (Aug 6 2026):** `.Text` property access and assignments now work correctly.
+{% endhint %}
 
 
 ## MeshPart

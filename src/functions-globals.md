@@ -19,6 +19,10 @@ function decompile(script: Instance): string
 
 Returns the decompiled source of `script` (a `LocalScript`, `ModuleScript`, or `Script`) as a string. If decompilation fails, an error message is printed to the console.
 
+{% hint style="success" %}
+**Fixed (Aug 6 2026):** Decompiler stability and output has been fixed in the latest version.
+{% endhint %}
+
 ## WorldToScreen
 
 ```lua

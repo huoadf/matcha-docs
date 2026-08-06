@@ -16,7 +16,6 @@ PAGES = [
     {"id": "classes", "title": "Classes", "group": "Reference", "src": "classes.md", "url": "classes/index.html", "breadcrumb": "Classes"},
     {"id": "datatypes", "title": "Datatypes", "group": "Reference", "src": "datatypes.md", "url": "datatypes/index.html", "breadcrumb": "Datatypes"},
     {"id": "drawing", "title": "Drawing", "group": "Reference", "src": "drawing.md", "url": "drawing/index.html", "breadcrumb": "Drawing"},
-    {"id": "ui-binding", "title": "UI / Menu Binding", "group": "Reference", "src": "ui-binding.md", "url": "ui-binding/index.html", "breadcrumb": "UI / Menu Binding"},
     {"id": "gc-guide", "title": "GC modding guide", "group": "Reference", "src": "gc-guide.md", "url": "gc-guide/index.html", "breadcrumb": "GC modding guide"}
 ]
 
@@ -454,7 +453,6 @@ llms_summary = """# Matcha Docs
 - [Classes](https://huoadf.github.io/matcha-docs/classes/) - BasePart, Camera, DataModel, Workspace...
 - [Datatypes](https://huoadf.github.io/matcha-docs/datatypes/) - Vector3, CFrame, Vector2, Color3, Ray, UDim, UDim2...
 - [Drawing](https://huoadf.github.io/matcha-docs/drawing/) - Drawing API, Square, Line, Circle, ESP Overlay example...
-- [UI / Menu Binding](https://huoadf.github.io/matcha-docs/ui-binding/) - Create custom menu tabs, widgets, and keybinds from Lua scripts.
 - [GC modding guide](https://huoadf.github.io/matcha-docs/gc-guide/) - Step-by-step tutorial on weapon modifier scripts using GC scans.
 
 For the full detailed documentation text, visit [llms-full.txt](https://huoadf.github.io/matcha-docs/llms-full.txt).

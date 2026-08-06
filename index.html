@@ -100,7 +100,6 @@
         <a class="nav-item " href="classes/">Classes</a>
         <a class="nav-item " href="datatypes/">Datatypes</a>
         <a class="nav-item " href="drawing/">Drawing</a>
-        <a class="nav-item " href="ui-binding/">UI / Menu Binding</a>
         <a class="nav-item " href="gc-guide/">GC modding guide</a>
       </div>
     </nav>
@@ -121,6 +120,20 @@
 <div class="callout callout-success"><span class="callout-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg></span><div class="callout-body"><p><strong>New (Jul 20 2026):</strong> Matcha now features a built-in <strong>Remote Spy</strong> in Hybrid mode! You can also invoke remote methods programmatically using <code>FireServer</code> and <code>InvokeFunction</code>.</p></div></div>
 <h2 id="browse-the-docs" tabindex="-1">Browse the docs <a class="header-anchor" href="#browse-the-docs" aria-hidden="true">#</a></h2>
 <div class="cards"><p><a href="functions-globals/"><strong>Globals</strong> loadstring, identifyexecutor, decompile…</a></p><p><a href="functions-console-input/"><strong>Console & input</strong> print, keys, mouse, clipboard</a></p><p><a href="functions-misc/"><strong>Scheduler & misc</strong> wait, task, run_secure, require</a></p><p><a href="memory/"><strong>Memory</strong> getbase, memory_read / memory_write</a></p><p><a href="garbage-collector/"><strong>Garbage collector</strong> getgc / setgc / applygc</a></p><p><a href="classes/"><strong>Classes</strong> game, Players, RunService…</a></p><p><a href="datatypes/"><strong>Datatypes</strong> Vector3, CFrame, Color3…</a></p><p><a href="drawing/"><strong>Drawing</strong> the Drawing API</a></p></div>
+<h2 id="ai-agents-mcp-integration" tabindex="-1">AI Agents & MCP Integration <a class="header-anchor" href="#ai-agents-mcp-integration" aria-hidden="true">#</a></h2>
+<p>Matcha includes native Model Context Protocol (MCP) support for seamless integration with AI coding assistants like Antigravity and Codex.</p>
+<h3 id="adding-to-antigravity" tabindex="-1">Adding to Antigravity <a class="header-anchor" href="#adding-to-antigravity" aria-hidden="true">#</a></h3>
+<p>Go to <code>C:\Users\<a href="USERNAME">USERNAME</a>\.gemini\antigravity</code> and open <code>mcp_config.json</code>. Add the Matcha server to your <code>mcpServers</code> list:</p>
+<pre><code class="language-json">{
+  "mcpServers": {
+    "matcha": {
+      "serverUrl": "http://127.0.0.1:8765/mcp"
+    }
+  }
+}</code></pre>
+<h3 id="adding-to-codex" tabindex="-1">Adding to Codex <a class="header-anchor" href="#adding-to-codex" aria-hidden="true">#</a></h3>
+<p>Run the following command in your terminal:</p>
+<pre><code class="language-bash">codex mcp add matcha --url http://127.0.0.1:8765/mcp</code></pre>
 <h2 id="resources" tabindex="-1">Resources <a class="header-anchor" href="#resources" aria-hidden="true">#</a></h2>
 <p>To understand how the LuaVM works, you first need the basics of Lua(U). For that, visit <a href="https://lua.org">https://lua.org</a>.</p>
       </article>
@@ -138,6 +151,9 @@
       <div class="toc-title">On this page</div>
       <ul class="toc-list">
 <li class="toc-l2"><a href="#browse-the-docs">Browse the docs</a></li>
+<li class="toc-l2"><a href="#ai-agents-mcp-integration">AI Agents & MCP Integration</a></li>
+<li class="toc-l3"><a href="#adding-to-antigravity">Adding to Antigravity</a></li>
+<li class="toc-l3"><a href="#adding-to-codex">Adding to Codex</a></li>
 <li class="toc-l2"><a href="#resources">Resources</a></li>
 </ul>
     </aside>

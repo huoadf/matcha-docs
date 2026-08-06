@@ -100,7 +100,6 @@
         <a class="nav-item " href="../classes/">Classes</a>
         <a class="nav-item " href="../datatypes/">Datatypes</a>
         <a class="nav-item " href="../drawing/">Drawing</a>
-        <a class="nav-item " href="../ui-binding/">UI / Menu Binding</a>
         <a class="nav-item " href="../gc-guide/">GC modding guide</a>
       </div>
     </nav>
@@ -124,6 +123,7 @@ function load(chunk: string, chunkname: string?): function</code></pre>
 <h2 id="decompile" tabindex="-1">decompile <a class="header-anchor" href="#decompile" aria-hidden="true">#</a></h2>
 <pre><code class="language-lua">function decompile(script: Instance): string</code></pre>
 <p>Returns the decompiled source of <code>script</code> (a <code>LocalScript</code>, <code>ModuleScript</code>, or <code>Script</code>) as a string. If decompilation fails, an error message is printed to the console.</p>
+<div class="callout callout-success"><span class="callout-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg></span><div class="callout-body"><p><strong>Fixed (Aug 6 2026):</strong> Decompiler stability and output has been fixed in the latest version.</p></div></div>
 <h2 id="worldtoscreen" tabindex="-1">WorldToScreen <a class="header-anchor" href="#worldtoscreen" aria-hidden="true">#</a></h2>
 <pre><code class="language-lua">function WorldToScreen(position: Vector3): (Vector2, boolean)</code></pre>
 <p>Projects a 3D world <code>position</code> into 2D screen space. Returns the screen position in <strong>pixels</strong> (top-left origin) and a boolean that is <code>true</code> when the point is on screen; off screen or behind the camera returns <code>(0, 0)</code> and <code>false</code>.</p>

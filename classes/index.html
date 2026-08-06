@@ -100,7 +100,6 @@
         <a class="nav-item active" href="../classes/">Classes</a>
         <a class="nav-item " href="../datatypes/">Datatypes</a>
         <a class="nav-item " href="../drawing/">Drawing</a>
-        <a class="nav-item " href="../ui-binding/">UI / Menu Binding</a>
         <a class="nav-item " href="../gc-guide/">GC modding guide</a>
       </div>
     </nav>
@@ -207,6 +206,7 @@
 <h3 id="address" tabindex="-1">Address <a class="header-anchor" href="#address" aria-hidden="true">#</a></h3>
 <pre><code class="language-lua">Instance.Address: number</code></pre>
 <p>Hexadecimal number representing the Instance’s memory address.</p>
+<div class="callout callout-info"><span class="callout-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg></span><div class="callout-body"><p>As of Aug 6 2026, comparing instances directly via <code>==</code> is supported, so comparing <code>.Address</code> manually is no longer required.</p></div></div>
 <p><strong>Methods</strong></p>
 <h3 id="findfirstchildofclass" tabindex="-1">FindFirstChildOfClass <a class="header-anchor" href="#findfirstchildofclass" aria-hidden="true">#</a></h3>
 <pre><code class="language-lua">function Instance:FindFirstChildOfClass(name: string): Instance</code></pre>
@@ -220,10 +220,12 @@
 <pre><code class="language-lua">function Instance:GetChildren(): { Instance }</code></pre>
 <h3 id="getattribute" tabindex="-1">GetAttribute <a class="header-anchor" href="#getattribute" aria-hidden="true">#</a></h3>
 <pre><code class="language-lua">function Instance:GetAttribute(name: string): any</code></pre>
+<div class="callout callout-success"><span class="callout-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg></span><div class="callout-body"><p><strong>Fixed (Aug 6 2026):</strong> Attribute retrieval issues have been resolved.</p></div></div>
 <h3 id="getattributes" tabindex="-1">GetAttributes <a class="header-anchor" href="#getattributes" aria-hidden="true">#</a></h3>
 <pre><code class="language-lua">function Instance:GetAttributes(): { string }</code></pre>
 <h3 id="setattribute" tabindex="-1">SetAttribute <a class="header-anchor" href="#setattribute" aria-hidden="true">#</a></h3>
 <pre><code class="language-lua">function Instance:SetAttribute(name: string, value: any): nil</code></pre>
+<div class="callout callout-success"><span class="callout-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg></span><div class="callout-body"><p><strong>Fixed (Aug 6 2026):</strong> Attribute assignment issues have been resolved.</p></div></div>
 <h3 id="getdescendants" tabindex="-1">GetDescendants <a class="header-anchor" href="#getdescendants" aria-hidden="true">#</a></h3>
 <pre><code class="language-lua">function Instance:GetDescendants(): { Instance }</code></pre>
 <h3 id="isdescendantof" tabindex="-1">IsDescendantOf <a class="header-anchor" href="#isdescendantof" aria-hidden="true">#</a></h3>
@@ -276,11 +278,13 @@
 <pre><code class="language-lua">GuiObject.AbsoluteSize: Vector2</code></pre>
 <h3 id="absoluteposition" tabindex="-1">AbsolutePosition <a class="header-anchor" href="#absoluteposition" aria-hidden="true">#</a></h3>
 <pre><code class="language-lua">GuiObject.AbsolutePosition: Vector2</code></pre>
+<div class="callout callout-success"><span class="callout-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg></span><div class="callout-body"><p><strong>Fixed (Aug 6 2026):</strong> Absolute position and size metrics now return accurate values.</p></div></div>
 <h2 id="textlabel" tabindex="-1">TextLabel <a class="header-anchor" href="#textlabel" aria-hidden="true">#</a></h2>
 <p><a href="https://create.roblox.com/docs/reference/engine/classes/TextLabel">https://create.roblox.com/docs/reference/engine/classes/TextLabel</a></p>
 <p><strong>Properties</strong></p>
 <h3 id="text" tabindex="-1">Text <a class="header-anchor" href="#text" aria-hidden="true">#</a></h3>
 <pre><code class="language-lua">TextLabel.Text: string</code></pre>
+<div class="callout callout-success"><span class="callout-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg></span><div class="callout-body"><p><strong>Fixed (Aug 6 2026):</strong> <code>.Text</code> property access and assignments now work correctly.</p></div></div>
 <h2 id="meshpart" tabindex="-1">MeshPart <a class="header-anchor" href="#meshpart" aria-hidden="true">#</a></h2>
 <p><a href="https://create.roblox.com/docs/reference/engine/classes/MeshPart">https://create.roblox.com/docs/reference/engine/classes/MeshPart</a></p>
 <p><strong>Properties</strong></p>
