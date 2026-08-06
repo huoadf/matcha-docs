@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>GC modding guide · Matcha docs</title>
-  <meta name="description" content="Matcha LuaVM documentation - GC modding guide">
+  <title>Changelogs · Matcha docs</title>
+  <meta name="description" content="Matcha LuaVM documentation - Changelogs">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050505'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23ee8aff'/%3E%3C/svg%3E">
   
   <!-- Fonts -->
@@ -100,8 +100,8 @@
         <a class="nav-item " href="../classes/">Classes</a>
         <a class="nav-item " href="../datatypes/">Datatypes</a>
         <a class="nav-item " href="../drawing/">Drawing</a>
-        <a class="nav-item active" href="../gc-guide/">GC modding guide</a>
-        <a class="nav-item " href="../changelogs/">Changelogs</a>
+        <a class="nav-item " href="../gc-guide/">GC modding guide</a>
+        <a class="nav-item active" href="../changelogs/">Changelogs</a>
       </div>
     </nav>
     
@@ -110,111 +110,112 @@
         <div class="breadcrumb">
           <a href="../">Matcha</a> 
           <span>/</span> 
-          GC modding guide
+          Changelogs
         </div>
-        <h1 id="gc-guide" tabindex="-1">
-          GC modding guide 
-          <a class="header-anchor" href="#gc-guide" aria-hidden="true">#</a>
+        <h1 id="changelogs" tabindex="-1">
+          Changelogs 
+          <a class="header-anchor" href="#changelogs" aria-hidden="true">#</a>
         </h1>
-        <p>This guide explains how to find and modify values held in the game's Lua garbage collector (GC), such as weapon stats, flight speeds, or cooldowns.</p>
-<p>In Luau, many games store configuration tables (like gun modules or physics settings) inside local variables or local tables. Because these are tracked by the Lua garbage collector, Matcha's GC functions allow you to scan the collector memory, find these values by name, and modify them directly.</p>
+        <h1 id="changelogs" tabindex="-1">Changelogs <a class="header-anchor" href="#changelogs" aria-hidden="true">#</a></h1>
+<p>Keep track of all the latest updates, fixes, and new features added to the Matcha Executor and Lua VM.</p>
 <hr>
-<h2 id="gc-functions-overview" tabindex="-1">GC Functions Overview <a class="header-anchor" href="#gc-functions-overview" aria-hidden="true">#</a></h2>
-<p>Matcha provides three functions for interacting with the garbage collector:</p>
-<ol>
-<li><strong><code>getgc</code></strong>: Scans the garbage collector and returns matching objects. Since scanning the entire GC is slow, you should run <code>getgc</code> <strong>once</strong> at the start of your script and save the results (caching them).</li>
-<li><strong><code>applygc</code></strong>: Updates values inside a previously cached scan. This is extremely fast and can be safely run inside loops or events.</li>
-<li><strong><code>setgc</code></strong>: Scans the GC and updates matching values instantly. Because this scans on every call, <strong>do not run this inside loops</strong> as it will lag the game client.</li>
-</ol>
+<h2 id="aug-6-2026" tabindex="-1">Aug 6 2026 <a class="header-anchor" href="#aug-6-2026" aria-hidden="true">#</a></h2>
+<p><strong>Version:</strong> <code>d584fb6c717a43d9</code></p>
+<p><strong>General & Fixes</strong></p>
+<ul>
+<li>Fixed Auth launch issue.</li>
+<li>Fixed Position Fly.</li>
+<li>Optimized performance for low-end PCs.</li>
+<li>Fixed Playerlist *(Aug 1)*.</li>
+</ul>
+<p><strong>Lua VM</strong></p>
+<ul>
+<li>Comparing <code>Instance</code>s no longer requires using <code>.Address</code> (direct <code>==</code> comparison is now supported).</li>
+<li>Fixed <code>Instance:GetAttribute()</code> and <code>Instance:SetAttribute()</code>.</li>
+<li>Fixed <code>TextLabel.Text</code> property assignments.</li>
+<li>Fixed <code>GuiObject.AbsoluteSize</code> & <code>GuiObject.AbsolutePosition</code>.</li>
+<li>Fixed Decompiler stability and output.</li>
+</ul>
+<p><strong>Pro (Early Access)</strong></p>
+<ul>
+<li>Added <strong>AI Agent & MCP integration</strong> into Lua U (currently in testing).</li>
+<li>*Antigravity users can now add Matcha to their <code>mcp_config.json</code> via <code>http://127.0.0.1:8765/mcp</code>.*</li>
+</ul>
 <hr>
-<h2 id="method-1-cached-modding-recommended" tabindex="-1">Method 1: Cached Modding (Recommended) <a class="header-anchor" href="#method-1-cached-modding-recommended" aria-hidden="true">#</a></h2>
-<p>This is the standard and most performant method. You scan the GC once, retrieve a cache of references, and repeatedly apply modifications. This is perfect for values that the game checks constantly or resets (e.g. ammo or recoil).</p>
-<h3 id="step-1-scan-and-cache" tabindex="-1">Step 1: Scan and Cache <a class="header-anchor" href="#step-1-scan-and-cache" aria-hidden="true">#</a></h3>
-<p>We use <code>getgc</code> to search the collector for specific keys we want to modify (e.g. <code>"FireRate"</code>, <code>"SpreadAngle"</code>, <code>"MagAmmo"</code>):</p>
-<pre><code class="language-lua">-- Scan the garbage collector once for our target keys and cache them
-local cache = getgc({"FireRate", "SpreadAngle", "MagAmmo"})</code></pre>
-<h3 id="step-2-apply-modifications" tabindex="-1">Step 2: Apply Modifications <a class="header-anchor" href="#step-2-apply-modifications" aria-hidden="true">#</a></h3>
-<p>Once you have the cache, you can modify singular values or apply modifications in groups using <code>applygc</code>.</p>
-<h4>Modifying a single value:</h4>
-<pre><code class="language-lua">-- Set FireRate to 0 (rapid fire)
-applygc(cache, "FireRate", 0)
-
--- Set MagAmmo to 999999
-applygc(cache, "MagAmmo", 999999)</code></pre>
-<h4>Modifying a group of values:</h4>
-<pre><code class="language-lua">-- Apply multiple modifications in one fast operation
-applygc(cache, {
-    FireRate = 0,
-    SpreadAngle = 0,
-    MagAmmo = 999999
-})</code></pre>
+<h2 id="jul-29-2026" tabindex="-1">Jul 29 2026 <a class="header-anchor" href="#jul-29-2026" aria-hidden="true">#</a></h2>
+<p><strong>UI Redesign</strong></p>
+<ul>
+<li>Redesigned Target HUD, Lag Notifier, Explorer List, Popup UI, Slider, and Dropdown.</li>
+<li>Redesigned Lua VM UI layout.</li>
+<li>Added exclusive <strong>Glass Design</strong> (for Watermark, Hotkeys, Notification, and Array List).</li>
+<li>Added Glass UI to Options (Windows 11 Only).</li>
+<li>Added animations for most UI elements.</li>
+<li>New Loading Screen design (no longer blocks input).</li>
+</ul>
+<p><strong>Visuals</strong></p>
+<ul>
+<li>Redesigned Glow for ESP.</li>
+<li>Redesigned Name Background.</li>
+</ul>
+<p><strong>General</strong></p>
+<ul>
+<li>Fixed ESP and Aim not working on certain games.</li>
+<li>Removed Script Hub (outdated).</li>
+<li>Removed silent launch stream-proof by default due to NVIDIA conflicts (will return as a toggleable option later).</li>
+</ul>
 <hr>
-<h2 id="method-2-instant-modding-one-offs" tabindex="-1">Method 2: Instant Modding (One-Offs) <a class="header-anchor" href="#method-2-instant-modding-one-offs" aria-hidden="true">#</a></h2>
-<p>If you only need to modify a value once (e.g., unlocking a game pass state or setting a one-time configuration) and do not need to repeat it, you can use <code>setgc</code>.</p>
-<pre><code class="language-lua">-- Singular modification
-setgc("FireRate", 0)
-
--- Group modification
-setgc({
-    FireRate = 0,
-    SpreadAngle = 0,
-    CameraRecoilMult = 0,
-    MagAmmo = 999999
-})</code></pre>
+<h2 id="jul-20-2026" tabindex="-1">Jul 20 2026 <a class="header-anchor" href="#jul-20-2026" aria-hidden="true">#</a></h2>
+<p><strong>Hybrid Mode</strong></p>
+<ul>
+<li>Added <strong>Remote Spy</strong>.</li>
+<li>Added <code>RemoteEvent:FireServer()</code> and <code>RemoteFunction:InvokeFunction()</code> support.</li>
+</ul>
 <hr>
-<h2 id="practical-example-auto-updating-gun-modifier" tabindex="-1">Practical Example: Auto-Updating Gun Modifier <a class="header-anchor" href="#practical-example-auto-updating-gun-modifier" aria-hidden="true">#</a></h2>
-<p>Many modern Roblox games (like *Blackhawk Rescue Mission 5*) rebuild or reset your gun configuration tables whenever you respawn, change weapons, or customize a weapon.</p>
-<p>To ensure your modifications remain active, you should:</p>
-<ol>
-<li>Listen for character spawns or weapon changes.</li>
-<li>Re-run <code>getgc</code> to scan for the new tables.</li>
-<li>Apply modifications.</li>
-</ol>
-<p>Here is a complete, ready-to-run template:</p>
-<pre><code class="language-lua">local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-
--- Function to modify our stats
-local function modifyWeaponStats()
-    print("Scanning garbage collector...")
-    
-    -- Scan and cache the target properties
-    local cache = getgc({
-        "FireRate",
-        "SpreadAngle",
-        "CameraRecoilMult",
-        "MagAmmo"
-    })
-    
-    -- Apply modifications
-    local modifiedCount = applygc(cache, {
-        FireRate = 0.01,         -- Insanely fast fire rate
-        SpreadAngle = 0,         -- Zero spread (laser accuracy)
-        CameraRecoilMult = 0,    -- Zero recoil
-        MagAmmo = 999999         -- Infinite magazine
-    })
-    
-    print("Weapon stats modified! Total changes applied: " .. tostring(modifiedCount))
-end
-
--- Run once on script load
-modifyWeaponStats()
-
--- Automatically re-apply modifications when character respawns
-LocalPlayer.CharacterAdded:Connect(function()
-    task.wait(1.5) -- Wait a moment for gun tables to load into memory
-    modifyWeaponStats()
-end)</code></pre>
+<h2 id="jul-17-2026" tabindex="-1">Jul 17 2026 <a class="header-anchor" href="#jul-17-2026" aria-hidden="true">#</a></h2>
+<p><strong>Fixes</strong></p>
+<ul>
+<li>Fixed Auth Issues.</li>
+<li>Fixed in-game input detection.</li>
+</ul>
+<p><strong>Lua VM additions</strong></p>
+<ul>
+<li>Added <code>Workspace:Raycast</code>.</li>
+<li>Native support for <code>Ray</code>, <code>UDim</code>, and <code>UDim2</code>.</li>
+<li>Added <code>getrbxversion()</code>.</li>
+<li>Added <code>gethwid()</code>.</li>
+<li>Added <code>Camera.CFrame</code>.</li>
+<li>Added <code>Drawing.Fonts.ProximaSoftBold</code>.</li>
+</ul>
+<p><strong>Misc</strong></p>
+<ul>
+<li>You can now interact with Music UI without having the main UI open.</li>
+</ul>
+<hr>
+<h2 id="jul-1-2026" tabindex="-1">Jul 1 2026 <a class="header-anchor" href="#jul-1-2026" aria-hidden="true">#</a></h2>
+<p><strong>Version:</strong> <code>5cf2272675e145f5</code></p>
+<p><strong>General</strong></p>
+<ul>
+<li>Now using Camera FOV and Lighting (Ambient, ClockTime, Exposure) independently without overlapping with the game environment.</li>
+<li>Redesigned Watermark.</li>
+</ul>
+<p><strong>Game Support (Overkill)</strong></p>
+<ul>
+<li>Added Silent Aim (Temu Rivals).</li>
+<li>Added Name & Weapon ESP support.</li>
+<li>Added Team Check Support.</li>
+<li>Added Engine Chams Support.</li>
+<li>Added Memory Aim (Works with smoothness).</li>
+</ul>
+<p><strong>Lua VM</strong></p>
+<ul>
+<li>Added <code>Player.UserId</code> property.</li>
+</ul>
       </article>
       
       <nav class="pager">
-<a class="pager-link prev" href="../drawing/">
+<a class="pager-link prev" href="../gc-guide/">
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg)"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-<span><em>Previous</em>Drawing</span>
-</a>
-<a class="pager-link next" href="../changelogs/">
-<span><em>Next</em>Changelogs</span>
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+<span><em>Previous</em>GC modding guide</span>
 </a>
 </nav>
     </main>
@@ -222,12 +223,11 @@ end)</code></pre>
     <aside class="toc">
       <div class="toc-title">On this page</div>
       <ul class="toc-list">
-<li class="toc-l2"><a href="#gc-functions-overview">GC Functions Overview</a></li>
-<li class="toc-l2"><a href="#method-1-cached-modding-recommended">Method 1 Cached Modding (Recommended)</a></li>
-<li class="toc-l3"><a href="#step-1-scan-and-cache">Step 1 Scan and Cache</a></li>
-<li class="toc-l3"><a href="#step-2-apply-modifications">Step 2 Apply Modifications</a></li>
-<li class="toc-l2"><a href="#method-2-instant-modding-one-offs">Method 2 Instant Modding (One-Offs)</a></li>
-<li class="toc-l2"><a href="#practical-example-auto-updating-gun-modifier">Practical Example Auto-Updating Gun Modifier</a></li>
+<li class="toc-l2"><a href="#aug-6-2026">Aug 6 2026</a></li>
+<li class="toc-l2"><a href="#jul-29-2026">Jul 29 2026</a></li>
+<li class="toc-l2"><a href="#jul-20-2026">Jul 20 2026</a></li>
+<li class="toc-l2"><a href="#jul-17-2026">Jul 17 2026</a></li>
+<li class="toc-l2"><a href="#jul-1-2026">Jul 1 2026</a></li>
 </ul>
     </aside>
   </div>

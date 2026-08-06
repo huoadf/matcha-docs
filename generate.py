@@ -16,7 +16,8 @@ PAGES = [
     {"id": "classes", "title": "Classes", "group": "Reference", "src": "classes.md", "url": "classes/index.html", "breadcrumb": "Classes"},
     {"id": "datatypes", "title": "Datatypes", "group": "Reference", "src": "datatypes.md", "url": "datatypes/index.html", "breadcrumb": "Datatypes"},
     {"id": "drawing", "title": "Drawing", "group": "Reference", "src": "drawing.md", "url": "drawing/index.html", "breadcrumb": "Drawing"},
-    {"id": "gc-guide", "title": "GC modding guide", "group": "Reference", "src": "gc-guide.md", "url": "gc-guide/index.html", "breadcrumb": "GC modding guide"}
+    {"id": "gc-guide", "title": "GC modding guide", "group": "Reference", "src": "gc-guide.md", "url": "gc-guide/index.html", "breadcrumb": "GC modding guide"},
+    {"id": "changelogs", "title": "Changelogs", "group": "Reference", "src": "changelogs.md", "url": "changelogs/index.html", "breadcrumb": "Changelogs"}
 ]
 
 # Load layout template
