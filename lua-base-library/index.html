@@ -143,10 +143,10 @@ function next(t: table, key: any?): (any, any)</code></pre>
 <h2 id="errors-protected-calls" tabindex="-1">Errors & protected calls <a class="header-anchor" href="#errors-protected-calls" aria-hidden="true">#</a></h2>
 <h3 id="assert" tabindex="-1">assert <a class="header-anchor" href="#assert" aria-hidden="true">#</a></h3>
 <pre><code class="language-lua">function assert(value: any, message: string?, ...): ...</code></pre>
-<p>Raises a catchable error (<code>Matcha:<a href="line">line</a>: <a href="message">message</a></code>, or <code>assertion failed!</code> with no message) if <code>value</code> is falsy; otherwise returns its arguments unchanged — the way to raise a catchable error in Matcha.</p>
+<p>Raises a catchable error (<code>Matcha:<line>: <message></code>, or <code>assertion failed!</code> with no message) if <code>value</code> is falsy; otherwise returns its arguments unchanged — the way to raise a catchable error in Matcha.</p>
 <h3 id="pcall" tabindex="-1">pcall <a class="header-anchor" href="#pcall" aria-hidden="true">#</a></h3>
 <pre><code class="language-lua">function pcall(f: function, ...): (boolean, ...)</code></pre>
-<p>Standard. Returns <code>true</code> plus <code>f</code>'s results on success, or <code>false, "Matcha:<a href="line">line</a>: <a href="message">message</a>"</code> on a runtime fault.</p>
+<p>Standard. Returns <code>true</code> plus <code>f</code>'s results on success, or <code>false, "Matcha:<line>: <message>"</code> on a runtime fault.</p>
 <h3 id="xpcall" tabindex="-1">xpcall <a class="header-anchor" href="#xpcall" aria-hidden="true">#</a></h3>
 <pre><code class="language-lua">function xpcall(f: function, handler: function, ...): (boolean, ...)</code></pre>
 <p>Standard, and <strong>forwards extra arguments to <code>f</code></strong> (Luau-style): <code>xpcall(fn, handler, 3, 4)</code> calls <code>fn(3, 4)</code>. On a real error, <code>handler</code> runs with the error message.</p>

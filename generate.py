@@ -59,8 +59,8 @@ def parse_markdown(md_text, current_url):
     md_text = re.sub(r'\[([^\]]+)\]\(/matcha/([^\)]*)\)', rewrite_markdown_link, md_text)
     md_text = re.sub(r'\[([^\]]+)\]\(/matcha\)', f'[\\1]({relative_prefix})', md_text)
     
-    # Also fix standard external link markup style
-    md_text = re.sub(r'<([^>]+)>', r'<a href="\1">\1</a>', md_text)
+    # Auto-link bare URLs like <https://example.com> — but NOT HTML tags
+    md_text = re.sub(r'<(https?://[^>]+)>', r'<a href="\1">\1</a>', md_text)
     
     lines = md_text.split("\n")
     html_lines = []
@@ -280,7 +280,13 @@ def parse_markdown(md_text, current_url):
             i += 1
             continue
 
-        # 8. Paragraphs and blank lines
+        # 8. Raw HTML pass-through (lines starting with an HTML tag)
+        if re.match(r'^<[a-zA-Z/]', stripped):
+            html_lines.append(stripped)
+            i += 1
+            continue
+
+        # 9. Paragraphs and blank lines
         if stripped == "":
             i += 1
             continue
