@@ -95,12 +95,18 @@ def parse_markdown(md_text, current_url):
     headings = []
 
     def inline_format(text):
+        # Role badges
+        pro_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 8 8"><path fill="currentColor" d="M4 0L4.88 2.76H8L5.56 4.47L6.47 7.24L4 5.53L1.53 7.24L2.44 4.47L0 2.76H3.12L4 0Z"/></svg>'
+        text = text.replace('::pro::', f'<span class="badge badge-pro">{pro_svg} Pro</span>')
+        text = text.replace('::buyer::', '<span class="badge badge-buyer">🫐 Buyer</span>')
         # Escaped code block backticks
         # Inline code `` `code` ``
         text = re.sub(r'`([^`]+)`', r'<code>\1</code>', text)
         # Bold
         text = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', text)
         text = re.sub(r'__([^_]+)__', r'<strong>\1</strong>', text)
+        # Italic
+        text = re.sub(r'\*([^*]+)\*', r'<em>\1</em>', text)
         # Links
         text = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', text)
         return text

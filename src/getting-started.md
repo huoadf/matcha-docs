@@ -15,7 +15,7 @@ Matcha **is not an executor** — it does not hook any functions in the Roblox e
 - Fixed Position Fly
 - Optimized some parts for low-end PCs
 - Comparing instances no longer needs `.Address`
-- **Pro (Early Access):** Added Agent and MCP integration into Lua U *(still on testing)*
+- **::pro:: Early Access:** Added Agent and MCP integration into Lua U *(still on testing)*
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)
 {% endhint %}
@@ -40,7 +40,7 @@ Matcha **is not an executor** — it does not hook any functions in the Roblox e
 [**Drawing** the Drawing API](/matcha/drawing)
 :::
 
-## AI Agents & MCP Integration
+## AI Agents & MCP Integration ::pro::
 
 Matcha includes native Model Context Protocol (MCP) support for seamless integration with AI coding assistants like Antigravity and Codex.
 

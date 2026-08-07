@@ -33,7 +33,7 @@ Keep track of all the latest updates, fixes, and new features added to the Match
 - Optimized some parts for low-end PCs
 - Comparing instances no longer needs `.Address` — direct `==` comparison is now supported
 
-**Pro (Early Access)**
+**Pro (Early Access)** ::pro::
 - Added **AI Agent & MCP integration** into Lua U *(still on testing)*
 
 *Run loader to update*
@@ -68,7 +68,7 @@ Keep track of all the latest updates, fixes, and new features added to the Match
 
 ## Jul 20 2026
 
-**Hybrid Mode**
+**Hybrid Mode** ::pro::
 - Added **Remote Spy**.
 - Added `RemoteEvent:FireServer()` and `RemoteFunction:InvokeFunction()` support.
 
