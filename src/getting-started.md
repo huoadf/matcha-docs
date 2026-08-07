@@ -5,7 +5,12 @@ Matcha **is not an executor** — it does not hook any functions in the Roblox e
 {% endhint %}
 
 {% hint style="success" %}
-**New (Jul 20 2026):** Matcha now features a built-in **Remote Spy** in Hybrid mode! You can also invoke remote methods programmatically using `FireServer` and `InvokeFunction`.
+**New (Aug 6 2026):**
+- Fixed Attributes (`GetAttribute` & `SetAttribute`)
+- Fixed `.Text`
+- Fixed `AbsoluteSize` & `AbsolutePosition`
+- Fixed Decompiler
+- *Run loader to update*
 {% endhint %}
 
 ## Browse the docs
