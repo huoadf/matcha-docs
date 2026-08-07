@@ -16,12 +16,19 @@ Matcha **is not an executor** — it does not hook any functions in the Roblox e
 
 
 > **[success]**
-**New (Aug 6 2026):**
-- Fixed Attributes (`GetAttribute` & `SetAttribute`)
+**Changelogs (Aug 6 2026)**
+- Fixed Attributes
+- Fixed `GetAttribute` & `SetAttribute`
 - Fixed `.Text`
 - Fixed `AbsoluteSize` & `AbsolutePosition`
 - Fixed Decompiler
-- *Run loader to update*
+- Updated to the latest version
+- Fixed Position Fly
+- Optimized some parts for low-end PCs
+- Comparing instances no longer needs `.Address`
+- **Pro (Early Access):** Added Agent and MCP integration into Lua U *(still on testing)*
+
+*Run loader to update* · [Full changelogs →](/matcha/changelogs)
 
 
 ## Browse the docs
@@ -2580,25 +2587,44 @@ Keep track of all the latest updates, fixes, and new features added to the Match
 
 ---
 
-## Aug 6 2026
+## Aug 6 2026 — Auth Fix
+- Fixed Auth *(this fixes launch issues)*
+- *Run loader to update*
+
+---
+
+## Aug 6 2026 — Lua VM Fixes
 **Version:** `d584fb6c717a43d9`
 
-**General & Fixes**
-- Fixed Auth launch issue.
-- Fixed Position Fly.
-- Optimized performance for low-end PCs.
-- Fixed Playerlist *(Aug 1)*.
-
 **Lua VM**
-- Comparing `Instance`s no longer requires using `.Address` (direct `==` comparison is now supported).
-- Fixed `Instance:GetAttribute()` and `Instance:SetAttribute()`.
-- Fixed `TextLabel.Text` property assignments.
-- Fixed `GuiObject.AbsoluteSize` & `GuiObject.AbsolutePosition`.
-- Fixed Decompiler stability and output.
+- Fixed Attributes
+- Fixed `GetAttribute` & `SetAttribute`
+- Fixed `.Text`
+- Fixed `AbsoluteSize` & `AbsolutePosition`
+- Fixed Decompiler
+
+*Run loader to update*
+
+---
+
+## Aug 6 2026 — General Update
+**Version:** `d584fb6c717a43d9`
+
+**General**
+- Updated to the latest version
+- Fixed Position Fly
+- Optimized some parts for low-end PCs
+- Comparing instances no longer needs `.Address` — direct `==` comparison is now supported
 
 **Pro (Early Access)**
-- Added **AI Agent & MCP integration** into Lua U (currently in testing).
-  - *Antigravity users can now add Matcha to their `mcp_config.json` via `http://127.0.0.1:8765/mcp`.*
+- Added **AI Agent & MCP integration** into Lua U *(still on testing)*
+
+*Run loader to update*
+
+---
+
+## Aug 1 2026
+- Fixed Playerlist
 
 ---
 
@@ -2637,7 +2663,7 @@ Keep track of all the latest updates, fixes, and new features added to the Match
 - Fixed Auth Issues.
 - Fixed in-game input detection.
 
-**Lua VM additions**
+**Lua VM**
 - Added `Workspace:Raycast`.
 - Native support for `Ray`, `UDim`, and `UDim2`.
 - Added `getrbxversion()`.

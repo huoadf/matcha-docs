@@ -119,27 +119,42 @@
         <h1 id="changelogs" tabindex="-1">Changelogs <a class="header-anchor" href="#changelogs" aria-hidden="true">#</a></h1>
 <p>Keep track of all the latest updates, fixes, and new features added to the Matcha Executor and Lua VM.</p>
 <hr>
-<h2 id="aug-6-2026" tabindex="-1">Aug 6 2026 <a class="header-anchor" href="#aug-6-2026" aria-hidden="true">#</a></h2>
-<p><strong>Version:</strong> <code>d584fb6c717a43d9</code></p>
-<p><strong>General & Fixes</strong></p>
+<h2 id="aug-6-2026-auth-fix" tabindex="-1">Aug 6 2026 — Auth Fix <a class="header-anchor" href="#aug-6-2026-auth-fix" aria-hidden="true">#</a></h2>
 <ul>
-<li>Fixed Auth launch issue.</li>
-<li>Fixed Position Fly.</li>
-<li>Optimized performance for low-end PCs.</li>
-<li>Fixed Playerlist *(Aug 1)*.</li>
+<li>Fixed Auth *(this fixes launch issues)*</li>
+<li>*Run loader to update*</li>
 </ul>
+<hr>
+<h2 id="aug-6-2026-lua-vm-fixes" tabindex="-1">Aug 6 2026 — Lua VM Fixes <a class="header-anchor" href="#aug-6-2026-lua-vm-fixes" aria-hidden="true">#</a></h2>
+<p><strong>Version:</strong> <code>d584fb6c717a43d9</code></p>
 <p><strong>Lua VM</strong></p>
 <ul>
-<li>Comparing <code>Instance</code>s no longer requires using <code>.Address</code> (direct <code>==</code> comparison is now supported).</li>
-<li>Fixed <code>Instance:GetAttribute()</code> and <code>Instance:SetAttribute()</code>.</li>
-<li>Fixed <code>TextLabel.Text</code> property assignments.</li>
-<li>Fixed <code>GuiObject.AbsoluteSize</code> & <code>GuiObject.AbsolutePosition</code>.</li>
-<li>Fixed Decompiler stability and output.</li>
+<li>Fixed Attributes</li>
+<li>Fixed <code>GetAttribute</code> & <code>SetAttribute</code></li>
+<li>Fixed <code>.Text</code></li>
+<li>Fixed <code>AbsoluteSize</code> & <code>AbsolutePosition</code></li>
+<li>Fixed Decompiler</li>
+</ul>
+<p>*Run loader to update*</p>
+<hr>
+<h2 id="aug-6-2026-general-update" tabindex="-1">Aug 6 2026 — General Update <a class="header-anchor" href="#aug-6-2026-general-update" aria-hidden="true">#</a></h2>
+<p><strong>Version:</strong> <code>d584fb6c717a43d9</code></p>
+<p><strong>General</strong></p>
+<ul>
+<li>Updated to the latest version</li>
+<li>Fixed Position Fly</li>
+<li>Optimized some parts for low-end PCs</li>
+<li>Comparing instances no longer needs <code>.Address</code> — direct <code>==</code> comparison is now supported</li>
 </ul>
 <p><strong>Pro (Early Access)</strong></p>
 <ul>
-<li>Added <strong>AI Agent & MCP integration</strong> into Lua U (currently in testing).</li>
-<li>*Antigravity users can now add Matcha to their <code>mcp_config.json</code> via <code>http://127.0.0.1:8765/mcp</code>.*</li>
+<li>Added <strong>AI Agent & MCP integration</strong> into Lua U *(still on testing)*</li>
+</ul>
+<p>*Run loader to update*</p>
+<hr>
+<h2 id="aug-1-2026" tabindex="-1">Aug 1 2026 <a class="header-anchor" href="#aug-1-2026" aria-hidden="true">#</a></h2>
+<ul>
+<li>Fixed Playerlist</li>
 </ul>
 <hr>
 <h2 id="jul-29-2026" tabindex="-1">Jul 29 2026 <a class="header-anchor" href="#jul-29-2026" aria-hidden="true">#</a></h2>
@@ -177,7 +192,7 @@
 <li>Fixed Auth Issues.</li>
 <li>Fixed in-game input detection.</li>
 </ul>
-<p><strong>Lua VM additions</strong></p>
+<p><strong>Lua VM</strong></p>
 <ul>
 <li>Added <code>Workspace:Raycast</code>.</li>
 <li>Native support for <code>Ray</code>, <code>UDim</code>, and <code>UDim2</code>.</li>
@@ -223,7 +238,10 @@
     <aside class="toc">
       <div class="toc-title">On this page</div>
       <ul class="toc-list">
-<li class="toc-l2"><a href="#aug-6-2026">Aug 6 2026</a></li>
+<li class="toc-l2"><a href="#aug-6-2026-auth-fix">Aug 6 2026 — Auth Fix</a></li>
+<li class="toc-l2"><a href="#aug-6-2026-lua-vm-fixes">Aug 6 2026 — Lua VM Fixes</a></li>
+<li class="toc-l2"><a href="#aug-6-2026-general-update">Aug 6 2026 — General Update</a></li>
+<li class="toc-l2"><a href="#aug-1-2026">Aug 1 2026</a></li>
 <li class="toc-l2"><a href="#jul-29-2026">Jul 29 2026</a></li>
 <li class="toc-l2"><a href="#jul-20-2026">Jul 20 2026</a></li>
 <li class="toc-l2"><a href="#jul-17-2026">Jul 17 2026</a></li>
