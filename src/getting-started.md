@@ -5,14 +5,12 @@ Matcha **is not an executor** — it does not hook any functions in the Roblox e
 {% endhint %}
 
 {% hint style="success" %}
-**✨ Matcha Update (Aug 6 2026)**
-
-Major stability and API fixes are now live:
-- 🔧 **Attributes:** Fixed `GetAttribute` & `SetAttribute`
-- 📏 **Properties:** Fixed `.Text`, `AbsoluteSize` & `AbsolutePosition`
-- 📜 **Lua VM:** Fixed Decompiler output
-
-*💡 Make sure to run your loader to receive the latest update!*
+**New (Aug 6 2026):**
+- Fixed Attributes (`GetAttribute` & `SetAttribute`)
+- Fixed `.Text`
+- Fixed `AbsoluteSize` & `AbsolutePosition`
+- Fixed Decompiler
+- *Run loader to update*
 {% endhint %}
 
 ## Browse the docs
