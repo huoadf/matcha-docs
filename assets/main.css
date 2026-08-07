@@ -5,7 +5,7 @@
    near-black canvas, hairline white-alpha borders, white as the accent. */
 :root {
   color-scheme: dark;
-  --accent: #ee8aff; /* Per-project accent for Matcha from original: #ee8aff */
+  --accent: #8cc63f; /* Per-project accent for Matcha: green */
   --accent-ink: #050505;
   --bg: #050505;
   --bg-elev: #0c0c0e;
@@ -40,8 +40,8 @@
 
 [data-theme="light"] {
   color-scheme: light;
-  --accent: #ee8aff; /* Keep Matcha violet accent in light theme too */
-  --accent-ink: #ffffff;
+  --accent: #8cc63f; /* New Matcha green */
+  --accent-ink: #000000;
   --bg: #ffffff;
   --bg-elev: #f7f7f8;
   --bg-code: #f4f4f5;
@@ -117,7 +117,7 @@ kbd {
 }
 .brand { display: flex; align-items: center; gap: 9px; font-weight: 600; color: var(--text); font-size: 15px; }
 .brand:hover { text-decoration: none; }
-.brand-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+.brand-logo { width: 22px; height: 22px; object-fit: contain; }
 .topbar-spacer { flex: 1; }
 .iconbtn {
   display: inline-flex; align-items: center; justify-content: center;
