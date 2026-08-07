@@ -101,6 +101,9 @@
         <a class="nav-item " href="../datatypes/">Datatypes</a>
         <a class="nav-item " href="../drawing/">Drawing</a>
         <a class="nav-item " href="../gc-guide/">GC modding guide</a>
+        <a class="nav-item " href="../examples/">Code examples</a>
+        <a class="nav-item " href="../limitations/">VM limitations</a>
+        <a class="nav-item " href="../faq/">FAQ</a>
         <a class="nav-item " href="../changelogs/">Changelogs</a>
       </div>
     </nav>
@@ -195,6 +198,30 @@
 <h3 id="raycast" tabindex="-1">Raycast <a class="header-anchor" href="#raycast" aria-hidden="true">#</a></h3>
 <pre><code class="language-lua">function Workspace:Raycast(origin: Vector3, direction: Vector3, params: RaycastParams?): RaycastResult?</code></pre>
 <p>Projects a ray from <code>origin</code> in the direction of <code>direction</code> using optional <code>RaycastParams</code>. Returns the first <code>RaycastResult</code> hit, or <code>nil</code> if no hit.</p>
+<h2 id="camera" tabindex="-1">Camera <a class="header-anchor" href="#camera" aria-hidden="true">#</a></h2>
+<a href="https://create.roblox.com/docs/reference/engine/classes/Camera">https://create.roblox.com/docs/reference/engine/classes/Camera</a>
+<p>The 3D view camera instance.</p>
+<p><strong>Properties</strong></p>
+<h3 id="cframe" tabindex="-1">CFrame <a class="header-anchor" href="#cframe" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Camera.CFrame: CFrame</code></pre>
+<p>The position and orientation of the camera in 3D space.</p>
+<h3 id="fieldofview" tabindex="-1">FieldOfView <a class="header-anchor" href="#fieldofview" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Camera.FieldOfView: number</code></pre>
+<p>The camera's vertical field of view in degrees. Can be modified independently without overlapping game settings.</p>
+<h3 id="viewportsize" tabindex="-1">ViewportSize <a class="header-anchor" href="#viewportsize" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Camera.ViewportSize: Vector2</code></pre>
+<p>The dimensions of the camera viewport in pixels (<code>Vector2.new(width, height)</code>).</p>
+<h2 id="lighting" tabindex="-1">Lighting <a class="header-anchor" href="#lighting" aria-hidden="true">#</a></h2>
+<a href="https://create.roblox.com/docs/reference/engine/classes/Lighting">https://create.roblox.com/docs/reference/engine/classes/Lighting</a>
+<p>Service controlling environment lighting and atmosphere.</p>
+<p><strong>Properties</strong></p>
+<h3 id="ambient" tabindex="-1">Ambient <a class="header-anchor" href="#ambient" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Lighting.Ambient: Color3</code></pre>
+<h3 id="clocktime" tabindex="-1">ClockTime <a class="header-anchor" href="#clocktime" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Lighting.ClockTime: number</code></pre>
+<p>Time of day in hours (0–24).</p>
+<h3 id="exposurecompensation" tabindex="-1">ExposureCompensation <a class="header-anchor" href="#exposurecompensation" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">Lighting.ExposureCompensation: number</code></pre>
 <h2 id="instance" tabindex="-1">Instance <a class="header-anchor" href="#instance" aria-hidden="true">#</a></h2>
 <a href="https://create.roblox.com/docs/reference/engine/classes/Instance">https://create.roblox.com/docs/reference/engine/classes/Instance</a>
 <p><strong>Properties</strong></p>
@@ -378,6 +405,14 @@
 <li class="toc-l2"><a href="#workspace">Workspace</a></li>
 <li class="toc-l3"><a href="#currentcamera">CurrentCamera</a></li>
 <li class="toc-l3"><a href="#raycast">Raycast</a></li>
+<li class="toc-l2"><a href="#camera">Camera</a></li>
+<li class="toc-l3"><a href="#cframe">CFrame</a></li>
+<li class="toc-l3"><a href="#fieldofview">FieldOfView</a></li>
+<li class="toc-l3"><a href="#viewportsize">ViewportSize</a></li>
+<li class="toc-l2"><a href="#lighting">Lighting</a></li>
+<li class="toc-l3"><a href="#ambient">Ambient</a></li>
+<li class="toc-l3"><a href="#clocktime">ClockTime</a></li>
+<li class="toc-l3"><a href="#exposurecompensation">ExposureCompensation</a></li>
 <li class="toc-l2"><a href="#instance">Instance</a></li>
 <li class="toc-l3"><a href="#name">Name</a></li>
 <li class="toc-l3"><a href="#classname">ClassName</a></li>

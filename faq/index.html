@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>File system · Matcha docs</title>
-  <meta name="description" content="Matcha LuaVM documentation - File system">
+  <title>FAQ · Matcha docs</title>
+  <meta name="description" content="Matcha LuaVM documentation - FAQ">
   <link rel="icon" href="../assets/logo.gif">
   
   <!-- Fonts -->
@@ -92,7 +92,7 @@
         <a class="nav-item " href="../functions-misc/">Miscellaneous &amp; scheduler</a>
         <a class="nav-item " href="../memory/">Memory</a>
         <a class="nav-item " href="../garbage-collector/">Garbage collector</a>
-        <a class="nav-item active" href="../filesystem/">File system</a>
+        <a class="nav-item " href="../filesystem/">File system</a>
         <a class="nav-item " href="../http/">HTTP</a>
         <a class="nav-item " href="../lua-base-library/">Lua base library</a>
         
@@ -103,7 +103,7 @@
         <a class="nav-item " href="../gc-guide/">GC modding guide</a>
         <a class="nav-item " href="../examples/">Code examples</a>
         <a class="nav-item " href="../limitations/">VM limitations</a>
-        <a class="nav-item " href="../faq/">FAQ</a>
+        <a class="nav-item active" href="../faq/">FAQ</a>
         <a class="nav-item " href="../changelogs/">Changelogs</a>
       </div>
     </nav>
@@ -113,53 +113,50 @@
         <div class="breadcrumb">
           <a href="../">Matcha</a> 
           <span>/</span> 
-          File system
+          FAQ
         </div>
-        <h1 id="filesystem" tabindex="-1">
-          File system 
-          <a class="header-anchor" href="#filesystem" aria-hidden="true">#</a>
+        <h1 id="faq" tabindex="-1">
+          FAQ 
+          <a class="header-anchor" href="#faq" aria-hidden="true">#</a>
         </h1>
-        <div class="callout callout-warning"><span class="callout-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg></span><div class="callout-body"><p>Paths are relative to the Matcha workspace folder (e.g. <code>C:\matcha\workspace\</code>). <code>/</code> and <code>\</code> are interchangeable, and paths are case-insensitive.</p>
-<p><code>readfile</code>, <code>writefile</code>, and <code>appendfile</code> only accept these extensions: <strong><code>.txt</code> <code>.lua</code> <code>.luau</code> <code>.json</code> <code>.cfg</code> <code>.dat</code> <code>.ini</code></strong>. Any other extension — including images, audio, and executables — raises <code>file extension not allowed</code>. Contents are binary-safe, so store raw/binary data under <code>.dat</code>.</p></div></div>
-<h2 id="writefile" tabindex="-1">writefile <a class="header-anchor" href="#writefile" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function writefile(path: string, content: string): nil</code></pre>
-<p>Creates <code>path</code> (or overwrites it) with <code>content</code>. Missing parent folders are created automatically. Content is written exactly, including binary data. Errors if <code>path</code> has a disallowed extension or is an existing folder.</p>
-<h2 id="readfile" tabindex="-1">readfile <a class="header-anchor" href="#readfile" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function readfile(path: string): string</code></pre>
-<p>Returns the contents of <code>path</code> as a string (binary-safe). Errors if the file does not exist, so guard with <code>isfile</code> or <code>pcall</code>.</p>
-<pre><code class="language-lua">if isfile("MyConfig.json") then
-    local raw = readfile("MyConfig.json")
-end</code></pre>
-<h2 id="appendfile" tabindex="-1">appendfile <a class="header-anchor" href="#appendfile" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function appendfile(path: string, content: string): nil</code></pre>
-<p>Appends <code>content</code> to the end of <code>path</code>, creating the file if it does not exist. Content is concatenated exactly — no separator is inserted.</p>
-<h2 id="makefolder" tabindex="-1">makefolder <a class="header-anchor" href="#makefolder" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function makefolder(path: string): nil</code></pre>
-<p>Creates the folder at <code>path</code>, including any missing parent folders. Does nothing if the folder already exists. Errors if a file already occupies the path.</p>
-<h2 id="isfile" tabindex="-1">isfile <a class="header-anchor" href="#isfile" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function isfile(path: string): boolean</code></pre>
-<p>Returns <code>true</code> only if <code>path</code> is an existing file; <code>false</code> for folders or missing paths. Never errors.</p>
-<h2 id="isfolder" tabindex="-1">isfolder <a class="header-anchor" href="#isfolder" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function isfolder(path: string): boolean</code></pre>
-<p>Returns <code>true</code> only if <code>path</code> is an existing folder; <code>false</code> for files or missing paths. Never errors.</p>
-<h2 id="listfiles" tabindex="-1">listfiles <a class="header-anchor" href="#listfiles" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function listfiles(path: string): { string }</code></pre>
-<p>Returns the immediate children of <code>path</code> — files and folders, not recursive — as workspace-relative paths sorted alphabetically (e.g. <code>listfiles("cfg")</code> → <code>{ "cfg\\a.json", "cfg\\sub" }</code>). Each entry can be passed straight to <code>isfile</code>, <code>isfolder</code>, or <code>readfile</code>. <code>listfiles("")</code> lists the workspace root. Errors if <code>path</code> does not exist or is a file.</p>
-<h2 id="delfile" tabindex="-1">delfile <a class="header-anchor" href="#delfile" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function delfile(path: string): boolean</code></pre>
-<p>Deletes the file (or empty folder) at <code>path</code>. Returns <code>true</code> if something was removed, <code>false</code> if the path did not exist. Errors if <code>path</code> is a non-empty folder — use <code>delfolder</code> for those.</p>
-<h2 id="delfolder" tabindex="-1">delfolder <a class="header-anchor" href="#delfolder" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function delfolder(path: string): boolean</code></pre>
-<p>Recursively deletes the folder (or file) at <code>path</code> and everything inside it. Always returns <code>true</code>, even if <code>path</code> did not exist.</p>
+        <h1 id="frequently-asked-questions-faq" tabindex="-1">Frequently Asked Questions (FAQ) <a class="header-anchor" href="#frequently-asked-questions-faq" aria-hidden="true">#</a></h1>
+<p>Frequently asked questions regarding Matcha execution, updates, roles, and troubleshooting.</p>
+<hr>
+<h2 id="general-questions" tabindex="-1">General Questions <a class="header-anchor" href="#general-questions" aria-hidden="true">#</a></h2>
+<h3 id="what-is-matcha" tabindex="-1">What is Matcha? <a class="header-anchor" href="#what-is-matcha" aria-hidden="true">#</a></h3>
+<p>Matcha is a <strong>Roblox LuaVM script executor</strong> that emulates Roblox API functions externally without hooking into internal engine functions. This design makes it 100% undetected by server-side or client-side anti-cheat mechanisms.</p>
+<h3 id="is-matcha-detectable" tabindex="-1">Is Matcha detectable? <a class="header-anchor" href="#is-matcha-detectable" aria-hidden="true">#</a></h3>
+<p>No. Because Matcha operates externally without memory hook signatures on Roblox engine routines, it is undetected.</p>
+<h3 id="how-do-i-update-matcha" tabindex="-1">How do I update Matcha? <a class="header-anchor" href="#how-do-i-update-matcha" aria-hidden="true">#</a></h3>
+<p>Whenever a new update is released, simply <strong>reopen the Matcha loader</strong>. The loader will automatically download and apply the latest version.</p>
+<hr>
+<h2 id="troubleshooting" tabindex="-1">Troubleshooting <a class="header-anchor" href="#troubleshooting" aria-hidden="true">#</a></h2>
+<h3 id="why-are-features-not-working-or-broken-in-game" tabindex="-1">Why are features not working or broken in-game? <a class="header-anchor" href="#why-are-features-not-working-or-broken-in-game" aria-hidden="true">#</a></h3>
+<p>Make sure your Roblox game client is updated to the latest forced version. If Roblox updated recently, you may encounter broken features until you force-update your game client or reopen the loader.</p>
+<h3 id="why-is-loadstring-dropping-my-return-values" tabindex="-1">Why is <code>loadstring</code> dropping my return values? <a class="header-anchor" href="#why-is-loadstring-dropping-my-return-values" aria-hidden="true">#</a></h3>
+<p>Matcha's <code>loadstring</code> implementation drops top-level <code>return</code> statements. To pass values out of a <code>loadstring</code> execution, set them to global variables (e.g. <code>_G.MyResult = 5</code>).</p>
+<h3 id="how-do-i-connect-matcha-to-antigravity-or-codex" tabindex="-1">How do I connect Matcha to Antigravity or Codex? <a class="header-anchor" href="#how-do-i-connect-matcha-to-antigravity-or-codex" aria-hidden="true">#</a></h3>
+<p>Matcha Pro features native <strong>Model Context Protocol (MCP)</strong> integration <span class="badge badge-pro"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 8 8"><path fill="currentColor" d="M4 0L4.88 2.76H8L5.56 4.47L6.47 7.24L4 5.53L1.53 7.24L2.44 4.47L0 2.76H3.12L4 0Z"/></svg> Pro</span>.</p>
+<ul>
+<li><strong>Antigravity</strong>: Open <code>C:\Users\<USERNAME>\.gemini\antigravity\mcp_config.json</code> and add <code>"matcha": { "serverUrl": "http://127.0.0.1:8765/mcp" }</code> inside <code>"mcpServers"</code>.</li>
+<li><strong>Codex</strong>: Run <code>codex mcp add matcha --url http://127.0.0.1:8765/mcp</code> in your terminal.</li>
+</ul>
+<hr>
+<h2 id="roles-versions" tabindex="-1">Roles & Versions <a class="header-anchor" href="#roles-versions" aria-hidden="true">#</a></h2>
+<h3 id="what-is-the-difference-between-buyer-and-pro" tabindex="-1">What is the difference between Buyer and Pro? <a class="header-anchor" href="#what-is-the-difference-between-buyer-and-pro" aria-hidden="true">#</a></h3>
+<ul>
+<li><strong>Buyer <span class="badge badge-buyer">🫐 Buyer</span></strong>: Standard access to the Matcha executor, drawing API, memory tools, and base Lua library.</li>
+<li><strong>Pro <span class="badge badge-pro"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 8 8"><path fill="currentColor" d="M4 0L4.88 2.76H8L5.56 4.47L6.47 7.24L4 5.53L1.53 7.24L2.44 4.47L0 2.76H3.12L4 0Z"/></svg> Pro</span></strong>: Early-access features including Hybrid Mode (Remote Spy, <code>FireServer</code>, <code>InvokeFunction</code>), and native AI Agent / MCP server integration.</li>
+</ul>
       </article>
       
       <nav class="pager">
-<a class="pager-link prev" href="../garbage-collector/">
+<a class="pager-link prev" href="../limitations/">
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg)"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-<span><em>Previous</em>Garbage collector</span>
+<span><em>Previous</em>VM limitations</span>
 </a>
-<a class="pager-link next" href="../http/">
-<span><em>Next</em>HTTP</span>
+<a class="pager-link next" href="../changelogs/">
+<span><em>Next</em>Changelogs</span>
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
 </a>
 </nav>
@@ -168,15 +165,16 @@ end</code></pre>
     <aside class="toc">
       <div class="toc-title">On this page</div>
       <ul class="toc-list">
-<li class="toc-l2"><a href="#writefile">writefile</a></li>
-<li class="toc-l2"><a href="#readfile">readfile</a></li>
-<li class="toc-l2"><a href="#appendfile">appendfile</a></li>
-<li class="toc-l2"><a href="#makefolder">makefolder</a></li>
-<li class="toc-l2"><a href="#isfile">isfile</a></li>
-<li class="toc-l2"><a href="#isfolder">isfolder</a></li>
-<li class="toc-l2"><a href="#listfiles">listfiles</a></li>
-<li class="toc-l2"><a href="#delfile">delfile</a></li>
-<li class="toc-l2"><a href="#delfolder">delfolder</a></li>
+<li class="toc-l2"><a href="#general-questions">General Questions</a></li>
+<li class="toc-l3"><a href="#what-is-matcha">What is Matcha?</a></li>
+<li class="toc-l3"><a href="#is-matcha-detectable">Is Matcha detectable?</a></li>
+<li class="toc-l3"><a href="#how-do-i-update-matcha">How do I update Matcha?</a></li>
+<li class="toc-l2"><a href="#troubleshooting">Troubleshooting</a></li>
+<li class="toc-l3"><a href="#why-are-features-not-working-or-broken-in-game">Why are features not working or broken in-game?</a></li>
+<li class="toc-l3"><a href="#why-is-loadstring-dropping-my-return-values">Why is loadstring dropping my return values?</a></li>
+<li class="toc-l3"><a href="#how-do-i-connect-matcha-to-antigravity-or-codex">How do I connect Matcha to Antigravity or Codex?</a></li>
+<li class="toc-l2"><a href="#roles-versions">Roles & Versions</a></li>
+<li class="toc-l3"><a href="#what-is-the-difference-between-buyer-and-pro">What is the difference between Buyer and Pro?</a></li>
 </ul>
     </aside>
   </div>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>File system · Matcha docs</title>
-  <meta name="description" content="Matcha LuaVM documentation - File system">
+  <title>VM limitations · Matcha docs</title>
+  <meta name="description" content="Matcha LuaVM documentation - VM limitations">
   <link rel="icon" href="../assets/logo.gif">
   
   <!-- Fonts -->
@@ -92,7 +92,7 @@
         <a class="nav-item " href="../functions-misc/">Miscellaneous &amp; scheduler</a>
         <a class="nav-item " href="../memory/">Memory</a>
         <a class="nav-item " href="../garbage-collector/">Garbage collector</a>
-        <a class="nav-item active" href="../filesystem/">File system</a>
+        <a class="nav-item " href="../filesystem/">File system</a>
         <a class="nav-item " href="../http/">HTTP</a>
         <a class="nav-item " href="../lua-base-library/">Lua base library</a>
         
@@ -102,7 +102,7 @@
         <a class="nav-item " href="../drawing/">Drawing</a>
         <a class="nav-item " href="../gc-guide/">GC modding guide</a>
         <a class="nav-item " href="../examples/">Code examples</a>
-        <a class="nav-item " href="../limitations/">VM limitations</a>
+        <a class="nav-item active" href="../limitations/">VM limitations</a>
         <a class="nav-item " href="../faq/">FAQ</a>
         <a class="nav-item " href="../changelogs/">Changelogs</a>
       </div>
@@ -113,53 +113,66 @@
         <div class="breadcrumb">
           <a href="../">Matcha</a> 
           <span>/</span> 
-          File system
+          VM limitations
         </div>
-        <h1 id="filesystem" tabindex="-1">
-          File system 
-          <a class="header-anchor" href="#filesystem" aria-hidden="true">#</a>
+        <h1 id="limitations" tabindex="-1">
+          VM limitations 
+          <a class="header-anchor" href="#limitations" aria-hidden="true">#</a>
         </h1>
-        <div class="callout callout-warning"><span class="callout-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg></span><div class="callout-body"><p>Paths are relative to the Matcha workspace folder (e.g. <code>C:\matcha\workspace\</code>). <code>/</code> and <code>\</code> are interchangeable, and paths are case-insensitive.</p>
-<p><code>readfile</code>, <code>writefile</code>, and <code>appendfile</code> only accept these extensions: <strong><code>.txt</code> <code>.lua</code> <code>.luau</code> <code>.json</code> <code>.cfg</code> <code>.dat</code> <code>.ini</code></strong>. Any other extension — including images, audio, and executables — raises <code>file extension not allowed</code>. Contents are binary-safe, so store raw/binary data under <code>.dat</code>.</p></div></div>
-<h2 id="writefile" tabindex="-1">writefile <a class="header-anchor" href="#writefile" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function writefile(path: string, content: string): nil</code></pre>
-<p>Creates <code>path</code> (or overwrites it) with <code>content</code>. Missing parent folders are created automatically. Content is written exactly, including binary data. Errors if <code>path</code> has a disallowed extension or is an existing folder.</p>
-<h2 id="readfile" tabindex="-1">readfile <a class="header-anchor" href="#readfile" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function readfile(path: string): string</code></pre>
-<p>Returns the contents of <code>path</code> as a string (binary-safe). Errors if the file does not exist, so guard with <code>isfile</code> or <code>pcall</code>.</p>
-<pre><code class="language-lua">if isfile("MyConfig.json") then
-    local raw = readfile("MyConfig.json")
-end</code></pre>
-<h2 id="appendfile" tabindex="-1">appendfile <a class="header-anchor" href="#appendfile" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function appendfile(path: string, content: string): nil</code></pre>
-<p>Appends <code>content</code> to the end of <code>path</code>, creating the file if it does not exist. Content is concatenated exactly — no separator is inserted.</p>
-<h2 id="makefolder" tabindex="-1">makefolder <a class="header-anchor" href="#makefolder" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function makefolder(path: string): nil</code></pre>
-<p>Creates the folder at <code>path</code>, including any missing parent folders. Does nothing if the folder already exists. Errors if a file already occupies the path.</p>
-<h2 id="isfile" tabindex="-1">isfile <a class="header-anchor" href="#isfile" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function isfile(path: string): boolean</code></pre>
-<p>Returns <code>true</code> only if <code>path</code> is an existing file; <code>false</code> for folders or missing paths. Never errors.</p>
-<h2 id="isfolder" tabindex="-1">isfolder <a class="header-anchor" href="#isfolder" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function isfolder(path: string): boolean</code></pre>
-<p>Returns <code>true</code> only if <code>path</code> is an existing folder; <code>false</code> for files or missing paths. Never errors.</p>
-<h2 id="listfiles" tabindex="-1">listfiles <a class="header-anchor" href="#listfiles" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function listfiles(path: string): { string }</code></pre>
-<p>Returns the immediate children of <code>path</code> — files and folders, not recursive — as workspace-relative paths sorted alphabetically (e.g. <code>listfiles("cfg")</code> → <code>{ "cfg\\a.json", "cfg\\sub" }</code>). Each entry can be passed straight to <code>isfile</code>, <code>isfolder</code>, or <code>readfile</code>. <code>listfiles("")</code> lists the workspace root. Errors if <code>path</code> does not exist or is a file.</p>
-<h2 id="delfile" tabindex="-1">delfile <a class="header-anchor" href="#delfile" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function delfile(path: string): boolean</code></pre>
-<p>Deletes the file (or empty folder) at <code>path</code>. Returns <code>true</code> if something was removed, <code>false</code> if the path did not exist. Errors if <code>path</code> is a non-empty folder — use <code>delfolder</code> for those.</p>
-<h2 id="delfolder" tabindex="-1">delfolder <a class="header-anchor" href="#delfolder" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function delfolder(path: string): boolean</code></pre>
-<p>Recursively deletes the folder (or file) at <code>path</code> and everything inside it. Always returns <code>true</code>, even if <code>path</code> did not exist.</p>
+        <h1 id="vm-limitations-api-differences" tabindex="-1">VM Limitations & API Differences <a class="header-anchor" href="#vm-limitations-api-differences" aria-hidden="true">#</a></h1>
+<p>Matcha is an <strong>external LuaVM emulator</strong> — it does not inject into or hook Roblox engine memory functions directly. This design guarantees <strong>100% undetected execution</strong>, but introduces specific differences and limitations compared to internal executors or standard Luau environment behavior.</p>
+<p>AI coding assistants and script authors should keep these rules in mind when writing code for Matcha.</p>
+<hr>
+<h2 id="key-differences-unsupported-features" tabindex="-1">Key Differences & Unsupported Features <a class="header-anchor" href="#key-differences-unsupported-features" aria-hidden="true">#</a></h2>
+<h3 id="1-no-instancenew" tabindex="-1">1. No <code>Instance.new()</code> <a class="header-anchor" href="#1-no-instancenew" aria-hidden="true">#</a></h3>
+<ul>
+<li>Matcha cannot instantiate new Roblox engine objects externally.</li>
+<li><strong>Workaround:</strong> Clone existing instances in the hierarchy or manipulate existing objects.</li>
+</ul>
+<h3 id="2-no-gamehttpget-or-gamehttppost" tabindex="-1">2. No <code>game:HttpGet()</code> or <code>game:HttpPost()</code> <a class="header-anchor" href="#2-no-gamehttpget-or-gamehttppost" aria-hidden="true">#</a></h3>
+<ul>
+<li>Engine HTTP methods on <code>game</code> are not directly hooked.</li>
+<li><strong>Workaround:</strong> Use Matcha's native global functions: <code>httpget(url)</code> and <code>httppost(url, data, contentType)</code>.</li>
+</ul>
+<h3 id="3-syntax-errors-in-loadstring-are-not-catchable" tabindex="-1">3. Syntax Errors in <code>loadstring</code> Are Not Catchable <a class="header-anchor" href="#3-syntax-errors-in-loadstring-are-not-catchable" aria-hidden="true">#</a></h3>
+<ul>
+<li>In standard Luau, <code>loadstring("invalid syntax")</code> returns <code>nil, "error message"</code>.</li>
+<li>In Matcha, <code>loadstring()</code> <strong>always returns a function</strong>. Syntax errors are printed to the console only when the returned function is executed.</li>
+<li>Top-level <code>return</code> statements in <code>loadstring("return 5")()</code> drop return values — pass results out via global variables.</li>
+</ul>
+<h3 id="4-runservicestepped-callback-arguments" tabindex="-1">4. <code>RunService.Stepped</code> Callback Arguments <a class="header-anchor" href="#4-runservicestepped-callback-arguments" aria-hidden="true">#</a></h3>
+<ul>
+<li>Standard Roblox <code>Stepped</code> event passes <code>(time, deltaTime)</code>.</li>
+<li>In Matcha, <code>Stepped</code> passes <strong>only <code>deltaTime</code></strong> as a single argument: <code>RunService.Stepped:Connect(function(deltaTime))</code></li>
+</ul>
+<h3 id="5-base64encode-null-byte-truncation" tabindex="-1">5. <code>base64encode</code> Null-Byte Truncation <a class="header-anchor" href="#5-base64encode-null-byte-truncation" aria-hidden="true">#</a></h3>
+<ul>
+<li><code>base64encode(data)</code> stops processing at the first <code>\0</code> null byte.</li>
+<li>Do not use <code>base64encode</code> for arbitrary binary data containing null bytes.</li>
+</ul>
+<h3 id="6-instance-comparison-updated-aug-6-2026" tabindex="-1">6. Instance Comparison (Updated Aug 6 2026) <a class="header-anchor" href="#6-instance-comparison-updated-aug-6-2026" aria-hidden="true">#</a></h3>
+<ul>
+<li>Comparing instances using <code>==</code> <strong>is fully supported</strong> (<code>instA == instB</code>).</li>
+<li>You no longer need to compare <code>.Address</code> manually.</li>
+</ul>
+<h3 id="7-remote-event-remotefunction-handling-pro-pro" tabindex="-1">7. Remote Event & RemoteFunction Handling (Pro <span class="badge badge-pro"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 8 8"><path fill="currentColor" d="M4 0L4.88 2.76H8L5.56 4.47L6.47 7.24L4 5.53L1.53 7.24L2.44 4.47L0 2.76H3.12L4 0Z"/></svg> Pro</span>) <a class="header-anchor" href="#7-remote-event-remotefunction-handling-pro-pro" aria-hidden="true">#</a></h3>
+<ul>
+<li>Standard Roblox uses <code>RemoteFunction:InvokeServer(...)</code>.</li>
+<li>Matcha uses <code>RemoteFunction:InvokeFunction(...)</code> for external RemoteFunction calls.</li>
+<li><code>RemoteEvent:FireServer(...)</code> is fully supported in Hybrid mode.</li>
+</ul>
+<hr>
+<h2 id="compatibility-quick-reference-table" tabindex="-1">Compatibility Quick Reference Table <a class="header-anchor" href="#compatibility-quick-reference-table" aria-hidden="true">#</a></h2>
+<table><thead><tr><th>Feature / Pattern</th><th>Supported in Matcha?</th><th>Replacement / Workaround</th></tr></thead><tbody><tr><td><code>Instance.new()</code></td><td>❌ No</td><td>Clone existing instances</td></tr><tr><td><code>game:HttpGet()</code></td><td>❌ No</td><td>Use <code>httpget(url)</code></td></tr><tr><td><code>loadstring()</code></td><td>⚠️ Partial</td><td>Top-level returns drop; errors print on call</td></tr><tr><td><code>Stepped</code> event</td><td>⚠️ Partial</td><td>Receives 1 arg (<code>deltaTime</code>) instead of 2</td></tr><tr><td><code>base64encode()</code></td><td>⚠️ Partial</td><td>Truncates at first <code>\0</code> byte</td></tr><tr><td><code>inst1 == inst2</code></td><td>✅ Yes</td><td>Direct comparison supported</td></tr><tr><td><code>GetAttribute()</code></td><td>✅ Yes</td><td>Supported (Fixed Aug 6)</td></tr><tr><td><code>SetAttribute()</code></td><td>✅ Yes</td><td>Supported (Fixed Aug 6)</td></tr><tr><td><code>RemoteEvent:FireServer</code></td><td>✅ Yes</td><td>Supported <span class="badge badge-pro"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 8 8"><path fill="currentColor" d="M4 0L4.88 2.76H8L5.56 4.47L6.47 7.24L4 5.53L1.53 7.24L2.44 4.47L0 2.76H3.12L4 0Z"/></svg> Pro</span></td></tr><tr><td><code>RemoteFunction:InvokeFunction</code></td><td>✅ Yes</td><td>Use <code>InvokeFunction</code> <span class="badge badge-pro"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 8 8"><path fill="currentColor" d="M4 0L4.88 2.76H8L5.56 4.47L6.47 7.24L4 5.53L1.53 7.24L2.44 4.47L0 2.76H3.12L4 0Z"/></svg> Pro</span></td></tr></tbody></table>
       </article>
       
       <nav class="pager">
-<a class="pager-link prev" href="../garbage-collector/">
+<a class="pager-link prev" href="../examples/">
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg)"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-<span><em>Previous</em>Garbage collector</span>
+<span><em>Previous</em>Code examples</span>
 </a>
-<a class="pager-link next" href="../http/">
-<span><em>Next</em>HTTP</span>
+<a class="pager-link next" href="../faq/">
+<span><em>Next</em>FAQ</span>
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
 </a>
 </nav>
@@ -168,15 +181,15 @@ end</code></pre>
     <aside class="toc">
       <div class="toc-title">On this page</div>
       <ul class="toc-list">
-<li class="toc-l2"><a href="#writefile">writefile</a></li>
-<li class="toc-l2"><a href="#readfile">readfile</a></li>
-<li class="toc-l2"><a href="#appendfile">appendfile</a></li>
-<li class="toc-l2"><a href="#makefolder">makefolder</a></li>
-<li class="toc-l2"><a href="#isfile">isfile</a></li>
-<li class="toc-l2"><a href="#isfolder">isfolder</a></li>
-<li class="toc-l2"><a href="#listfiles">listfiles</a></li>
-<li class="toc-l2"><a href="#delfile">delfile</a></li>
-<li class="toc-l2"><a href="#delfolder">delfolder</a></li>
+<li class="toc-l2"><a href="#key-differences-unsupported-features">Key Differences & Unsupported Features</a></li>
+<li class="toc-l3"><a href="#1-no-instancenew">1. No Instance.new()</a></li>
+<li class="toc-l3"><a href="#2-no-gamehttpget-or-gamehttppost">2. No gameHttpGet() or gameHttpPost()</a></li>
+<li class="toc-l3"><a href="#3-syntax-errors-in-loadstring-are-not-catchable">3. Syntax Errors in loadstring Are Not Catchable</a></li>
+<li class="toc-l3"><a href="#4-runservicestepped-callback-arguments">4. RunService.Stepped Callback Arguments</a></li>
+<li class="toc-l3"><a href="#5-base64encode-null-byte-truncation">5. base64encode Null-Byte Truncation</a></li>
+<li class="toc-l3"><a href="#6-instance-comparison-updated-aug-6-2026">6. Instance Comparison (Updated Aug 6 2026)</a></li>
+<li class="toc-l3"><a href="#7-remote-event-remotefunction-handling-pro-pro">7. Remote Event & RemoteFunction Handling (Pro pro)</a></li>
+<li class="toc-l2"><a href="#compatibility-quick-reference-table">Compatibility Quick Reference Table</a></li>
 </ul>
     </aside>
   </div>

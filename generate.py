@@ -17,6 +17,9 @@ PAGES = [
     {"id": "datatypes", "title": "Datatypes", "group": "Reference", "src": "datatypes.md", "url": "datatypes/index.html", "breadcrumb": "Datatypes"},
     {"id": "drawing", "title": "Drawing", "group": "Reference", "src": "drawing.md", "url": "drawing/index.html", "breadcrumb": "Drawing"},
     {"id": "gc-guide", "title": "GC modding guide", "group": "Reference", "src": "gc-guide.md", "url": "gc-guide/index.html", "breadcrumb": "GC modding guide"},
+    {"id": "examples", "title": "Code examples", "group": "Reference", "src": "examples.md", "url": "examples/index.html", "breadcrumb": "Code examples"},
+    {"id": "limitations", "title": "VM limitations", "group": "Reference", "src": "limitations.md", "url": "limitations/index.html", "breadcrumb": "VM limitations"},
+    {"id": "faq", "title": "FAQ", "group": "Reference", "src": "faq.md", "url": "faq/index.html", "breadcrumb": "FAQ"},
     {"id": "changelogs", "title": "Changelogs", "group": "Reference", "src": "changelogs.md", "url": "changelogs/index.html", "breadcrumb": "Changelogs"}
 ]
 

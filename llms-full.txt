@@ -64,6 +64,14 @@ Matcha **is not an executor** — it does not hook any functions in the Roblox e
 
 [**Drawing** the Drawing API](/matcha/drawing)
 
+[**Code examples** complete script snippets](/matcha/examples)
+
+[**VM limitations** execution rules & workarounds](/matcha/limitations)
+
+[**FAQ** common questions & fixes](/matcha/faq)
+
+[**Changelogs** release history & updates](/matcha/changelogs)
+
 ## AI Agents & MCP Integration [Pro]
 
 Matcha includes native Model Context Protocol (MCP) support for seamless integration with AI coding assistants like Antigravity and Codex.
@@ -1125,6 +1133,62 @@ function Workspace:Raycast(origin: Vector3, direction: Vector3, params: RaycastP
 ```
 
 Projects a ray from `origin` in the direction of `direction` using optional `RaycastParams`. Returns the first `RaycastResult` hit, or `nil` if no hit.
+
+## Camera
+
+The 3D view camera instance.
+
+**Properties**
+
+### CFrame
+
+```lua
+Camera.CFrame: CFrame
+```
+
+The position and orientation of the camera in 3D space.
+
+### FieldOfView
+
+```lua
+Camera.FieldOfView: number
+```
+
+The camera's vertical field of view in degrees. Can be modified independently without overlapping game settings.
+
+### ViewportSize
+
+```lua
+Camera.ViewportSize: Vector2
+```
+
+The dimensions of the camera viewport in pixels (`Vector2.new(width, height)`).
+
+## Lighting
+
+Service controlling environment lighting and atmosphere.
+
+**Properties**
+
+### Ambient
+
+```lua
+Lighting.Ambient: Color3
+```
+
+### ClockTime
+
+```lua
+Lighting.ClockTime: number
+```
+
+Time of day in hours (0–24).
+
+### ExposureCompensation
+
+```lua
+Lighting.ExposureCompensation: number
+```
 
 ## Instance
 
@@ -2499,6 +2563,274 @@ LocalPlayer.CharacterAdded:Connect(function()
     modifyWeaponStats()
 end)
 ```
+
+---
+
+# Code examples
+
+URL: https://huoadf.github.io/matcha-docs/examples/
+Group: Reference
+
+# Code Examples
+
+A collection of complete, functional script examples demonstrating common patterns in the Matcha LuaVM. These examples are optimized for AI reference and developer usage.
+
+---
+
+## 1. 2D Box ESP Overlay
+
+Draws bounding boxes around all players in the game using `WorldToScreen` and `Drawing.new("Square")`.
+
+```lua
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+local Camera = workspace.CurrentCamera
+
+local boxes = {}
+
+local function createBox(player)
+    if player == LocalPlayer then return end
+    
+    local box = Drawing.new("Square")
+    box.Color = Color3.fromRGB(0, 255, 120)
+    box.Thickness = 2
+    box.Filled = false
+    box.Visible = false
+    
+    boxes[player] = box
+end
+
+for _, player in ipairs(Players:GetPlayers()) do
+    createBox(player)
+end
+
+Players.PlayerAdded:Connect(createBox)
+
+Players.PlayerRemoving:Connect(function(player)
+    if boxes[player] then
+        boxes[player]:Remove()
+        boxes[player] = nil
+    end
+end)
+
+RunService.RenderStepped:Connect(function()
+    for player, box in pairs(boxes) do
+        local character = player.Character
+        local hrp = character and character:FindFirstChild("HumanoidRootPart")
+        
+        if hrp then
+            local pos, onScreen = WorldToScreen(hrp.Position)
+            if onScreen then
+                -- Calculate dynamic size based on distance
+                local dist = (Camera.CFrame.Position - hrp.Position).Magnitude
+                local size = math.clamp(1000 / dist, 10, 300)
+                
+                box.Position = Vector2.new(pos.X - size / 2, pos.Y - size / 2)
+                box.Size = Vector2.new(size, size)
+                box.Visible = true
+            else
+                box.Visible = false
+            end
+        else
+            box.Visible = false
+        end
+    end
+end)
+```
+
+---
+
+## 2. Memory Read / Write (Unlimited Health / Speed)
+
+Reading and writing engine memory using `getbase` and `memory_write`.
+
+```lua
+-- Get Roblox process base address
+local baseAddr = getbase()
+
+-- Example: Modify player speed at a known offset
+local walkSpeedOffset = 0x1A2B3C -- Example offset
+local targetAddr = baseAddr + walkSpeedOffset
+
+-- Write float value
+memory_write("float", targetAddr, 100.0)
+
+-- Read back float value
+local currentSpeed = memory_read("float", targetAddr)
+print("Current WalkSpeed:", currentSpeed)
+```
+
+---
+
+## 3. Remote Event Invocation (Pro [Pro])
+
+Firing remote events programmatically using Hybrid mode methods.
+
+```lua
+-- Fire a RemoteEvent to the server
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local GiveMoneyRemote = ReplicatedStorage:FindFirstChild("GiveMoney", true)
+
+if GiveMoneyRemote then
+    -- Fires RemoteEvent on the server
+    GiveMoneyRemote:FireServer(1000000)
+end
+
+-- Invoke a RemoteFunction
+local GetPlayerData = ReplicatedStorage:FindFirstChild("GetPlayerData", true)
+if GetPlayerData then
+    local data = GetPlayerData:InvokeFunction()
+    print("Received player data:", data)
+end
+```
+
+---
+
+## 4. Garbage Collector Scanning (`getgc`)
+
+Iterating through Lua garbage collector objects to find tables, functions, or upvalues.
+
+```lua
+local gc = getgc(true) -- Get all tables and functions
+
+for _, item in ipairs(gc) do
+    if type(item) == "table" and rawget(item, "WalkSpeed") then
+        print("Found Movement Config Table!")
+        item.WalkSpeed = 500
+    end
+end
+```
+
+---
+
+## 5. Raycasting
+
+Using `Workspace:Raycast` to detect objects in front of the camera or player.
+
+```lua
+local Camera = workspace.CurrentCamera
+local origin = Camera.CFrame.Position
+local direction = Camera.CFrame.LookVector * 500
+
+local result = workspace:Raycast(origin, direction)
+if result then
+    print("Ray hit instance:", result.Instance:GetFullName())
+    print("Hit position:", result.Position)
+    print("Normal:", result.Normal)
+end
+```
+
+---
+
+# VM limitations
+
+URL: https://huoadf.github.io/matcha-docs/limitations/
+Group: Reference
+
+# VM Limitations & API Differences
+
+Matcha is an **external LuaVM emulator** — it does not inject into or hook Roblox engine memory functions directly. This design guarantees **100% undetected execution**, but introduces specific differences and limitations compared to internal executors or standard Luau environment behavior.
+
+AI coding assistants and script authors should keep these rules in mind when writing code for Matcha.
+
+---
+
+## Key Differences & Unsupported Features
+
+### 1. No `Instance.new()`
+- Matcha cannot instantiate new Roblox engine objects externally.
+- **Workaround:** Clone existing instances in the hierarchy or manipulate existing objects.
+
+### 2. No `game:HttpGet()` or `game:HttpPost()`
+- Engine HTTP methods on `game` are not directly hooked.
+- **Workaround:** Use Matcha's native global functions: `httpget(url)` and `httppost(url, data, contentType)`.
+
+### 3. Syntax Errors in `loadstring` Are Not Catchable
+- In standard Luau, `loadstring("invalid syntax")` returns `nil, "error message"`.
+- In Matcha, `loadstring()` **always returns a function**. Syntax errors are printed to the console only when the returned function is executed.
+- Top-level `return` statements in `loadstring("return 5")()` drop return values — pass results out via global variables.
+
+### 4. `RunService.Stepped` Callback Arguments
+- Standard Roblox `Stepped` event passes `(time, deltaTime)`.
+- In Matcha, `Stepped` passes **only `deltaTime`** as a single argument: `RunService.Stepped:Connect(function(deltaTime))`
+
+### 5. `base64encode` Null-Byte Truncation
+- `base64encode(data)` stops processing at the first `\0` null byte.
+- Do not use `base64encode` for arbitrary binary data containing null bytes.
+
+### 6. Instance Comparison (Updated Aug 6 2026)
+- Comparing instances using `==` **is fully supported** (`instA == instB`).
+- You no longer need to compare `.Address` manually.
+
+### 7. Remote Event & RemoteFunction Handling (Pro [Pro])
+- Standard Roblox uses `RemoteFunction:InvokeServer(...)`.
+- Matcha uses `RemoteFunction:InvokeFunction(...)` for external RemoteFunction calls.
+- `RemoteEvent:FireServer(...)` is fully supported in Hybrid mode.
+
+---
+
+## Compatibility Quick Reference Table
+
+| Feature / Pattern | Supported in Matcha? | Replacement / Workaround |
+| :--- | :---: | :--- |
+| `Instance.new()` | ❌ No | Clone existing instances |
+| `game:HttpGet()` | ❌ No | Use `httpget(url)` |
+| `loadstring()` | ⚠️ Partial | Top-level returns drop; errors print on call |
+| `Stepped` event | ⚠️ Partial | Receives 1 arg (`deltaTime`) instead of 2 |
+| `base64encode()` | ⚠️ Partial | Truncates at first `\0` byte |
+| `inst1 == inst2` | ✅ Yes | Direct comparison supported |
+| `GetAttribute()` | ✅ Yes | Supported (Fixed Aug 6) |
+| `SetAttribute()` | ✅ Yes | Supported (Fixed Aug 6) |
+| `RemoteEvent:FireServer` | ✅ Yes | Supported [Pro] |
+| `RemoteFunction:InvokeFunction` | ✅ Yes | Use `InvokeFunction` [Pro] |
+
+---
+
+# FAQ
+
+URL: https://huoadf.github.io/matcha-docs/faq/
+Group: Reference
+
+# Frequently Asked Questions (FAQ)
+
+Frequently asked questions regarding Matcha execution, updates, roles, and troubleshooting.
+
+---
+
+## General Questions
+
+### What is Matcha?
+Matcha is a **Roblox LuaVM script executor** that emulates Roblox API functions externally without hooking into internal engine functions. This design makes it 100% undetected by server-side or client-side anti-cheat mechanisms.
+
+### Is Matcha detectable?
+No. Because Matcha operates externally without memory hook signatures on Roblox engine routines, it is undetected.
+
+### How do I update Matcha?
+Whenever a new update is released, simply **reopen the Matcha loader**. The loader will automatically download and apply the latest version.
+
+---
+
+## Troubleshooting
+
+### Why are features not working or broken in-game?
+Make sure your Roblox game client is updated to the latest forced version. If Roblox updated recently, you may encounter broken features until you force-update your game client or reopen the loader.
+
+### Why is `loadstring` dropping my return values?
+Matcha's `loadstring` implementation drops top-level `return` statements. To pass values out of a `loadstring` execution, set them to global variables (e.g. `_G.MyResult = 5`).
+
+### How do I connect Matcha to Antigravity or Codex?
+Matcha Pro features native **Model Context Protocol (MCP)** integration [Pro].
+- **Antigravity**: Open `C:\Users\\.gemini\antigravity\mcp_config.json` and add `"matcha": { "serverUrl": "http://127.0.0.1:8765/mcp" }` inside `"mcpServers"`.
+- **Codex**: Run `codex mcp add matcha --url http://127.0.0.1:8765/mcp` in your terminal.
+
+---
+
+## Roles & Versions
+
+### What is the difference between Buyer and Pro?
+- **Buyer [Buyer]**: Standard access to the Matcha executor, drawing API, memory tools, and base Lua library.
+- **Pro [Pro]**: Early-access features including Hybrid Mode (Remote Spy, `FireServer`, `InvokeFunction`), and native AI Agent / MCP server integration.
 
 ---
 

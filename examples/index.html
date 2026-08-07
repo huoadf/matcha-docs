@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>File system · Matcha docs</title>
-  <meta name="description" content="Matcha LuaVM documentation - File system">
+  <title>Code examples · Matcha docs</title>
+  <meta name="description" content="Matcha LuaVM documentation - Code examples">
   <link rel="icon" href="../assets/logo.gif">
   
   <!-- Fonts -->
@@ -92,7 +92,7 @@
         <a class="nav-item " href="../functions-misc/">Miscellaneous &amp; scheduler</a>
         <a class="nav-item " href="../memory/">Memory</a>
         <a class="nav-item " href="../garbage-collector/">Garbage collector</a>
-        <a class="nav-item active" href="../filesystem/">File system</a>
+        <a class="nav-item " href="../filesystem/">File system</a>
         <a class="nav-item " href="../http/">HTTP</a>
         <a class="nav-item " href="../lua-base-library/">Lua base library</a>
         
@@ -101,7 +101,7 @@
         <a class="nav-item " href="../datatypes/">Datatypes</a>
         <a class="nav-item " href="../drawing/">Drawing</a>
         <a class="nav-item " href="../gc-guide/">GC modding guide</a>
-        <a class="nav-item " href="../examples/">Code examples</a>
+        <a class="nav-item active" href="../examples/">Code examples</a>
         <a class="nav-item " href="../limitations/">VM limitations</a>
         <a class="nav-item " href="../faq/">FAQ</a>
         <a class="nav-item " href="../changelogs/">Changelogs</a>
@@ -113,53 +113,139 @@
         <div class="breadcrumb">
           <a href="../">Matcha</a> 
           <span>/</span> 
-          File system
+          Code examples
         </div>
-        <h1 id="filesystem" tabindex="-1">
-          File system 
-          <a class="header-anchor" href="#filesystem" aria-hidden="true">#</a>
+        <h1 id="examples" tabindex="-1">
+          Code examples 
+          <a class="header-anchor" href="#examples" aria-hidden="true">#</a>
         </h1>
-        <div class="callout callout-warning"><span class="callout-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></svg></span><div class="callout-body"><p>Paths are relative to the Matcha workspace folder (e.g. <code>C:\matcha\workspace\</code>). <code>/</code> and <code>\</code> are interchangeable, and paths are case-insensitive.</p>
-<p><code>readfile</code>, <code>writefile</code>, and <code>appendfile</code> only accept these extensions: <strong><code>.txt</code> <code>.lua</code> <code>.luau</code> <code>.json</code> <code>.cfg</code> <code>.dat</code> <code>.ini</code></strong>. Any other extension — including images, audio, and executables — raises <code>file extension not allowed</code>. Contents are binary-safe, so store raw/binary data under <code>.dat</code>.</p></div></div>
-<h2 id="writefile" tabindex="-1">writefile <a class="header-anchor" href="#writefile" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function writefile(path: string, content: string): nil</code></pre>
-<p>Creates <code>path</code> (or overwrites it) with <code>content</code>. Missing parent folders are created automatically. Content is written exactly, including binary data. Errors if <code>path</code> has a disallowed extension or is an existing folder.</p>
-<h2 id="readfile" tabindex="-1">readfile <a class="header-anchor" href="#readfile" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function readfile(path: string): string</code></pre>
-<p>Returns the contents of <code>path</code> as a string (binary-safe). Errors if the file does not exist, so guard with <code>isfile</code> or <code>pcall</code>.</p>
-<pre><code class="language-lua">if isfile("MyConfig.json") then
-    local raw = readfile("MyConfig.json")
+        <h1 id="code-examples" tabindex="-1">Code Examples <a class="header-anchor" href="#code-examples" aria-hidden="true">#</a></h1>
+<p>A collection of complete, functional script examples demonstrating common patterns in the Matcha LuaVM. These examples are optimized for AI reference and developer usage.</p>
+<hr>
+<h2 id="1-2d-box-esp-overlay" tabindex="-1">1. 2D Box ESP Overlay <a class="header-anchor" href="#1-2d-box-esp-overlay" aria-hidden="true">#</a></h2>
+<p>Draws bounding boxes around all players in the game using <code>WorldToScreen</code> and <code>Drawing.new("Square")</code>.</p>
+<pre><code class="language-lua">local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local LocalPlayer = Players.LocalPlayer
+local Camera = workspace.CurrentCamera
+
+local boxes = {}
+
+local function createBox(player)
+    if player == LocalPlayer then return end
+    
+    local box = Drawing.new("Square")
+    box.Color = Color3.fromRGB(0, 255, 120)
+    box.Thickness = 2
+    box.Filled = false
+    box.Visible = false
+    
+    boxes[player] = box
+end
+
+for _, player in ipairs(Players:GetPlayers()) do
+    createBox(player)
+end
+
+Players.PlayerAdded:Connect(createBox)
+
+Players.PlayerRemoving:Connect(function(player)
+    if boxes[player] then
+        boxes[player]:Remove()
+        boxes[player] = nil
+    end
+end)
+
+RunService.RenderStepped:Connect(function()
+    for player, box in pairs(boxes) do
+        local character = player.Character
+        local hrp = character and character:FindFirstChild("HumanoidRootPart")
+        
+        if hrp then
+            local pos, onScreen = WorldToScreen(hrp.Position)
+            if onScreen then
+                -- Calculate dynamic size based on distance
+                local dist = (Camera.CFrame.Position - hrp.Position).Magnitude
+                local size = math.clamp(1000 / dist, 10, 300)
+                
+                box.Position = Vector2.new(pos.X - size / 2, pos.Y - size / 2)
+                box.Size = Vector2.new(size, size)
+                box.Visible = true
+            else
+                box.Visible = false
+            end
+        else
+            box.Visible = false
+        end
+    end
+end)</code></pre>
+<hr>
+<h2 id="2-memory-read-write-unlimited-health-speed" tabindex="-1">2. Memory Read / Write (Unlimited Health / Speed) <a class="header-anchor" href="#2-memory-read-write-unlimited-health-speed" aria-hidden="true">#</a></h2>
+<p>Reading and writing engine memory using <code>getbase</code> and <code>memory_write</code>.</p>
+<pre><code class="language-lua">-- Get Roblox process base address
+local baseAddr = getbase()
+
+-- Example: Modify player speed at a known offset
+local walkSpeedOffset = 0x1A2B3C -- Example offset
+local targetAddr = baseAddr + walkSpeedOffset
+
+-- Write float value
+memory_write("float", targetAddr, 100.0)
+
+-- Read back float value
+local currentSpeed = memory_read("float", targetAddr)
+print("Current WalkSpeed:", currentSpeed)</code></pre>
+<hr>
+<h2 id="3-remote-event-invocation-pro-pro" tabindex="-1">3. Remote Event Invocation (Pro <span class="badge badge-pro"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 8 8"><path fill="currentColor" d="M4 0L4.88 2.76H8L5.56 4.47L6.47 7.24L4 5.53L1.53 7.24L2.44 4.47L0 2.76H3.12L4 0Z"/></svg> Pro</span>) <a class="header-anchor" href="#3-remote-event-invocation-pro-pro" aria-hidden="true">#</a></h2>
+<p>Firing remote events programmatically using Hybrid mode methods.</p>
+<pre><code class="language-lua">-- Fire a RemoteEvent to the server
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local GiveMoneyRemote = ReplicatedStorage:FindFirstChild("GiveMoney", true)
+
+if GiveMoneyRemote then
+    -- Fires RemoteEvent on the server
+    GiveMoneyRemote:FireServer(1000000)
+end
+
+-- Invoke a RemoteFunction
+local GetPlayerData = ReplicatedStorage:FindFirstChild("GetPlayerData", true)
+if GetPlayerData then
+    local data = GetPlayerData:InvokeFunction()
+    print("Received player data:", data)
 end</code></pre>
-<h2 id="appendfile" tabindex="-1">appendfile <a class="header-anchor" href="#appendfile" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function appendfile(path: string, content: string): nil</code></pre>
-<p>Appends <code>content</code> to the end of <code>path</code>, creating the file if it does not exist. Content is concatenated exactly — no separator is inserted.</p>
-<h2 id="makefolder" tabindex="-1">makefolder <a class="header-anchor" href="#makefolder" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function makefolder(path: string): nil</code></pre>
-<p>Creates the folder at <code>path</code>, including any missing parent folders. Does nothing if the folder already exists. Errors if a file already occupies the path.</p>
-<h2 id="isfile" tabindex="-1">isfile <a class="header-anchor" href="#isfile" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function isfile(path: string): boolean</code></pre>
-<p>Returns <code>true</code> only if <code>path</code> is an existing file; <code>false</code> for folders or missing paths. Never errors.</p>
-<h2 id="isfolder" tabindex="-1">isfolder <a class="header-anchor" href="#isfolder" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function isfolder(path: string): boolean</code></pre>
-<p>Returns <code>true</code> only if <code>path</code> is an existing folder; <code>false</code> for files or missing paths. Never errors.</p>
-<h2 id="listfiles" tabindex="-1">listfiles <a class="header-anchor" href="#listfiles" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function listfiles(path: string): { string }</code></pre>
-<p>Returns the immediate children of <code>path</code> — files and folders, not recursive — as workspace-relative paths sorted alphabetically (e.g. <code>listfiles("cfg")</code> → <code>{ "cfg\\a.json", "cfg\\sub" }</code>). Each entry can be passed straight to <code>isfile</code>, <code>isfolder</code>, or <code>readfile</code>. <code>listfiles("")</code> lists the workspace root. Errors if <code>path</code> does not exist or is a file.</p>
-<h2 id="delfile" tabindex="-1">delfile <a class="header-anchor" href="#delfile" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function delfile(path: string): boolean</code></pre>
-<p>Deletes the file (or empty folder) at <code>path</code>. Returns <code>true</code> if something was removed, <code>false</code> if the path did not exist. Errors if <code>path</code> is a non-empty folder — use <code>delfolder</code> for those.</p>
-<h2 id="delfolder" tabindex="-1">delfolder <a class="header-anchor" href="#delfolder" aria-hidden="true">#</a></h2>
-<pre><code class="language-lua">function delfolder(path: string): boolean</code></pre>
-<p>Recursively deletes the folder (or file) at <code>path</code> and everything inside it. Always returns <code>true</code>, even if <code>path</code> did not exist.</p>
+<hr>
+<h2 id="4-garbage-collector-scanning-getgc" tabindex="-1">4. Garbage Collector Scanning (<code>getgc</code>) <a class="header-anchor" href="#4-garbage-collector-scanning-getgc" aria-hidden="true">#</a></h2>
+<p>Iterating through Lua garbage collector objects to find tables, functions, or upvalues.</p>
+<pre><code class="language-lua">local gc = getgc(true) -- Get all tables and functions
+
+for _, item in ipairs(gc) do
+    if type(item) == "table" and rawget(item, "WalkSpeed") then
+        print("Found Movement Config Table!")
+        item.WalkSpeed = 500
+    end
+end</code></pre>
+<hr>
+<h2 id="5-raycasting" tabindex="-1">5. Raycasting <a class="header-anchor" href="#5-raycasting" aria-hidden="true">#</a></h2>
+<p>Using <code>Workspace:Raycast</code> to detect objects in front of the camera or player.</p>
+<pre><code class="language-lua">local Camera = workspace.CurrentCamera
+local origin = Camera.CFrame.Position
+local direction = Camera.CFrame.LookVector * 500
+
+local result = workspace:Raycast(origin, direction)
+if result then
+    print("Ray hit instance:", result.Instance:GetFullName())
+    print("Hit position:", result.Position)
+    print("Normal:", result.Normal)
+end</code></pre>
       </article>
       
       <nav class="pager">
-<a class="pager-link prev" href="../garbage-collector/">
+<a class="pager-link prev" href="../gc-guide/">
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg)"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-<span><em>Previous</em>Garbage collector</span>
+<span><em>Previous</em>GC modding guide</span>
 </a>
-<a class="pager-link next" href="../http/">
-<span><em>Next</em>HTTP</span>
+<a class="pager-link next" href="../limitations/">
+<span><em>Next</em>VM limitations</span>
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
 </a>
 </nav>
@@ -168,15 +254,11 @@ end</code></pre>
     <aside class="toc">
       <div class="toc-title">On this page</div>
       <ul class="toc-list">
-<li class="toc-l2"><a href="#writefile">writefile</a></li>
-<li class="toc-l2"><a href="#readfile">readfile</a></li>
-<li class="toc-l2"><a href="#appendfile">appendfile</a></li>
-<li class="toc-l2"><a href="#makefolder">makefolder</a></li>
-<li class="toc-l2"><a href="#isfile">isfile</a></li>
-<li class="toc-l2"><a href="#isfolder">isfolder</a></li>
-<li class="toc-l2"><a href="#listfiles">listfiles</a></li>
-<li class="toc-l2"><a href="#delfile">delfile</a></li>
-<li class="toc-l2"><a href="#delfolder">delfolder</a></li>
+<li class="toc-l2"><a href="#1-2d-box-esp-overlay">1. 2D Box ESP Overlay</a></li>
+<li class="toc-l2"><a href="#2-memory-read-write-unlimited-health-speed">2. Memory Read / Write (Unlimited Health / Speed)</a></li>
+<li class="toc-l2"><a href="#3-remote-event-invocation-pro-pro">3. Remote Event Invocation (Pro pro)</a></li>
+<li class="toc-l2"><a href="#4-garbage-collector-scanning-getgc">4. Garbage Collector Scanning (getgc)</a></li>
+<li class="toc-l2"><a href="#5-raycasting">5. Raycasting</a></li>
 </ul>
     </aside>
   </div>

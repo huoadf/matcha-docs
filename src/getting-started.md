@@ -38,6 +38,14 @@ Matcha **is not an executor** — it does not hook any functions in the Roblox e
 [**Datatypes** Vector3, CFrame, Color3…](/matcha/datatypes)
 
 [**Drawing** the Drawing API](/matcha/drawing)
+
+[**Code examples** complete script snippets](/matcha/examples)
+
+[**VM limitations** execution rules & workarounds](/matcha/limitations)
+
+[**FAQ** common questions & fixes](/matcha/faq)
+
+[**Changelogs** release history & updates](/matcha/changelogs)
 :::
 
 ## AI Agents & MCP Integration ::pro::

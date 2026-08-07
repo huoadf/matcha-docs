@@ -217,6 +217,69 @@ function Workspace:Raycast(origin: Vector3, direction: Vector3, params: RaycastP
 Projects a ray from `origin` in the direction of `direction` using optional `RaycastParams`. Returns the first `RaycastResult` hit, or `nil` if no hit.
 
 
+## Camera
+
+<https://create.roblox.com/docs/reference/engine/classes/Camera>
+
+The 3D view camera instance.
+
+**Properties**
+
+### CFrame
+
+```lua
+Camera.CFrame: CFrame
+```
+
+The position and orientation of the camera in 3D space.
+
+### FieldOfView
+
+```lua
+Camera.FieldOfView: number
+```
+
+The camera's vertical field of view in degrees. Can be modified independently without overlapping game settings.
+
+### ViewportSize
+
+```lua
+Camera.ViewportSize: Vector2
+```
+
+The dimensions of the camera viewport in pixels (`Vector2.new(width, height)`).
+
+
+## Lighting
+
+<https://create.roblox.com/docs/reference/engine/classes/Lighting>
+
+Service controlling environment lighting and atmosphere.
+
+**Properties**
+
+### Ambient
+
+```lua
+Lighting.Ambient: Color3
+```
+
+### ClockTime
+
+```lua
+Lighting.ClockTime: number
+```
+
+Time of day in hours (0–24).
+
+### ExposureCompensation
+
+```lua
+Lighting.ExposureCompensation: number
+```
+
+
+
 ## Instance
 
 <https://create.roblox.com/docs/reference/engine/classes/Instance>
