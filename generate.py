@@ -431,44 +431,90 @@ with open("search-index.json", "w", encoding="utf-8") as f_idx:
 print("Generated search-index.json")
 
 # Generate llms-full.txt
-llms_full_content = ["# Matcha documentation\n\n> LuaVM documentation\n\n"]
+llms_full_content = ["""# Matcha — LuaVM Documentation
+
+> **What is Matcha?**
+> Matcha is a **Roblox LuaVM executor** — it does NOT hook any functions in the Roblox engine.
+> Instead it emulates them externally, making it completely undetected.
+> Because it emulates externally it has no direct access to internal Roblox API functions.
+
+> **Roles:**
+> - **Buyer** — Access to the base executor and standard features.
+> - **Pro** — Additional early-access features: Remote Spy, FireServer/InvokeFunction, AI Agent & MCP integration.
+
+> **AI Agent & MCP Integration (Pro):**
+> Matcha exposes a local MCP server at `http://127.0.0.1:8765/mcp` while running.
+> To add to Antigravity: edit `C:\\Users\\<USERNAME>\\.gemini\\antigravity\\mcp_config.json` and add:
+>   `"matcha": { "serverUrl": "http://127.0.0.1:8765/mcp" }` inside `"mcpServers"`.
+> To add to Codex: run `codex mcp add matcha --url http://127.0.0.1:8765/mcp`
+
+> **Latest version:** d584fb6c717a43d9 (Aug 6 2026)
+> **Website:** https://matcha-latte.win
+
+"""]
+
 for page in PAGES:
     src_file = os.path.join("src", page["src"])
     if os.path.exists(src_file):
         with open(src_file, "r", encoding="utf-8") as f_in:
             page_md = f_in.read()
-        # Clean up GitBook specific tags for LLM readability
+        # Clean up template-specific tags for LLM readability
         page_md = re.sub(r'\{% hint style="([^"]+)" %\}', r'> **[\1]**', page_md)
         page_md = page_md.replace('{% endhint %}', '')
         page_md = page_md.replace('::: cards', '').replace(':::', '')
-        
+        page_md = page_md.replace('::pro::', '[Pro]')
+        page_md = page_md.replace('::buyer::', '[Buyer]')
+        # Remove raw HTML from LLM text
+        page_md = re.sub(r'<[^>]+>', '', page_md)
+        page_md = re.sub(r'\n{3,}', '\n\n', page_md).strip()
+
         url_subpath = page['url'].replace('index.html', '')
-        llms_full_content.append(f"---\n\n# {page['title']}\n\nSource: https://huoadf.github.io/matcha-docs/{url_subpath}\n\n{page_md}\n")
+        llms_full_content.append(f"---\n\n# {page['title']}\n\nURL: https://huoadf.github.io/matcha-docs/{url_subpath}\nGroup: {page['group'] or 'Overview'}\n\n{page_md}\n")
 
 with open("llms-full.txt", "w", encoding="utf-8") as f_llms_full:
     f_llms_full.write("\n".join(llms_full_content))
 print("Generated llms-full.txt")
 
-# Generate llms.txt (brief summary)
+# Generate llms.txt (brief summary — the entry point for AI agents)
 llms_summary = """# Matcha Docs
-> LuaVM documentation for Matcha
+> LuaVM documentation for Matcha — a Roblox script executor that emulates the Roblox API externally.
+> Matcha does NOT hook engine functions. It is undetected by design.
+> Requires loader to run. Reopen loader after each update.
 
-## Directory
-- [Getting started](https://huoadf.github.io/matcha-docs/) - Introduction to Matcha LuaVM.
-- [Globals](https://huoadf.github.io/matcha-docs/functions-globals/) - Globals loadstring, identifyexecutor, decompile, gethwid, getrbxversion...
-- [Console & input](https://huoadf.github.io/matcha-docs/functions-console-input/) - print, warn, mouse clicks, key presses...
-- [Scheduler & misc](https://huoadf.github.io/matcha-docs/functions-misc/) - wait, spawn, require, run_secure...
-- [Memory](https://huoadf.github.io/matcha-docs/memory/) - getbase, memory_read, memory_write...
-- [Garbage collector](https://huoadf.github.io/matcha-docs/garbage-collector/) - getgc, setgc, applygc...
-- [File system](https://huoadf.github.io/matcha-docs/filesystem/) - readfile, writefile, appendfile, makefolder...
-- [HTTP](https://huoadf.github.io/matcha-docs/http/) - httpget, httppost...
-- [Lua base library](https://huoadf.github.io/matcha-docs/lua-base-library/) - type, tostring, unpack, pcall...
-- [Classes](https://huoadf.github.io/matcha-docs/classes/) - BasePart, Camera, DataModel, Workspace...
-- [Datatypes](https://huoadf.github.io/matcha-docs/datatypes/) - Vector3, CFrame, Vector2, Color3, Ray, UDim, UDim2...
-- [Drawing](https://huoadf.github.io/matcha-docs/drawing/) - Drawing API, Square, Line, Circle, ESP Overlay example...
+## Roles
+- **Buyer** — Base executor access.
+- **Pro** — Early access features: Remote Spy, FireServer/InvokeFunction, AI Agent & MCP integration.
+
+## AI / MCP Integration (Pro)
+Matcha exposes a local MCP server while running.
+- Antigravity: add `"matcha": { "serverUrl": "http://127.0.0.1:8765/mcp" }` to `mcp_config.json`
+- Codex: `codex mcp add matcha --url http://127.0.0.1:8765/mcp`
+
+## Latest Changes (Aug 6 2026)
+- Fixed Attributes, GetAttribute & SetAttribute
+- Fixed .Text, AbsoluteSize & AbsolutePosition
+- Fixed Decompiler
+- Fixed Position Fly, Fixed Auth
+- Instance comparison via `==` no longer needs .Address
+- Added AI Agent & MCP integration (Pro Early Access)
+
+## Documentation Pages
+- [Getting started](https://huoadf.github.io/matcha-docs/) - Introduction, what Matcha is, MCP setup, latest updates.
+- [Globals](https://huoadf.github.io/matcha-docs/functions-globals/) - loadstring, decompile, WorldToScreen, notify, identifyexecutor, gethwid, getrbxversion, getscripts, getscriptbytecode, base64encode, base64decode, GetPingValue, tick, typeof, getfenv, setfenv.
+- [Console & input](https://huoadf.github.io/matcha-docs/functions-console-input/) - print, warn, error, mouse clicks, key presses, clipboard.
+- [Scheduler & misc](https://huoadf.github.io/matcha-docs/functions-misc/) - wait, task, spawn, require, run_secure, getgenv.
+- [Memory](https://huoadf.github.io/matcha-docs/memory/) - getbase, memory_read, memory_write. Types: int, float, double, byte, string, uintptr_t.
+- [Garbage collector](https://huoadf.github.io/matcha-docs/garbage-collector/) - getgc, setgc, applygc.
+- [File system](https://huoadf.github.io/matcha-docs/filesystem/) - readfile, writefile, appendfile, makefolder, isfolder, isfile, listfiles, delfile.
+- [HTTP](https://huoadf.github.io/matcha-docs/http/) - httpget, httppost, request.
+- [Lua base library](https://huoadf.github.io/matcha-docs/lua-base-library/) - type, tostring, tonumber, unpack, pcall, xpcall, select, rawget, rawset, pairs, ipairs.
+- [Classes](https://huoadf.github.io/matcha-docs/classes/) - Instance, BasePart, Camera, DataModel, Workspace, Players, Player, RemoteEvent (FireServer), RemoteFunction (InvokeFunction), TextLabel, GuiObject, MeshPart. Properties: .Name, .Parent, .Address, .Text, .AbsoluteSize, .AbsolutePosition. Methods: FindFirstChild, FindFirstChildOfClass, GetChildren, GetDescendants, GetAttribute, SetAttribute, IsA, Destroy.
+- [Datatypes](https://huoadf.github.io/matcha-docs/datatypes/) - Vector3, Vector2, CFrame, Color3, Ray, UDim, UDim2, BrickColor.
+- [Drawing](https://huoadf.github.io/matcha-docs/drawing/) - Drawing.new, Square, Line, Circle, Triangle, Text, Image. Fonts include ProximaSoftBold. Properties: Visible, Color, Transparency, Position, Size, ZIndex.
 - [GC modding guide](https://huoadf.github.io/matcha-docs/gc-guide/) - Step-by-step tutorial on weapon modifier scripts using GC scans.
+- [Changelogs](https://huoadf.github.io/matcha-docs/changelogs/) - Full release history from Jul 1 2026 to Aug 6 2026.
 
-For the full detailed documentation text, visit [llms-full.txt](https://huoadf.github.io/matcha-docs/llms-full.txt).
+For complete API documentation text, see: https://huoadf.github.io/matcha-docs/llms-full.txt
 """
 
 with open("llms.txt", "w", encoding="utf-8") as f_llms:

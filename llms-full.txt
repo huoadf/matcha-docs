@@ -1,19 +1,35 @@
-# Matcha documentation
+# Matcha — LuaVM Documentation
 
-> LuaVM documentation
+> **What is Matcha?**
+> Matcha is a **Roblox LuaVM executor** — it does NOT hook any functions in the Roblox engine.
+> Instead it emulates them externally, making it completely undetected.
+> Because it emulates externally it has no direct access to internal Roblox API functions.
+
+> **Roles:**
+> - **Buyer** — Access to the base executor and standard features.
+> - **Pro** — Additional early-access features: Remote Spy, FireServer/InvokeFunction, AI Agent & MCP integration.
+
+> **AI Agent & MCP Integration (Pro):**
+> Matcha exposes a local MCP server at `http://127.0.0.1:8765/mcp` while running.
+> To add to Antigravity: edit `C:\Users\<USERNAME>\.gemini\antigravity\mcp_config.json` and add:
+>   `"matcha": { "serverUrl": "http://127.0.0.1:8765/mcp" }` inside `"mcpServers"`.
+> To add to Codex: run `codex mcp add matcha --url http://127.0.0.1:8765/mcp`
+
+> **Latest version:** d584fb6c717a43d9 (Aug 6 2026)
+> **Website:** https://matcha-latte.win
 
 
 ---
 
 # Getting started
 
-Source: https://huoadf.github.io/matcha-docs/
+URL: https://huoadf.github.io/matcha-docs/
+Group: Overview
 
 This is the documentation for the Matcha LuaVM.
 
 > **[info]**
 Matcha **is not an executor** — it does not hook any functions in the Roblox engine. Instead it emulates them externally, which makes it completely undetected, but also means it has no direct access to internal Roblox API functions.
-
 
 > **[success]**
 **Changelogs (Aug 6 2026)**
@@ -26,13 +42,11 @@ Matcha **is not an executor** — it does not hook any functions in the Roblox e
 - Fixed Position Fly
 - Optimized some parts for low-end PCs
 - Comparing instances no longer needs `.Address`
-- **::pro:: Early Access:** Added Agent and MCP integration into Lua U *(still on testing)*
+- **[Pro] Early Access:** Added Agent and MCP integration into Lua U *(still on testing)*
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)
 
-
 ## Browse the docs
-
 
 [**Globals** loadstring, identifyexecutor, decompile…](/matcha/functions-globals)
 
@@ -50,13 +64,12 @@ Matcha **is not an executor** — it does not hook any functions in the Roblox e
 
 [**Drawing** the Drawing API](/matcha/drawing)
 
-
-## AI Agents & MCP Integration ::pro::
+## AI Agents & MCP Integration [Pro]
 
 Matcha includes native Model Context Protocol (MCP) support for seamless integration with AI coding assistants like Antigravity and Codex.
 
 ### Adding to Antigravity
-Go to `C:\Users\<USERNAME>\.gemini\antigravity` and open `mcp_config.json`. Add the Matcha server to your `mcpServers` list:
+Go to `C:\Users\\.gemini\antigravity` and open `mcp_config.json`. Add the Matcha server to your `mcpServers` list:
 
 ```json
 {
@@ -76,13 +89,14 @@ codex mcp add matcha --url http://127.0.0.1:8765/mcp
 
 ## Resources
 
-To understand how the LuaVM works, you first need the basics of Lua(U). For that, visit <https://lua.org>.
+To understand how the LuaVM works, you first need the basics of Lua(U). For that, visit .
 
 ---
 
 # Globals
 
-Source: https://huoadf.github.io/matcha-docs/functions-globals/
+URL: https://huoadf.github.io/matcha-docs/functions-globals/
+Group: Functions
 
 ## loadstring / load
 
@@ -96,7 +110,6 @@ Compiles `chunk` into a callable function (`load` is equivalent for string chunk
 > **[warning]**
 Two Matcha-specific differences: a syntax error still returns a function (the error only prints when the function is called — never `nil` + message, so it isn't catchable), and a chunk's top-level `return` values are dropped (`loadstring("return 5")()` yields nothing — pass results out via globals).
 
-
 ## decompile
 
 ```lua
@@ -107,7 +120,6 @@ Returns the decompiled source of `script` (a `LocalScript`, `ModuleScript`, or `
 
 > **[success]**
 **Fixed (Aug 6 2026):** Decompiler stability and output has been fixed in the latest version.
-
 
 ## WorldToScreen
 
@@ -183,7 +195,6 @@ Encodes `data` to a standard Base64 string.
 > **[warning]**
 `data` is treated as null-terminated: encoding **stops at the first `\0` byte** (`base64encode("a\0b")` encodes only `"a"`). Base64 here is therefore not safe for arbitrary binary that may contain null bytes.
 
-
 ## base64decode
 
 ```lua
@@ -237,7 +248,6 @@ local sandbox = { print = print }
 setfenv(f, sandbox) -- f now only sees `sandbox` as its globals
 ```
 
-
 ## getrbxversion
 
 ```lua
@@ -245,7 +255,6 @@ function getrbxversion(): string
 ```
 
 Returns the current Roblox client version (e.g. `"0.635.0.6350567"`).
-
 
 ## gethwid
 
@@ -259,7 +268,8 @@ Returns the unique hardware identifier (HWID) of the current machine.
 
 # Console & input
 
-Source: https://huoadf.github.io/matcha-docs/functions-console-input/
+URL: https://huoadf.github.io/matcha-docs/functions-console-input/
+Group: Functions
 
 ## Console
 
@@ -290,7 +300,6 @@ Prints its arguments as a red, error-styled line; returns `nil`.
 > **[danger]**
 Despite the name, `error` does **not** raise an error or halt execution — it only prints. To raise a `pcall`-catchable error, use `assert(false, message)`.
 
-
 ### errorl
 
 ```lua
@@ -299,11 +308,9 @@ function errorl(...)
 
 Identical to `error` — a red, error-styled console line. The error-level counterpart to `warn`.
 
-
-
 ## Input
 
-List of key codes can be found here: <https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes>
+List of key codes can be found here: 
 
 ### setrobloxinput
 
@@ -445,7 +452,8 @@ Scrolls the mouse wheel by `amount`; the sign sets the direction.
 
 # Miscellaneous & scheduler
 
-Source: https://huoadf.github.io/matcha-docs/functions-misc/
+URL: https://huoadf.github.io/matcha-docs/functions-misc/
+Group: Functions
 
 ## run_secure
 
@@ -458,7 +466,6 @@ Runs protected code. `text` must be a **base64-encoded protected payload** — p
 > **[warning]**
 Code protection is not available to the public.
 
-
 ## Set Fast Flag
 
 ```lua
@@ -469,7 +476,6 @@ Intended to set the fast flag `FFlag` to `value`. Marked incomplete (below) — 
 
 > **[danger]**
 This function is not complete.
-
 
 ## Get Fast Flag
 
@@ -482,7 +488,6 @@ Intended to read the fast flag `FFlag`, but currently a stub — it returns `0` 
 > **[danger]**
 This function is not complete.
 
-
 ## require
 
 ```lua
@@ -493,7 +498,6 @@ Loads a `.lua` / `.luau` module by path. The extension is required and validated
 
 > **[warning]**
 `require` resolves from its own module root, **separate from the `writefile`/`readfile` workspace** — a file that `isfile` confirms exists is still reported `Module file does not exist`, so you can't `writefile` a module and `require` it.
-
 
 ## wait
 
@@ -521,7 +525,6 @@ Runs `target` immediately on a new thread (synchronously — code after the call
 
 > **[info]**
 `task.spawn` does not forward extra arguments to `target`; use a closure: `task.spawn(function() myFunc(arg) end)`.
-
 
 ## task.defer
 
@@ -551,15 +554,15 @@ Yields the current thread for `time` seconds, or until the next frame if `time` 
 
 # Memory
 
-Source: https://huoadf.github.io/matcha-docs/memory/
+URL: https://huoadf.github.io/matcha-docs/memory/
+Group: Functions
 
 > **[warning]**
 You must allow unsafe LuaU execution before using these functions
 
-
 ## Memory Types
 
-<table><thead><tr><th valign="middle">Memory Types</th><th>Returns</th></tr></thead><tbody><tr><td valign="middle">int</td><td>int</td></tr><tr><td valign="middle">float</td><td>number</td></tr><tr><td valign="middle">double</td><td>number</td></tr><tr><td valign="middle">byte</td><td>int</td></tr><tr><td valign="middle">string</td><td>string</td></tr><tr><td valign="middle">uintptr_t</td><td>int</td></tr></tbody></table>
+Memory TypesReturnsintintfloatnumberdoublenumberbyteintstringstringuintptr_tint
 
 ## getbase
 
@@ -580,7 +583,6 @@ Writes `value` to `address`, interpreting it as `memoryType` — the same type s
 > **[danger]**
 Ensure the address and value type are correct before writing; a write to the wrong address can crash Roblox.
 
-
 ## memory_read
 
 ```lua
@@ -593,7 +595,8 @@ Reads the value of type `memoryType` at `address` (see the **Memory Types** tabl
 
 # Garbage collector
 
-Source: https://huoadf.github.io/matcha-docs/garbage-collector/
+URL: https://huoadf.github.io/matcha-docs/garbage-collector/
+Group: Functions
 
 These functions find and modify values held in the game's Lua garbage collector by name, such as weapon stats and other values stored in Lua tables.
 
@@ -659,13 +662,13 @@ applygc(cache, { FireRate = 0, SpreadAngle = 0, MagAmmo = 999999 })
 
 # File system
 
-Source: https://huoadf.github.io/matcha-docs/filesystem/
+URL: https://huoadf.github.io/matcha-docs/filesystem/
+Group: Functions
 
 > **[warning]**
 Paths are relative to the Matcha workspace folder (e.g. `C:\matcha\workspace\`). `/` and `\` are interchangeable, and paths are case-insensitive.
 
 `readfile`, `writefile`, and `appendfile` only accept these extensions: **`.txt` `.lua` `.luau` `.json` `.cfg` `.dat` `.ini`**. Any other extension — including images, audio, and executables — raises `file extension not allowed`. Contents are binary-safe, so store raw/binary data under `.dat`.
-
 
 ## writefile
 
@@ -749,11 +752,11 @@ Recursively deletes the folder (or file) at `path` and everything inside it. Alw
 
 # HTTP
 
-Source: https://huoadf.github.io/matcha-docs/http/
+URL: https://huoadf.github.io/matcha-docs/http/
+Group: Functions
 
 > **[info]**
 `httpget` and `httppost` are **synchronous** — they block until the response arrives and return the response body as a string. They never raise an error: an HTTP error status (e.g. 404) returns the server's response body, and a connection failure (e.g. an unreachable host) returns an empty string. They are the global equivalents of `game:HttpGet` / `game:HttpPost`.
-
 
 ## httpget
 
@@ -786,7 +789,8 @@ local resp = httppost("https://example.com/api", '{"action":"ping"}', "applicati
 
 # Lua base library
 
-Source: https://huoadf.github.io/matcha-docs/lua-base-library/
+URL: https://huoadf.github.io/matcha-docs/lua-base-library/
+Group: Functions
 
 Matcha runs on a Luau-based VM, so the standard Lua(U) global functions are available and behave per the [Lua 5.1 reference](https://www.lua.org/manual/5.1/) **except** where noted below. This page lists what the VM actually exposes and flags the Matcha-specific differences — it does not re-document standard Lua semantics.
 
@@ -831,7 +835,6 @@ Standard iteration; `ipairs` stops at the first `nil` hole.
 > **[warning]**
 `pairs` does **not** honor the Luau `__iter` metamethod — it always iterates the raw table.
 
-
 ### select
 
 ```lua
@@ -856,7 +859,7 @@ Returns `t[i]` through `t[j]` (defaults `i = 1`, `j = #t`). Exposed as a **globa
 function assert(value: any, message: string?, ...): ...
 ```
 
-Raises a catchable error (`Matcha:<line>: <message>`, or `assertion failed!` with no message) if `value` is falsy; otherwise returns its arguments unchanged — the way to raise a catchable error in Matcha.
+Raises a catchable error (`Matcha:: `, or `assertion failed!` with no message) if `value` is falsy; otherwise returns its arguments unchanged — the way to raise a catchable error in Matcha.
 
 ### pcall
 
@@ -864,7 +867,7 @@ Raises a catchable error (`Matcha:<line>: <message>`, or `assertion failed!` wit
 function pcall(f: function, ...): (boolean, ...)
 ```
 
-Standard. Returns `true` plus `f`'s results on success, or `false, "Matcha:<line>: <message>"` on a runtime fault.
+Standard. Returns `true` plus `f`'s results on success, or `false, "Matcha:: "` on a runtime fault.
 
 ### xpcall
 
@@ -920,11 +923,10 @@ Returns the VM's current memory usage in kilobytes.
 
 # Classes
 
-Source: https://huoadf.github.io/matcha-docs/classes/
+URL: https://huoadf.github.io/matcha-docs/classes/
+Group: Reference
 
 ## BasePart
-
-<https://create.roblox.com/docs/reference/engine/classes/BasePart>
 
 **Properties**
 
@@ -970,10 +972,7 @@ BasePart.AssemblyLinearVelocity: Vector3
 BasePart.CanCollide: bool
 ```
 
-
 ## Camera
-
-<https://create.roblox.com/docs/reference/engine/classes/Camera>
 
 **Constructors**
 
@@ -1009,10 +1008,7 @@ Camera.Position: Vector3
 Camera.CFrame: CFrame
 ```
 
-
 ## DataModel
-
-<https://create.roblox.com/docs/reference/engine/classes/DataModel>
 
 **Properties**
 
@@ -1062,7 +1058,6 @@ function DataModel:isLoaded(): boolean
 
 Returns `true` if the game is fully loaded, else `false`.
 
-
 ## HttpService
 
 **Methods**
@@ -1085,10 +1080,7 @@ function HttpService:JSONDecode(str: string): table
 function HttpService:GenerateGUID(): string
 ```
 
-
 ## Humanoid
-
-<https://create.roblox.com/docs/reference/engine/classes/Humanoid>
 
 **Properties**
 
@@ -1104,10 +1096,7 @@ Humanoid.MaxHealth: number
 Humanoid.Health: number
 ```
 
-
 ## Model
-
-<https://create.roblox.com/docs/reference/engine/classes/Model>
 
 **Properties**
 
@@ -1117,10 +1106,7 @@ Humanoid.Health: number
 Model.PrimaryPart: BasePart
 ```
 
-
 ## Workspace
-
-<https://create.roblox.com/docs/reference/engine/classes/Workspace>
 
 **Properties**
 
@@ -1140,10 +1126,7 @@ function Workspace:Raycast(origin: Vector3, direction: Vector3, params: RaycastP
 
 Projects a ray from `origin` in the direction of `direction` using optional `RaycastParams`. Returns the first `RaycastResult` hit, or `nil` if no hit.
 
-
 ## Instance
-
-<https://create.roblox.com/docs/reference/engine/classes/Instance>
 
 **Properties**
 
@@ -1175,7 +1158,6 @@ Hexadecimal number representing the Instance’s memory address.
 
 > **[info]**
 As of Aug 6 2026, comparing instances directly via `==` is supported, so comparing `.Address` manually is no longer required.
-
 
 **Methods**
 
@@ -1218,7 +1200,6 @@ function Instance:GetAttribute(name: string): any
 > **[success]**
 **Fixed (Aug 6 2026):** Attribute retrieval issues have been resolved.
 
-
 ### GetAttributes
 
 ```lua
@@ -1233,7 +1214,6 @@ function Instance:SetAttribute(name: string, value: any): nil
 
 > **[success]**
 **Fixed (Aug 6 2026):** Attribute assignment issues have been resolved.
-
 
 ### GetDescendants
 
@@ -1259,10 +1239,7 @@ function Instance:FindFirstChildWhichIsA(class: string): Instance
 function Instance:WaitForChild(name: string): Instance
 ```
 
-
 ## Mouse
-
-<https://create.roblox.com/docs/reference/engine/classes/Mouse>
 
 **Properties**
 
@@ -1278,10 +1255,7 @@ Mouse.X: number
 Mouse.Y: number
 ```
 
-
 ## Players
-
-<https://create.roblox.com/docs/reference/engine/classes/Players>
 
 **Properties**
 
@@ -1311,10 +1285,7 @@ Players.PlayerAdded:Connect(function(player))
 Players.PlayerRemoving:Connect(function(player))
 ```
 
-
 ## Player
-
-<https://create.roblox.com/docs/reference/engine/classes/Player>
 
 **Properties**
 
@@ -1344,10 +1315,7 @@ Player.UserId: number
 function Player:GetMouse(): Mouse
 ```
 
-
 ## ValueBase
-
-<https://create.roblox.com/docs/reference/engine/classes/ValueBase>
 
 `ObjectValue`, `Color3Value`, `NumberValue`, `IntValue`, `FloatValue`, `BoolValue`, and `StringValue` all inherit from this class. For simplicity, they do not have separate sub-pages.
 
@@ -1359,10 +1327,7 @@ function Player:GetMouse(): Mouse
 ValueBase.Value: any
 ```
 
-
 ## GuiObject
-
-<https://create.roblox.com/docs/reference/engine/classes/GuiObject>
 
 **Properties**
 
@@ -1381,11 +1346,7 @@ GuiObject.AbsolutePosition: Vector2
 > **[success]**
 **Fixed (Aug 6 2026):** Absolute position and size metrics now return accurate values.
 
-
-
 ## TextLabel
-
-<https://create.roblox.com/docs/reference/engine/classes/TextLabel>
 
 **Properties**
 
@@ -1398,11 +1359,7 @@ TextLabel.Text: string
 > **[success]**
 **Fixed (Aug 6 2026):** `.Text` property access and assignments now work correctly.
 
-
-
 ## MeshPart
-
-<https://create.roblox.com/docs/reference/engine/classes/MeshPart>
 
 **Properties**
 
@@ -1417,7 +1374,6 @@ MeshPart.TextureId: string
 ```lua
 MeshPart.MeshId: string
 ```
-
 
 ## UserInputService
 
@@ -1439,10 +1395,7 @@ local UserInputService = game:GetService("UserInputService")
 UserInputService.InputEnded:Connect(function(input: InputObject, gameProcessed: boolean))
 ```
 
-
 ## RunService
-
-<https://create.roblox.com/docs/reference/engine/classes/RunService>
 
 The `RunService` service contains methods and events for managing the execution of the game/simulation.
 
@@ -1475,11 +1428,7 @@ Fires every frame, prior to the physics simulation step. Passes the time elapsed
 > **[warning]**
 In the Matcha VM, the `Stepped` event only receives one argument (`deltaTime: number`), unlike the standard Roblox API which receives both `time` and `deltaTime`.
 
-
-
 ## RemoteEvent
-
-<https://create.roblox.com/docs/reference/engine/classes/RemoteEvent>
 
 **Methods**
 
@@ -1491,10 +1440,7 @@ RemoteEvent:FireServer(...any)
 
 Fires the `RemoteEvent` to the server with the given arguments. *(Added in Hybrid mode - Jul 20 2026).*
 
-
 ## RemoteFunction
-
-<https://create.roblox.com/docs/reference/engine/classes/RemoteFunction>
 
 **Methods**
 
@@ -1509,16 +1455,14 @@ Invokes the `RemoteFunction` on the server and yields until it returns a result.
 > **[warning]**
 Unlike the standard Roblox `InvokeServer`, Matcha uses `InvokeFunction` to call `RemoteFunction`s externally.
 
-
 ---
 
 # Datatypes
 
-Source: https://huoadf.github.io/matcha-docs/datatypes/
+URL: https://huoadf.github.io/matcha-docs/datatypes/
+Group: Reference
 
 ## Vector3
-
-<https://create.roblox.com/docs/reference/engine/datatypes/Vector3>
 
 The [Vector3](https://create.roblox.com/docs/reference/engine/datatypes/Vector3) data type represents a vector in 3D space, typically used as a point in 3D space or the dimensions of a rectangular prism.
 
@@ -1707,12 +1651,7 @@ function Vector3:Sign(): Vector3
 
 Returns a Vector3 indicating the sign of each component (-1, 0, or 1).
 
-
-
-
 ## CFrame
-
-<https://create.roblox.com/docs/reference/engine/datatypes/CFrame>
 
 The [CFrame](https://create.roblox.com/docs/reference/engine/datatypes/CFrame) (Coordinate Frame) data type describes a position and rotation in 3D space.
 
@@ -1746,7 +1685,6 @@ Returns a CFrame with position (x, y, z) and rotation defined by the rotation ma
 
 > **[info]**
 `CFrame.new` expects exactly 0, 3, 6, or 12 arguments.
-
 
 ### Angles
 
@@ -1904,11 +1842,7 @@ function CFrame:VectorToWorldSpace(v: Vector3): Vector3
 
 Transforms a Vector3 vector from local object space to world space.
 
-
-
 ## Vector2
-
-<https://create.roblox.com/docs/reference/engine/datatypes/Vector2>
 
 The [Vector2](https://create.roblox.com/docs/reference/engine/datatypes/Vector2) data type represents a 2D value with direction and magnitude. Some applications include GUI elements and 2D mouse positions.
 
@@ -1935,7 +1869,6 @@ Vector2.X: number
 ```lua
 Vector2.Y: number
 ```
-
 
 ## Color3
 
@@ -1995,7 +1928,6 @@ Color3.G: number
 Color3.B: number
 ```
 
-
 ## Ray
 
 The [Ray](https://create.roblox.com/docs/reference/engine/datatypes/Ray) data type represents a ray in 3D space, consisting of an origin and a direction.
@@ -2024,7 +1956,6 @@ Ray.Origin: Vector3
 Ray.Direction: Vector3
 ```
 
-
 ## UDim
 
 The [UDim](https://create.roblox.com/docs/reference/engine/datatypes/UDim) data type represents a single dimension of a UI coordinate, consisting of a scale (relative size) and an offset (pixel size).
@@ -2052,7 +1983,6 @@ UDim.Scale: number
 ```lua
 UDim.Offset: number
 ```
-
 
 ## UDim2
 
@@ -2103,7 +2033,8 @@ UDim2.Y: UDim
 
 # Drawing
 
-Source: https://huoadf.github.io/matcha-docs/drawing/
+URL: https://huoadf.github.io/matcha-docs/drawing/
+Group: Reference
 
 The following snippet will display a red square on the user's screen for 5 seconds.
 
@@ -2119,8 +2050,6 @@ wait(5)
 square:Remove()
 ```
 
-
-
 ## Drawing.new
 
 ```lua
@@ -2135,7 +2064,6 @@ Drawing.new(drawingType: string): DrawingObject
 * Text
 * Triangle
 * Image
-
 
 ## DrawingObject
 
@@ -2313,9 +2241,7 @@ DrawingObject.Rounding: number
 
 The rounding radius of the image corners (defaults to 0).
 
-
 ## Fonts
-
 
 ```lua
 Drawing.Fonts.UI         -- ProggyClean
@@ -2327,7 +2253,6 @@ Drawing.Fonts.Pixel      -- Pixel
 Drawing.Fonts.Fortnite   -- Fortnite
 Drawing.Fonts.ProximaSoftBold -- Proxima Soft Bold
 ```
-
 
 ## Example: Basic Player ESP (Boxes & Snaplines)
 
@@ -2453,7 +2378,8 @@ print("Matcha ESP script loaded! Draw overlays are now active.")
 
 # GC modding guide
 
-Source: https://huoadf.github.io/matcha-docs/gc-guide/
+URL: https://huoadf.github.io/matcha-docs/gc-guide/
+Group: Reference
 
 This guide explains how to find and modify values held in the game's Lua garbage collector (GC), such as weapon stats, flight speeds, or cooldowns.
 
@@ -2574,12 +2500,12 @@ LocalPlayer.CharacterAdded:Connect(function()
 end)
 ```
 
-
 ---
 
 # Changelogs
 
-Source: https://huoadf.github.io/matcha-docs/changelogs/
+URL: https://huoadf.github.io/matcha-docs/changelogs/
+Group: Reference
 
 # Changelogs
 
@@ -2616,7 +2542,7 @@ Keep track of all the latest updates, fixes, and new features added to the Match
 - Optimized some parts for low-end PCs
 - Comparing instances no longer needs `.Address` — direct `==` comparison is now supported
 
-**Pro (Early Access)** ::pro::
+**Pro (Early Access)** [Pro]
 - Added **AI Agent & MCP integration** into Lua U *(still on testing)*
 
 *Run loader to update*
@@ -2651,7 +2577,7 @@ Keep track of all the latest updates, fixes, and new features added to the Match
 
 ## Jul 20 2026
 
-**Hybrid Mode** ::pro::
+**Hybrid Mode** [Pro]
 - Added **Remote Spy**.
 - Added `RemoteEvent:FireServer()` and `RemoteFunction:InvokeFunction()` support.
 
@@ -2692,4 +2618,3 @@ Keep track of all the latest updates, fixes, and new features added to the Match
 
 **Lua VM**
 - Added `Player.UserId` property.
-
