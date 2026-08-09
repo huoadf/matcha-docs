@@ -101,7 +101,6 @@
         <a class="nav-item active" href="../datatypes/">Datatypes</a>
         <a class="nav-item " href="../drawing/">Drawing</a>
         <a class="nav-item " href="../ui-binding/">UI Binding</a>
-        <a class="nav-item " href="../game-support/">Game features</a>
         <a class="nav-item " href="../gc-guide/">GC modding guide</a>
         <a class="nav-item " href="../examples/">Code examples</a>
         <a class="nav-item " href="../limitations/">VM limitations</a>
@@ -349,39 +348,6 @@ UDim2.new(x: UDim, y: UDim)</code></pre>
 <pre><code class="language-lua">UDim2.X: UDim</code></pre>
 <h3 id="y" tabindex="-1">Y <a class="header-anchor" href="#y" aria-hidden="true">#</a></h3>
 <pre><code class="language-lua">UDim2.Y: UDim</code></pre>
-<h2 id="raycastparams" tabindex="-1">RaycastParams <a class="header-anchor" href="#raycastparams" aria-hidden="true">#</a></h2>
-<p>The <code>RaycastParams</code> data type stores parameters for <code>Workspace:Raycast</code> operations.</p>
-<p><strong>Constructors</strong></p>
-<h3 id="new" tabindex="-1">new <a class="header-anchor" href="#new" aria-hidden="true">#</a></h3>
-<pre><code class="language-lua">RaycastParams.new(): RaycastParams</code></pre>
-<p>Returns a new <code>RaycastParams</code> object.</p>
-<p><strong>Properties</strong></p>
-<h3 id="filterancestorstypes" tabindex="-1">FilterAncestorsTypes <a class="header-anchor" href="#filterancestorstypes" aria-hidden="true">#</a></h3>
-<pre><code class="language-lua">RaycastParams.FilterAncestorsTypes: Enum.RaycastFilterType</code></pre>
-<h3 id="filtertype" tabindex="-1">FilterType <a class="header-anchor" href="#filtertype" aria-hidden="true">#</a></h3>
-<pre><code class="language-lua">RaycastParams.FilterType: Enum.RaycastFilterType</code></pre>
-<h3 id="ignorewater" tabindex="-1">IgnoreWater <a class="header-anchor" href="#ignorewater" aria-hidden="true">#</a></h3>
-<pre><code class="language-lua">RaycastParams.IgnoreWater: boolean</code></pre>
-<h3 id="collisiongroup" tabindex="-1">CollisionGroup <a class="header-anchor" href="#collisiongroup" aria-hidden="true">#</a></h3>
-<pre><code class="language-lua">RaycastParams.CollisionGroup: string</code></pre>
-<h2 id="raycastresult" tabindex="-1">RaycastResult <a class="header-anchor" href="#raycastresult" aria-hidden="true">#</a></h2>
-<p>The <code>RaycastResult</code> data type represents the result of a <code>Workspace:Raycast</code> query.</p>
-<p><strong>Properties</strong></p>
-<h3 id="instance" tabindex="-1">Instance <a class="header-anchor" href="#instance" aria-hidden="true">#</a></h3>
-<pre><code class="language-lua">RaycastResult.Instance: Instance</code></pre>
-<p>The <code>Instance</code> hit by the raycast.</p>
-<h3 id="position" tabindex="-1">Position <a class="header-anchor" href="#position" aria-hidden="true">#</a></h3>
-<pre><code class="language-lua">RaycastResult.Position: Vector3</code></pre>
-<p>The 3D world position where the ray intersected the target instance.</p>
-<h3 id="normal" tabindex="-1">Normal <a class="header-anchor" href="#normal" aria-hidden="true">#</a></h3>
-<pre><code class="language-lua">RaycastResult.Normal: Vector3</code></pre>
-<p>The surface normal vector at the intersection point.</p>
-<h3 id="material" tabindex="-1">Material <a class="header-anchor" href="#material" aria-hidden="true">#</a></h3>
-<pre><code class="language-lua">RaycastResult.Material: Enum.Material</code></pre>
-<p>The material of the hit part.</p>
-<h3 id="distance" tabindex="-1">Distance <a class="header-anchor" href="#distance" aria-hidden="true">#</a></h3>
-<pre><code class="language-lua">RaycastResult.Distance: number</code></pre>
-<p>The distance from the ray origin to the hit position.</p>
       </article>
       
       <nav class="pager">
@@ -468,18 +434,6 @@ UDim2.new(x: UDim, y: UDim)</code></pre>
 <li class="toc-l3"><a href="#fromscale">fromScale</a></li>
 <li class="toc-l3"><a href="#x">X</a></li>
 <li class="toc-l3"><a href="#y">Y</a></li>
-<li class="toc-l2"><a href="#raycastparams">RaycastParams</a></li>
-<li class="toc-l3"><a href="#new">new</a></li>
-<li class="toc-l3"><a href="#filterancestorstypes">FilterAncestorsTypes</a></li>
-<li class="toc-l3"><a href="#filtertype">FilterType</a></li>
-<li class="toc-l3"><a href="#ignorewater">IgnoreWater</a></li>
-<li class="toc-l3"><a href="#collisiongroup">CollisionGroup</a></li>
-<li class="toc-l2"><a href="#raycastresult">RaycastResult</a></li>
-<li class="toc-l3"><a href="#instance">Instance</a></li>
-<li class="toc-l3"><a href="#position">Position</a></li>
-<li class="toc-l3"><a href="#normal">Normal</a></li>
-<li class="toc-l3"><a href="#material">Material</a></li>
-<li class="toc-l3"><a href="#distance">Distance</a></li>
 </ul>
     </aside>
   </div>
