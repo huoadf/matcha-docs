@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Code examples · Matcha docs</title>
-  <meta name="description" content="Matcha LuaVM documentation - Code examples">
+  <title>Game features · Matcha docs</title>
+  <meta name="description" content="Matcha LuaVM documentation - Game features">
   <link rel="icon" href="../assets/logo.gif">
   
   <!-- Fonts -->
@@ -101,9 +101,9 @@
         <a class="nav-item " href="../datatypes/">Datatypes</a>
         <a class="nav-item " href="../drawing/">Drawing</a>
         <a class="nav-item " href="../ui-binding/">UI Binding</a>
-        <a class="nav-item " href="../game-support/">Game features</a>
+        <a class="nav-item active" href="../game-support/">Game features</a>
         <a class="nav-item " href="../gc-guide/">GC modding guide</a>
-        <a class="nav-item active" href="../examples/">Code examples</a>
+        <a class="nav-item " href="../examples/">Code examples</a>
         <a class="nav-item " href="../limitations/">VM limitations</a>
         <a class="nav-item " href="../faq/">FAQ</a>
         <a class="nav-item " href="../changelogs/">Changelogs</a>
@@ -115,139 +115,70 @@
         <div class="breadcrumb">
           <a href="../">Matcha</a> 
           <span>/</span> 
-          Code examples
+          Game features
         </div>
-        <h1 id="examples" tabindex="-1">
-          Code examples 
-          <a class="header-anchor" href="#examples" aria-hidden="true">#</a>
+        <h1 id="game-support" tabindex="-1">
+          Game features 
+          <a class="header-anchor" href="#game-support" aria-hidden="true">#</a>
         </h1>
-        <h1 id="code-examples" tabindex="-1">Code Examples <a class="header-anchor" href="#code-examples" aria-hidden="true">#</a></h1>
-<p>A collection of complete, functional script examples demonstrating common patterns in the Matcha LuaVM. These examples are optimized for AI reference and developer usage.</p>
+        <h1 id="game-features-combat-systems" tabindex="-1">Game Features & Combat Systems <a class="header-anchor" href="#game-features-combat-systems" aria-hidden="true">#</a></h1>
+<p>Documentation for Matcha's built-in visuals, combat engine features, and game-specific support modules (Overkill, Temu Rivals, etc.).</p>
 <hr>
-<h2 id="1-2d-box-esp-overlay" tabindex="-1">1. 2D Box ESP Overlay <a class="header-anchor" href="#1-2d-box-esp-overlay" aria-hidden="true">#</a></h2>
-<p>Draws bounding boxes around all players in the game using <code>WorldToScreen</code> and <code>Drawing.new("Square")</code>.</p>
-<pre><code class="language-lua">local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
-local LocalPlayer = Players.LocalPlayer
-local Camera = workspace.CurrentCamera
-
-local boxes = {}
-
-local function createBox(player)
-    if player == LocalPlayer then return end
-    
-    local box = Drawing.new("Square")
-    box.Color = Color3.fromRGB(0, 255, 120)
-    box.Thickness = 2
-    box.Filled = false
-    box.Visible = false
-    
-    boxes[player] = box
-end
-
-for _, player in ipairs(Players:GetPlayers()) do
-    createBox(player)
-end
-
-Players.PlayerAdded:Connect(createBox)
-
-Players.PlayerRemoving:Connect(function(player)
-    if boxes[player] then
-        boxes[player]:Remove()
-        boxes[player] = nil
-    end
-end)
-
-RunService.RenderStepped:Connect(function()
-    for player, box in pairs(boxes) do
-        local character = player.Character
-        local hrp = character and character:FindFirstChild("HumanoidRootPart")
-        
-        if hrp then
-            local pos, onScreen = WorldToScreen(hrp.Position)
-            if onScreen then
-                -- Calculate dynamic size based on distance
-                local dist = (Camera.CFrame.Position - hrp.Position).Magnitude
-                local size = math.clamp(1000 / dist, 10, 300)
-                
-                box.Position = Vector2.new(pos.X - size / 2, pos.Y - size / 2)
-                box.Size = Vector2.new(size, size)
-                box.Visible = true
-            else
-                box.Visible = false
-            end
-        else
-            box.Visible = false
-        end
-    end
-end)</code></pre>
+<h2 id="combat-targeting-systems" tabindex="-1">Combat & Targeting Systems <a class="header-anchor" href="#combat-targeting-systems" aria-hidden="true">#</a></h2>
+<h3 id="silent-aim" tabindex="-1">Silent Aim <a class="header-anchor" href="#silent-aim" aria-hidden="true">#</a></h3>
+<p>Matches player target trajectory silently without overriding the camera CFrame.</p>
+<ul>
+<li><strong>Hitchance Configuration</strong>: Configurable integer percentage (<code>1</code> to <code>100</code>).</li>
+<li><strong>Target Bone Selection</strong>: Supports <code>Head</code>, <code>Torso</code>, or <code>Nearest</code> bone targeting.</li>
+<li><strong>Team Check</strong>: Toggles filtering out players on the same team as <code>LocalPlayer</code>.</li>
+<li><strong>Keybind Modes</strong>: Supports <code>hold</code>, <code>toggle</code>, <code>click</code>, and <code>always</code> activation modes.</li>
+</ul>
+<pre><code class="language-lua">-- Example using UI Binding
+aim:Toggle("aim_silent", "Silent Aim")
+aim:SliderInt("aim_hc", "Hitchance", 1, 100, 85)
+aim:Combo("aim_bone", "Hitbox", {"Head", "Torso", "Nearest"}, 0)</code></pre>
+<h3 id="memory-aim-smooth-aim" tabindex="-1">Memory Aim (Smooth Aim) <a class="header-anchor" href="#memory-aim-smooth-aim" aria-hidden="true">#</a></h3>
+<p>Direct memory-based aiming vector calculations with adjustable smoothness to ensure natural movement.</p>
+<ul>
+<li><strong>Smoothness Range</strong>: <code>0.0</code> (instant snap) to <code>20.0</code> (ultra smooth interpolation).</li>
+<li><strong>FOV Circle</strong>: Independent screen FOV boundary (<code>10</code> to <code>800</code> pixels).</li>
+</ul>
+<pre><code class="language-lua">aim:SliderFloat("aim_smooth", "Smoothing", 0.0, 20.0, 6.0, "%.1f")</code></pre>
 <hr>
-<h2 id="2-memory-read-write-unlimited-health-speed" tabindex="-1">2. Memory Read / Write (Unlimited Health / Speed) <a class="header-anchor" href="#2-memory-read-write-unlimited-health-speed" aria-hidden="true">#</a></h2>
-<p>Reading and writing engine memory using <code>getbase</code> and <code>memory_write</code>.</p>
-<pre><code class="language-lua">-- Get Roblox process base address
-local baseAddr = getbase()
-
--- Example: Modify player speed at a known offset
-local walkSpeedOffset = 0x1A2B3C -- Example offset
-local targetAddr = baseAddr + walkSpeedOffset
-
--- Write float value
-memory_write("float", targetAddr, 100.0)
-
--- Read back float value
-local currentSpeed = memory_read("float", targetAddr)
-print("Current WalkSpeed:", currentSpeed)</code></pre>
+<h2 id="visuals-engine-esp" tabindex="-1">Visuals & Engine ESP <a class="header-anchor" href="#visuals-engine-esp" aria-hidden="true">#</a></h2>
+<h3 id="engine-chams-glow-esp" tabindex="-1">Engine Chams & Glow ESP <a class="header-anchor" href="#engine-chams-glow-esp" aria-hidden="true">#</a></h3>
+<p>Redesigned visual overlay system for player models and world objects.</p>
+<ul>
+<li><strong>Glow ESP</strong>: Outer model glow outline rendering.</li>
+<li><strong>Name & Weapon ESP</strong>: Displays player display names, username, and equipped weapon names.</li>
+<li><strong>Health Bar</strong>: Dynamic health indicator showing current vs max health.</li>
+<li><strong>Visible Check</strong>: Dual-color configuration for visible vs occluded target parts (<code>ColorPicker2</code>).</li>
+<li><strong>Distance Scaling</strong>: Dynamic box/text size calculations based on distance from <code>Camera.CFrame.Position</code>.</li>
+</ul>
+<pre><code class="language-lua">esp:Toggle("esp_vis", "Visible Check")
+esp:ColorPicker2("vis_col", {0, 1, 0, 1}, "invis_col", {1, 0, 0, 1})</code></pre>
 <hr>
-<h2 id="3-remote-event-invocation-pro-pro" tabindex="-1">3. Remote Event Invocation (Pro <span class="badge badge-pro"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 8 8"><path fill="currentColor" d="M4 0L4.88 2.76H8L5.56 4.47L6.47 7.24L4 5.53L1.53 7.24L2.44 4.47L0 2.76H3.12L4 0Z"/></svg> Pro</span>) <a class="header-anchor" href="#3-remote-event-invocation-pro-pro" aria-hidden="true">#</a></h2>
-<p>Firing remote events programmatically using Hybrid mode methods.</p>
-<pre><code class="language-lua">-- Fire a RemoteEvent to the server
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local GiveMoneyRemote = ReplicatedStorage:FindFirstChild("GiveMoney", true)
-
-if GiveMoneyRemote then
-    -- Fires RemoteEvent on the server
-    GiveMoneyRemote:FireServer(1000000)
-end
-
--- Invoke a RemoteFunction
-local GetPlayerData = ReplicatedStorage:FindFirstChild("GetPlayerData", true)
-if GetPlayerData then
-    local data = GetPlayerData:InvokeFunction()
-    print("Received player data:", data)
-end</code></pre>
+<h2 id="environment-lighting-overrides" tabindex="-1">Environment & Lighting Overrides <a class="header-anchor" href="#environment-lighting-overrides" aria-hidden="true">#</a></h2>
+<p>Matcha allows overriding local rendering parameters <strong>without altering server or game environment state</strong>, preventing server rollback detection.</p>
+<h3 id="field-of-view-fov-override" tabindex="-1">Field of View (FOV) Override <a class="header-anchor" href="#field-of-view-fov-override" aria-hidden="true">#</a></h3>
+<p>Adjusts local <code>Camera.FieldOfView</code> without triggering server camera checks or overlapping with game script FOV changes.</p>
+<h3 id="environment-lighting" tabindex="-1">Environment Lighting <a class="header-anchor" href="#environment-lighting" aria-hidden="true">#</a></h3>
+<p>Overrides <code>Lighting.Ambient</code>, <code>Lighting.ClockTime</code> (Time of Day), and <code>Lighting.ExposureCompensation</code> locally for full night-vision or full-bright visual control.</p>
+<pre><code class="language-lua">local Lighting = game:GetService("Lighting")
+Lighting.ClockTime = 12 -- Force noon locally
+Lighting.Ambient = Color3.fromRGB(255, 255, 255) -- Full-bright</code></pre>
 <hr>
-<h2 id="4-garbage-collector-scanning-getgc" tabindex="-1">4. Garbage Collector Scanning (<code>getgc</code>) <a class="header-anchor" href="#4-garbage-collector-scanning-getgc" aria-hidden="true">#</a></h2>
-<p>Iterating through Lua garbage collector objects to find tables, functions, or upvalues.</p>
-<pre><code class="language-lua">local gc = getgc(true) -- Get all tables and functions
-
-for _, item in ipairs(gc) do
-    if type(item) == "table" and rawget(item, "WalkSpeed") then
-        print("Found Movement Config Table!")
-        item.WalkSpeed = 500
-    end
-end</code></pre>
-<hr>
-<h2 id="5-raycasting" tabindex="-1">5. Raycasting <a class="header-anchor" href="#5-raycasting" aria-hidden="true">#</a></h2>
-<p>Using <code>Workspace:Raycast</code> to detect objects in front of the camera or player.</p>
-<pre><code class="language-lua">local Camera = workspace.CurrentCamera
-local origin = Camera.CFrame.Position
-local direction = Camera.CFrame.LookVector * 500
-
-local result = workspace:Raycast(origin, direction)
-if result then
-    print("Ray hit instance:", result.Instance:GetFullName())
-    print("Hit position:", result.Position)
-    print("Normal:", result.Normal)
-end</code></pre>
+<h2 id="supported-games-matrix" tabindex="-1">Supported Games Matrix <a class="header-anchor" href="#supported-games-matrix" aria-hidden="true">#</a></h2>
+<table><thead><tr><th>Game Title</th><th>Supported Features</th><th>Status</th></tr></thead><tbody><tr><td><strong>Temu Rivals</strong></td><td>Silent Aim, Name, Weapon ESP, Team Check, Memory Aim</td><td>✅ Supported</td></tr><tr><td><strong>Overkill</strong></td><td>Engine Chams, Silent Aim, Team Check, Recoil Reduction</td><td>✅ Supported</td></tr><tr><td><strong>Generic Roblox Games</strong></td><td>Universal ESP, Box ESP, Memory Aim, Lighting Overrides, UI Binding</td><td>✅ Supported</td></tr></tbody></table>
       </article>
       
       <nav class="pager">
-<a class="pager-link prev" href="../gc-guide/">
+<a class="pager-link prev" href="../ui-binding/">
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg)"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-<span><em>Previous</em>GC modding guide</span>
+<span><em>Previous</em>UI Binding</span>
 </a>
-<a class="pager-link next" href="../limitations/">
-<span><em>Next</em>VM limitations</span>
+<a class="pager-link next" href="../gc-guide/">
+<span><em>Next</em>GC modding guide</span>
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
 </a>
 </nav>
@@ -256,11 +187,15 @@ end</code></pre>
     <aside class="toc">
       <div class="toc-title">On this page</div>
       <ul class="toc-list">
-<li class="toc-l2"><a href="#1-2d-box-esp-overlay">1. 2D Box ESP Overlay</a></li>
-<li class="toc-l2"><a href="#2-memory-read-write-unlimited-health-speed">2. Memory Read / Write (Unlimited Health / Speed)</a></li>
-<li class="toc-l2"><a href="#3-remote-event-invocation-pro-pro">3. Remote Event Invocation (Pro pro)</a></li>
-<li class="toc-l2"><a href="#4-garbage-collector-scanning-getgc">4. Garbage Collector Scanning (getgc)</a></li>
-<li class="toc-l2"><a href="#5-raycasting">5. Raycasting</a></li>
+<li class="toc-l2"><a href="#combat-targeting-systems">Combat & Targeting Systems</a></li>
+<li class="toc-l3"><a href="#silent-aim">Silent Aim</a></li>
+<li class="toc-l3"><a href="#memory-aim-smooth-aim">Memory Aim (Smooth Aim)</a></li>
+<li class="toc-l2"><a href="#visuals-engine-esp">Visuals & Engine ESP</a></li>
+<li class="toc-l3"><a href="#engine-chams-glow-esp">Engine Chams & Glow ESP</a></li>
+<li class="toc-l2"><a href="#environment-lighting-overrides">Environment & Lighting Overrides</a></li>
+<li class="toc-l3"><a href="#field-of-view-fov-override">Field of View (FOV) Override</a></li>
+<li class="toc-l3"><a href="#environment-lighting">Environment Lighting</a></li>
+<li class="toc-l2"><a href="#supported-games-matrix">Supported Games Matrix</a></li>
 </ul>
     </aside>
   </div>

@@ -580,3 +580,91 @@ UDim2.X: UDim
 ```lua
 UDim2.Y: UDim
 ```
+
+
+## RaycastParams
+
+The `RaycastParams` data type stores parameters for `Workspace:Raycast` operations.
+
+**Constructors**
+
+### new
+
+```lua
+RaycastParams.new(): RaycastParams
+```
+
+Returns a new `RaycastParams` object.
+
+**Properties**
+
+### FilterAncestorsTypes
+
+```lua
+RaycastParams.FilterAncestorsTypes: Enum.RaycastFilterType
+```
+
+### FilterType
+
+```lua
+RaycastParams.FilterType: Enum.RaycastFilterType
+```
+
+### IgnoreWater
+
+```lua
+RaycastParams.IgnoreWater: boolean
+```
+
+### CollisionGroup
+
+```lua
+RaycastParams.CollisionGroup: string
+```
+
+
+## RaycastResult
+
+The `RaycastResult` data type represents the result of a `Workspace:Raycast` query.
+
+**Properties**
+
+### Instance
+
+```lua
+RaycastResult.Instance: Instance
+```
+
+The `Instance` hit by the raycast.
+
+### Position
+
+```lua
+RaycastResult.Position: Vector3
+```
+
+The 3D world position where the ray intersected the target instance.
+
+### Normal
+
+```lua
+RaycastResult.Normal: Vector3
+```
+
+The surface normal vector at the intersection point.
+
+### Material
+
+```lua
+RaycastResult.Material: Enum.Material
+```
+
+The material of the hit part.
+
+### Distance
+
+```lua
+RaycastResult.Distance: number
+```
+
+The distance from the ray origin to the hit position.
