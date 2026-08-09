@@ -39,6 +39,8 @@ Matcha **is not an executor** — it does not hook any functions in the Roblox e
 
 [**Drawing** the Drawing API](/matcha/drawing)
 
+[**UI Binding** custom tabs, widgets & hotkeys](/matcha/ui-binding)
+
 [**Code examples** complete script snippets](/matcha/examples)
 
 [**VM limitations** execution rules & workarounds](/matcha/limitations)

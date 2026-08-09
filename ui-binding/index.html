@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UI Binding · Matcha docs</title>
+  <meta name="description" content="Matcha LuaVM documentation - UI Binding">
+  <link rel="icon" href="../assets/logo.gif">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+  
+  <!-- Theme CSS -->
+  <link rel="stylesheet" href="../assets/main.css">
+  <style>:root{--accent:#8cc63f}</style>
+  
+  <script>
+    (function(){try{var t=localStorage.getItem("wd-theme");if(t)document.documentElement.dataset.theme=t;}catch(e){}})();
+  </script>
+</head>
+<body data-project="matcha" data-search-path="../search-index.json">
+  <header class="topbar">
+    <button class="iconbtn menu-btn" data-menu aria-label="Open navigation">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+    <a class="brand" href="../">
+      <img src="../assets/logo.gif" class="brand-logo" alt="Matcha"> Matcha docs
+    </a>
+    <div class="switcher">
+      <button class="switcher-btn" data-switcher aria-haspopup="true" aria-expanded="false">
+        Matcha 
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+          <path d="m6 9 6 6 6-6"/>
+        </svg>
+      </button>
+      <div class="switcher-menu" data-switcher-menu hidden>
+        <a href="../" class="switcher-item active">
+          <span>Matcha</span>
+          <em>LuaVM documentation</em>
+        </a>
+      </div>
+    </div>
+    
+    <div class="topbar-spacer"></div>
+    
+    <button class="searchbtn" data-search-open>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7"/>
+        <path d="m21 21-4.3-4.3"/>
+      </svg>
+      <span>Search</span>
+      <kbd>⌘K</kbd>
+    </button>
+    
+    <button class="connectbtn" data-connect-open aria-label="Connect to AI">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 2v6M15 2v6"/>
+        <path d="M6 8h12v2a6 6 0 0 1-6 6 6 6 0 0 1-6-6z"/>
+        <path d="M12 16v6"/>
+      </svg>
+      <span>Connect</span>
+    </button>
+    
+    <button class="iconbtn" data-theme-toggle aria-label="Toggle theme">
+      <span class="theme-sun">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>
+        </svg>
+      </span>
+      <span class="theme-moon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>
+        </svg>
+      </span>
+    </button>
+  </header>
+  
+  <div class="layout">
+    <div class="scrim" data-scrim></div>
+    <nav class="sidebar" data-sidebar>
+      <div class="sidebar-inner">
+        <a class="nav-item " href="../">Getting started</a>
+        
+        <div class="nav-group">Functions</div>
+        <a class="nav-item " href="../functions-globals/">Globals</a>
+        <a class="nav-item " href="../functions-console-input/">Console &amp; input</a>
+        <a class="nav-item " href="../functions-misc/">Miscellaneous &amp; scheduler</a>
+        <a class="nav-item " href="../memory/">Memory</a>
+        <a class="nav-item " href="../garbage-collector/">Garbage collector</a>
+        <a class="nav-item " href="../filesystem/">File system</a>
+        <a class="nav-item " href="../http/">HTTP</a>
+        <a class="nav-item " href="../lua-base-library/">Lua base library</a>
+        
+        <div class="nav-group">Reference</div>
+        <a class="nav-item " href="../classes/">Classes</a>
+        <a class="nav-item " href="../datatypes/">Datatypes</a>
+        <a class="nav-item " href="../drawing/">Drawing</a>
+        <a class="nav-item active" href="../ui-binding/">UI Binding</a>
+        <a class="nav-item " href="../gc-guide/">GC modding guide</a>
+        <a class="nav-item " href="../examples/">Code examples</a>
+        <a class="nav-item " href="../limitations/">VM limitations</a>
+        <a class="nav-item " href="../faq/">FAQ</a>
+        <a class="nav-item " href="../changelogs/">Changelogs</a>
+      </div>
+    </nav>
+    
+    <main class="content">
+      <article class="prose">
+        <div class="breadcrumb">
+          <a href="../">Matcha</a> 
+          <span>/</span> 
+          UI Binding
+        </div>
+        <h1 id="ui-binding" tabindex="-1">
+          UI Binding 
+          <a class="header-anchor" href="#ui-binding" aria-hidden="true">#</a>
+        </h1>
+        <h1 id="ui-binding-menu-binding" tabindex="-1">UI Binding (Menu Binding) <a class="header-anchor" href="#ui-binding-menu-binding" aria-hidden="true">#</a></h1>
+<p>Create custom menu tabs, widgets, sections, and hotkey keybinds directly from Lua scripts in Matcha.</p>
+<p>> <strong>Source / Script Hub:</strong> <a href="https://github.com/cconstellation/MatchaScripts">MatchaScripts Repository</a></p>
+<hr>
+<h2 id="overview" tabindex="-1">Overview <a class="header-anchor" href="#overview" aria-hidden="true">#</a></h2>
+<p>The <code>UI</code> global library allows you to build custom menu interfaces that integrate directly into the Matcha UI overlay.</p>
+<pre><code class="language-lua">UI.AddTab("My Script", function(tab)
+    local sec = tab:Section("Settings", "Left")
+    sec:Toggle("enabled", "Enabled")
+    sec:Keybind("enabled_kb", 0x46, "hold")
+    sec:SliderInt("range", "Range", 1, 5000, 2000)
+end)</code></pre>
+<hr>
+<h2 id="global-functions" tabindex="-1">Global Functions <a class="header-anchor" href="#global-functions" aria-hidden="true">#</a></h2>
+<h3 id="uiaddtab" tabindex="-1"><code>UI.AddTab</code> <a class="header-anchor" href="#uiaddtab" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">UI.AddTab(name: string, fn: function)</code></pre>
+<p>Creates a custom tab with <code>name</code>. The callback function <code>fn(tab)</code> runs every frame to render and update the tab contents.</p>
+<h3 id="uiremovetab" tabindex="-1"><code>UI.RemoveTab</code> <a class="header-anchor" href="#uiremovetab" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">UI.RemoveTab(name: string)</code></pre>
+<p>Removes a tab by name.</p>
+<h3 id="uigetvalue" tabindex="-1"><code>UI.GetValue</code> <a class="header-anchor" href="#uigetvalue" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">UI.GetValue(id: string): any</code></pre>
+<p>Reads the current value of a widget with <code>id</code> from anywhere in your script.</p>
+<h3 id="uisetvalue" tabindex="-1"><code>UI.SetValue</code> <a class="header-anchor" href="#uisetvalue" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">UI.SetValue(id: string, value: any)</code></pre>
+<p>Sets the value of a widget with <code>id</code> programmatically.</p>
+<pre><code class="language-lua">while true do
+    if UI.GetValue("aim_on") then
+        local fov = UI.GetValue("aim_fov")
+        -- Aimbot logic here...
+    end
+    wait()
+end</code></pre>
+<hr>
+<h2 id="sections" tabindex="-1">Sections <a class="header-anchor" href="#sections" aria-hidden="true">#</a></h2>
+<p>Sections are created from the <code>tab</code> object and arrange widgets into standard two-column layouts (<code>"Left"</code> or <code>"Right"</code>).</p>
+<pre><code class="language-lua">tab:Section(name: string, side: string) -&gt; Section
+tab:Section(name: string, side: string, pages: table) -&gt; Section (tabbed)
+tab:Section(name: string, side: string, pages: table, max_height: number) -&gt; Section (scrollable)</code></pre>
+<h3 id="tabbed-scrollable-sections" tabindex="-1">Tabbed & Scrollable Sections <a class="header-anchor" href="#tabbed-scrollable-sections" aria-hidden="true">#</a></h3>
+<p>Passing an array of page names turns a section into a tabbed card container. You can check <code>sec.page</code> to render specific widgets on specific pages.</p>
+<pre><code class="language-lua">local sec = tab:Section("Aimbot", "Left", {"Main", "Advanced"}, 400)
+
+if sec.page == 0 then
+    -- Main page widgets
+elseif sec.page == 1 then
+    -- Advanced page widgets
+end</code></pre>
+<p><em>Note: Sections close automatically when a new section definition begins.</em></p>
+<hr>
+<h2 id="widgets" tabindex="-1">Widgets <a class="header-anchor" href="#widgets" aria-hidden="true">#</a></h2>
+<p>Every widget method returns an object that you can store to access properties or call methods on.</p>
+<pre><code class="language-lua">local toggle = sec:Toggle("aim_on", "Enabled")
+toggle.value            -- current boolean value
+toggle:GetValue()       -- gets fresh value
+toggle:SetValue(true)   -- updates value programmatically</code></pre>
+<p>All widgets accept an optional <code>callback</code> function as their last argument.</p>
+<h3 id="toggle" tabindex="-1">Toggle <a class="header-anchor" href="#toggle" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">sec:Toggle(id: string, label: string [, default: boolean] [, callback: function]) -&gt; Widget</code></pre>
+<pre><code class="language-lua">sec:Toggle("aim_on", "Aimbot", function(state)
+    print("Aimbot: " .. tostring(state))
+end)
+
+sec:Toggle("team_check", "Team Check", true)</code></pre>
+<hr>
+<h3 id="keybind" tabindex="-1">Keybind <a class="header-anchor" href="#keybind" aria-hidden="true">#</a></h3>
+<p>Must be placed directly after a <code>Toggle</code> widget. Left-click in the UI to rebind key, right-click to pick execution mode.</p>
+<pre><code class="language-lua">sec:Keybind(id: string [, key: number | Enum.KeyCode] [, type: string]) -&gt; KeybindWidget</code></pre>
+<ul>
+<li><strong><code>key</code></strong>: Virtual-key (VK) code or <code>Enum.KeyCode</code>. Default <code>0</code> = unbound.</li>
+<li><strong><code>type</code></strong>: Keybind mode — <code>"toggle"</code>, <code>"hold"</code>, <code>"always"</code>, or <code>"click"</code>.</li>
+</ul>
+<pre><code class="language-lua">sec:Toggle("aim_on", "Aimbot")
+local kb = sec:Keybind("aim_kb", 0x46, "hold")  -- F key, hold mode
+-- Or with Enum:
+-- local kb = sec:Keybind("aim_kb", Enum.KeyCode.F, "hold")</code></pre>
+<h4>KeybindWidget Methods & Properties</h4>
+<table><thead><tr><th>Method / Property</th><th>Description</th></tr></thead><tbody><tr><td><code>.value</code> / <code>:IsEnabled()</code></td><td>Returns <code>true</code> if keybind is currently active</td></tr><tr><td><code>:GetKey()</code></td><td>Returns current VK code / <code>Enum.KeyCode</code></td></tr><tr><td><code>:SetKey(vk)</code></td><td>Rebinds the key</td></tr><tr><td><code>:GetKeyName()</code></td><td>Returns key label string (e.g. <code>"f"</code>, <code>"lmb"</code>, <code>"none"</code>)</td></tr><tr><td><code>:GetType()</code></td><td>Returns current mode (<code>"toggle"</code>, <code>"hold"</code>, <code>"always"</code>, <code>"click"</code>)</td></tr><tr><td><code>:SetType(typeStr)</code></td><td>Changes keybind mode</td></tr><tr><td><code>:AddToHotkey(label, toggle_id)</code></td><td>Displays keybind in on-screen hotkey overlay when <code>toggle_id</code> is ON</td></tr><tr><td><code>:RemoveFromHotkey()</code></td><td>Removes keybind from hotkey overlay</td></tr></tbody></table>
+<h4>Key Codes Reference</h4>
+<ul>
+<li><strong>VK Codes:</strong> <code>0x01</code> LMB · <code>0x02</code> RMB · <code>0x04</code> MMB · <code>0x05</code> X1 · <code>0x06</code> X2 · <code>0x41</code>–<code>0x5A</code> (A–Z)</li>
+<li><strong>Enum.KeyCode:</strong> <code>Enum.KeyCode.MouseButton1</code> · <code>Enum.KeyCode.MouseButton2</code> · <code>Enum.KeyCode.MouseButton3</code> · <code>Enum.KeyCode.A</code>–<code>Enum.KeyCode.Z</code></li>
+</ul>
+<hr>
+<h3 id="sliderint" tabindex="-1">SliderInt <a class="header-anchor" href="#sliderint" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">sec:SliderInt(id: string, label: string, min: number, max: number [, default: number] [, callback: function]) -&gt; Widget</code></pre>
+<pre><code class="language-lua">sec:SliderInt("fov", "FOV Size", 10, 800, 180, function(val)
+    print("FOV:", val)
+end)</code></pre>
+<hr>
+<h3 id="sliderfloat" tabindex="-1">SliderFloat <a class="header-anchor" href="#sliderfloat" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">sec:SliderFloat(id: string, label: string, min: number, max: number [, default: number] [, format: string] [, callback: function]) -&gt; Widget</code></pre>
+<pre><code class="language-lua">sec:SliderFloat("smooth", "Smoothing", 0.1, 20.0, 6.0, "%.1f", function(val)
+    print("Smooth:", val)
+end)</code></pre>
+<hr>
+<h3 id="combo-dropdown" tabindex="-1">Combo (Dropdown) <a class="header-anchor" href="#combo-dropdown" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">sec:Combo(id: string, label: string, items: table [, default: number] [, callback: function]) -&gt; ComboWidget</code></pre>
+<pre><code class="language-lua">local c = sec:Combo("hitbox", "Target", {"Head", "Torso", "Nearest"}, 0, function(idx, text)
+    print("Target:", text)
+end)</code></pre>
+<h4>ComboWidget Methods</h4>
+<table><thead><tr><th>Method</th><th>Description</th></tr></thead><tbody><tr><td><code>c:Add(item: string)</code></td><td>Appends a new item option</td></tr><tr><td><code>c:Remove(item: string)</code></td><td>Removes an item option</td></tr><tr><td><code>c:Clear()</code></td><td>Removes all item options</td></tr><tr><td><code>c:GetItems()</code></td><td>Returns table of all item strings</td></tr><tr><td><code>c:GetText()</code></td><td>Returns string of currently selected option</td></tr><tr><td><code>c:SetValue(index: number)</code></td><td>Selects item at 0-based index</td></tr></tbody></table>
+<hr>
+<h3 id="button" tabindex="-1">Button <a class="header-anchor" href="#button" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">sec:Button(label: string [, callback: function])
+sec:Button(label: string, width: number, height: number [, callback: function])</code></pre>
+<pre><code class="language-lua">sec:Button("Reset All", function()
+    UI.SetValue("aim_on", false)
+    UI.SetValue("fov", 180)
+end)</code></pre>
+<hr>
+<h3 id="colorpicker" tabindex="-1">ColorPicker <a class="header-anchor" href="#colorpicker" aria-hidden="true">#</a></h3>
+<p>Must be placed directly after a <code>Toggle</code> widget. Callback receives <code>(Color3, alpha)</code>.</p>
+<pre><code class="language-lua">sec:ColorPicker(id: string [, r: number, g: number, b: number, a: number] [, callback: function]) -&gt; Widget</code></pre>
+<pre><code class="language-lua">sec:Toggle("box_on", "Box ESP")
+sec:ColorPicker("box_col", 1, 0, 0, 1, function(color, alpha)
+    print("Color RGB:", color.R, color.G, color.B, "Alpha:", alpha)
+end)</code></pre>
+<hr>
+<h3 id="colorpicker2-dual-color-picker" tabindex="-1">ColorPicker2 (Dual Color Picker) <a class="header-anchor" href="#colorpicker2-dual-color-picker" aria-hidden="true">#</a></h3>
+<p>Must be placed directly after a <code>Toggle</code> widget. Callback receives <code>(Color3_1, alpha1, Color3_2, alpha2)</code>.</p>
+<pre><code class="language-lua">sec:ColorPicker2(id1: string, {r, g, b, a}, id2: string, {r, g, b, a} [, callback: function])</code></pre>
+<pre><code class="language-lua">sec:Toggle("vis_check", "Visible Check")
+sec:ColorPicker2("vis_col", {0, 1, 0, 1}, "invis_col", {1, 0, 0, 1}, function(c1, a1, c2, a2)
+    print("Visible R:", c1.R, "Invisible R:", c2.R)
+end)</code></pre>
+<hr>
+<h3 id="inputtext" tabindex="-1">InputText <a class="header-anchor" href="#inputtext" aria-hidden="true">#</a></h3>
+<p>Callback triggers when the input field loses focus (Enter, Escape, or clicking away).</p>
+<pre><code class="language-lua">sec:InputText(id: string, label: string [, default: string] [, callback: function]) -&gt; Widget</code></pre>
+<pre><code class="language-lua">sec:InputText("webhook", "Webhook URL", "", function(text)
+    print("Saved Webhook:", text)
+end)</code></pre>
+<hr>
+<h3 id="text-tip-spacing" tabindex="-1">Text · Tip · Spacing <a class="header-anchor" href="#text-tip-spacing" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">sec:Text("Label text")
+sec:Tip("Tooltip shown on the right side of previous widget")
+sec:Spacing()</code></pre>
+<hr>
+<h2 id="widget-summary-callbacks" tabindex="-1">Widget Summary & Callbacks <a class="header-anchor" href="#widget-summary-callbacks" aria-hidden="true">#</a></h2>
+<table><thead><tr><th>Widget</th><th>Value Type</th><th>Callback Arguments</th><th>When Triggered</th></tr></thead><tbody><tr><td><strong>Toggle</strong></td><td><code>boolean</code></td><td><code>state</code></td><td>Toggled</td></tr><tr><td><strong>SliderInt</strong></td><td><code>integer</code></td><td><code>value</code></td><td>Dragging slider</td></tr><tr><td><strong>SliderFloat</strong></td><td><code>float</code></td><td><code>value</code></td><td>Dragging slider</td></tr><tr><td><strong>Combo</strong></td><td><code>integer</code> (0-based)</td><td><code>index, text</code></td><td>Option selected</td></tr><tr><td><strong>Button</strong></td><td>N/A</td><td>None</td><td>Clicked</td></tr><tr><td><strong>ColorPicker</strong></td><td><code>Color3, alpha</code></td><td><code>Color3, alpha</code></td><td>Color changed</td></tr><tr><td><strong>ColorPicker2</strong></td><td><code>Color3, a, Color3, a</code></td><td><code>c1, a1, c2, a2</code></td><td>Either color changed</td></tr><tr><td><strong>InputText</strong></td><td><code>string</code></td><td><code>text</code></td><td>Field loses focus</td></tr><tr><td><strong>Keybind</strong></td><td><code>boolean</code></td><td>N/A</td><td>Key state change</td></tr></tbody></table>
+<hr>
+<h2 id="complete-examples" tabindex="-1">Complete Examples <a class="header-anchor" href="#complete-examples" aria-hidden="true">#</a></h2>
+<h3 id="1-full-aimbot-esp-menu" tabindex="-1">1. Full Aimbot + ESP Menu <a class="header-anchor" href="#1-full-aimbot-esp-menu" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">UI.AddTab("Script", function(tab)
+    local aim = tab:Section("Aimbot", "Left", {"Targeting", "Silent"})
+
+    if aim.page == 0 then
+        aim:Toggle("aim_on", "Enabled")
+        local kb = aim:Keybind("aim_kb", 0x02, "hold")
+        kb:AddToHotkey("Aimbot", "aim_on")
+
+        aim:Toggle("aim_tc", "Team Check", true)
+        aim:Tip("Ignores teammates")
+        aim:Combo("aim_bone", "Hitbox", {"Head", "Torso", "Nearest"}, 0)
+        aim:SliderInt("aim_fov", "FOV", 10, 800, 180)
+        aim:SliderFloat("aim_smooth", "Smoothing", 0.0, 20.0, 6.0, "%.1f")
+
+    elseif aim.page == 1 then
+        aim:Toggle("aim_silent", "Silent Aim")
+        local skb = aim:Keybind("aim_skb", 0x04, "hold")
+        skb:AddToHotkey("Silent Aim", "aim_silent")
+        aim:SliderInt("aim_hc", "Hitchance", 1, 100, 85)
+    end
+
+    local gun = tab:Section("Weapon", "Left")
+    gun:Toggle("gun_norecoil", "No Recoil")
+    gun:Toggle("gun_nospread", "No Spread")
+    gun:Toggle("gun_infammo", "Infinite Ammo")
+
+    local esp = tab:Section("ESP", "Right")
+    esp:Toggle("esp_on", "Enabled")
+    local ekb = esp:Keybind("esp_kb")
+    ekb:AddToHotkey("ESP", "esp_on")
+
+    esp:Toggle("esp_box", "Box")
+    esp:ColorPicker("esp_boxcol", 1, 0, 0, 1)
+    esp:Toggle("esp_vis", "Visible Check")
+    esp:ColorPicker2("vis_col", {0,1,0,1}, "invis_col", {1,0,0,1})
+    esp:Toggle("esp_name", "Name")
+    esp:Toggle("esp_hp", "Health Bar")
+    esp:SliderInt("esp_dist", "Distance", 100, 20000, 8000)
+
+    local misc = tab:Section("Misc", "Right")
+    misc:InputText("webhook", "Webhook", "", function(text)
+        print("Webhook: " .. text)
+    end)
+    misc:Button("Reset", function()
+        UI.SetValue("aim_on", false)
+        UI.SetValue("aim_smooth", 6.0)
+        UI.SetValue("esp_on", false)
+        UI.SetValue("esp_dist", 8000)
+    end)
+end)</code></pre>
+<h3 id="2-widget-object-manipulation" tabindex="-1">2. Widget Object Manipulation <a class="header-anchor" href="#2-widget-object-manipulation" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">UI.AddTab("Demo", function(tab)
+    local sec = tab:Section("Objects", "Left")
+
+    local t = sec:Toggle("demo_t", "Toggle")
+    local k = sec:Keybind("demo_k", 0x46, "toggle")
+    local s = sec:SliderInt("demo_s", "Slider", 0, 100, 50)
+    local c = sec:Combo("demo_c", "Combo", {"A", "B", "C"})
+    local i = sec:InputText("demo_i", "Input", "hello")
+
+    local actions = tab:Section("Actions", "Right")
+
+    actions:Button("Read All", function()
+        print("toggle: " .. tostring(t.value))
+        print("slider: " .. s:GetValue())
+        print("combo: " .. c:GetText() .. " [" .. c.value .. "]")
+        print("input: " .. i.value)
+        print("key: " .. k:GetKeyName() .. " [" .. k:GetType() .. "]")
+        print("active: " .. tostring(k:IsEnabled()))
+    end)
+
+    actions:Button("Write All", function()
+        t:SetValue(true)
+        s:SetValue(75)
+        c:SetValue(2)
+        i:SetValue("world")
+        k:SetKey(0x47)
+        k:SetType("hold")
+    end)
+
+    actions:Button("Combo Items", function()
+        c:Add("D")
+        c:Remove("A")
+        local items = c:GetItems()
+        for idx, name in ipairs(items) do
+            print(idx .. ": " .. name)
+        end
+    end)
+end)</code></pre>
+      </article>
+      
+      <nav class="pager">
+<a class="pager-link prev" href="../drawing/">
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: rotate(180deg)"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+<span><em>Previous</em>Drawing</span>
+</a>
+<a class="pager-link next" href="../gc-guide/">
+<span><em>Next</em>GC modding guide</span>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+</a>
+</nav>
+    </main>
+    
+    <aside class="toc">
+      <div class="toc-title">On this page</div>
+      <ul class="toc-list">
+<li class="toc-l2"><a href="#overview">Overview</a></li>
+<li class="toc-l2"><a href="#global-functions">Global Functions</a></li>
+<li class="toc-l3"><a href="#uiaddtab">UI.AddTab</a></li>
+<li class="toc-l3"><a href="#uiremovetab">UI.RemoveTab</a></li>
+<li class="toc-l3"><a href="#uigetvalue">UI.GetValue</a></li>
+<li class="toc-l3"><a href="#uisetvalue">UI.SetValue</a></li>
+<li class="toc-l2"><a href="#sections">Sections</a></li>
+<li class="toc-l3"><a href="#tabbed-scrollable-sections">Tabbed & Scrollable Sections</a></li>
+<li class="toc-l2"><a href="#widgets">Widgets</a></li>
+<li class="toc-l3"><a href="#toggle">Toggle</a></li>
+<li class="toc-l3"><a href="#keybind">Keybind</a></li>
+<li class="toc-l3"><a href="#sliderint">SliderInt</a></li>
+<li class="toc-l3"><a href="#sliderfloat">SliderFloat</a></li>
+<li class="toc-l3"><a href="#combo-dropdown">Combo (Dropdown)</a></li>
+<li class="toc-l3"><a href="#button">Button</a></li>
+<li class="toc-l3"><a href="#colorpicker">ColorPicker</a></li>
+<li class="toc-l3"><a href="#colorpicker2-dual-color-picker">ColorPicker2 (Dual Color Picker)</a></li>
+<li class="toc-l3"><a href="#inputtext">InputText</a></li>
+<li class="toc-l3"><a href="#text-tip-spacing">Text · Tip · Spacing</a></li>
+<li class="toc-l2"><a href="#widget-summary-callbacks">Widget Summary & Callbacks</a></li>
+<li class="toc-l2"><a href="#complete-examples">Complete Examples</a></li>
+<li class="toc-l3"><a href="#1-full-aimbot-esp-menu">1. Full Aimbot + ESP Menu</a></li>
+<li class="toc-l3"><a href="#2-widget-object-manipulation">2. Widget Object Manipulation</a></li>
+</ul>
+    </aside>
+  </div>
+  
+  <!-- Search Overlay -->
+  <div class="search-overlay" data-search-overlay hidden>
+    <div class="search-panel">
+      <div class="search-head">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"/>
+          <path d="m21 21-4.3-4.3"/>
+        </svg>
+        <input type="search" placeholder="Search Matcha docs" data-search-input autocomplete="off" spellcheck="false">
+        <kbd>Esc</kbd>
+      </div>
+      <div class="search-results" data-search-results></div>
+    </div>
+  </div>
+  
+  <!-- Connect Overlay -->
+  <div class="connect-overlay" data-connect-overlay hidden>
+    <div class="connect-panel">
+      <div class="connect-head">
+        <div>
+          <h2 class="connect-title">Connect Matcha docs to your AI</h2>
+          <p class="connect-sub">Give any MCP-capable agent live search &amp; read access to these docs.</p>
+        </div>
+        <button class="iconbtn connect-close" type="button" data-connect-close aria-label="Close">✕</button>
+      </div>
+      <div class="connect-url-label">MCP server URL</div>
+      <div class="connect-url">
+        <code>https://huoadf.github.io/matcha-docs/mcp</code>
+        <button class="copy-btn" type="button">Copy</button>
+      </div>
+      <div class="tabs connect-tabs" data-tabs>
+        <div class="tab-panel" data-tab="Claude Code">
+          <p class="connect-note">Run in your terminal:</p>
+          <div class="connect-snippet">
+            <pre><code>claude mcp add --transport http matcha-docs https://huoadf.github.io/matcha-docs/mcp</code></pre>
+            <button class="copy-btn" type="button">Copy</button>
+          </div>
+        </div>
+        <div class="tab-panel" data-tab="Cursor">
+          <p class="connect-note">Add to <code>.cursor/mcp.json</code>:</p>
+          <div class="connect-snippet">
+            <pre><code>{
+  &quot;mcpServers&quot;: {
+    &quot;matcha-docs&quot;: {
+      &quot;url&quot;: &quot;https://huoadf.github.io/matcha-docs/mcp&quot;
+    }
+  }
+}</code></pre>
+            <button class="copy-btn" type="button">Copy</button>
+          </div>
+        </div>
+        <div class="tab-panel" data-tab="VS Code">
+          <p class="connect-note">Add to <code>.vscode/mcp.json</code>:</p>
+          <div class="connect-snippet">
+            <pre><code>{
+  &quot;servers&quot;: {
+    &quot;matcha-docs&quot;: {
+      &quot;type&quot;: &quot;http&quot;,
+      &quot;url&quot;: &quot;https://huoadf.github.io/matcha-docs/mcp&quot;
+    }
+  }
+}</code></pre>
+            <button class="copy-btn" type="button">Copy</button>
+          </div>
+        </div>
+      </div>
+      <p class="connect-foot">No setup? Point any agent at <code>llms.txt</code> or <code>llms-full.txt</code>.</p>
+    </div>
+  </div>
+  
+  <!-- Scripts -->
+  <script src="../assets/highlight.min.js"></script>
+  <script src="../assets/client.js" defer></script>
+  <script src="../assets/favicon-anim.js" defer></script>
+</body>
+</html>

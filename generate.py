@@ -16,6 +16,7 @@ PAGES = [
     {"id": "classes", "title": "Classes", "group": "Reference", "src": "classes.md", "url": "classes/index.html", "breadcrumb": "Classes"},
     {"id": "datatypes", "title": "Datatypes", "group": "Reference", "src": "datatypes.md", "url": "datatypes/index.html", "breadcrumb": "Datatypes"},
     {"id": "drawing", "title": "Drawing", "group": "Reference", "src": "drawing.md", "url": "drawing/index.html", "breadcrumb": "Drawing"},
+    {"id": "ui-binding", "title": "UI Binding", "group": "Reference", "src": "ui-binding.md", "url": "ui-binding/index.html", "breadcrumb": "UI Binding"},
     {"id": "gc-guide", "title": "GC modding guide", "group": "Reference", "src": "gc-guide.md", "url": "gc-guide/index.html", "breadcrumb": "GC modding guide"},
     {"id": "examples", "title": "Code examples", "group": "Reference", "src": "examples.md", "url": "examples/index.html", "breadcrumb": "Code examples"},
     {"id": "limitations", "title": "VM limitations", "group": "Reference", "src": "limitations.md", "url": "limitations/index.html", "breadcrumb": "VM limitations"},
