@@ -1,54 +1,77 @@
 # Matcha Documentation
 
-This repository contains the complete, updated documentation for the Matcha LuaVM.
+[![Docs Live](https://img.shields.io/badge/docs-live-8cc63f?style=flat-square)](https://huoadf.github.io/matcha-docs/)
+[![Matcha Version](https://img.shields.io/badge/roblox_version-ce0bcd0fbd484804-blue?style=flat-square)](https://huoadf.github.io/matcha-docs/changelogs/)
+[![AI Ready](https://img.shields.io/badge/AI_Ready-llms.txt-purple?style=flat-square)](https://huoadf.github.io/matcha-docs/llms.txt)
 
-It has been rebuilt as a lightweight, clean, self-contained static site optimized for hosting on **GitHub Pages** (or any other static host) and viewing locally.
+Official, comprehensive documentation for the **Matcha LuaVM** — an external, undetected LuaVM emulator for Roblox.
 
-## Features
-
-- **Portability**: All assets and links use relative paths, meaning the site works perfectly locally (just double-click `index.html`), on a custom domain, or inside a subdirectory on GitHub Pages (e.g. `https://username.github.io/matcha/`).
-- **Markdown-Driven**: The page contents are stored in clean Markdown files inside the `src/` directory.
-- **Search (⌘K)**: A fast client-side fuzzy search over all page content and headers.
-- **Syntax Highlighting**: Beautiful code syntax highlighting for Lua, JSON, CSS, and HTML via Highlight.js.
-- **Dark/Light Mode**: Smooth theme toggling that persists across page loads.
-- **Fully Updated**: Integrated the latest updates from the Jul 17 2026 and Jun 10 2026 changelogs, including:
-  - `Workspace:Raycast`
-  - `DataModel:isLoaded`
-  - `Camera.CFrame`
-  - `Player.UserId`
-  - Native datatypes: `Ray`, `UDim`, `UDim2`
-  - Global functions: `getrbxversion`, `gethwid`
-  - Drawing fonts: `Drawing.Fonts.ProximaSoftBold`
-  - Garbage collector: Speed optimizations and table scans.
+📖 **Live Documentation:** [https://huoadf.github.io/matcha-docs/](https://huoadf.github.io/matcha-docs/)
 
 ---
 
-## Publishing to GitHub Pages
+## 🤖 AI & MCP Integration (Pro)
 
-To host this documentation on GitHub Pages for free:
+Matcha provides direct support for AI coding assistants (Antigravity, Codex, Cursor, Claude Code) via native Model Context Protocol (MCP) and structured LLM indices.
 
-1. Create a new repository on GitHub (e.g. named `matcha`).
-2. Push this folder to your repository:
-   ```bash
-   git remote add origin https://github.com/YOUR_USERNAME/matcha.git
-   git branch -M main
-   git push -u origin main
-   ```
-3. On GitHub, go to your repository settings:
-   - Click **Settings** (gear icon) -> **Pages** (on the left menu).
-   - Under **Build and deployment**, set **Source** to **Deploy from a branch**.
-   - Under **Branch**, select **main** and `/ (root)`, then click **Save**.
-4. Your site will be live at `https://YOUR_USERNAME.github.io/matcha/` in a few moments!
+### Connect AI to Matcha Docs
+* **Quick Read Index:** [`https://huoadf.github.io/matcha-docs/llms.txt`](https://huoadf.github.io/matcha-docs/llms.txt)
+* **Full API Context:** [`https://huoadf.github.io/matcha-docs/llms-full.txt`](https://huoadf.github.io/matcha-docs/llms-full.txt)
+
+### Connect AI to Live Matcha Game Bridge (Port 8765)
+When Matcha is running in-game, it exposes an MCP server at `http://127.0.0.1:8765/mcp`.
+
+#### Google Antigravity
+Add this to `C:\Users\<USERNAME>\.gemini\antigravity\mcp_config.json`:
+```json
+{
+  "mcpServers": {
+    "matcha": {
+      "serverUrl": "http://127.0.0.1:8765/mcp"
+    }
+  }
+}
+```
+
+#### Codex
+```bash
+codex mcp add matcha --url http://127.0.0.1:8765/mcp
+```
 
 ---
 
-## Modifying the Documentation
+## 📁 Repository Structure
 
-If you want to edit or add content:
+```
+├── src/                 # Markdown documentation source files
+│   ├── getting-started.md
+│   ├── functions-globals.md
+│   ├── ui-binding.md
+│   ├── drawing.md
+│   ├── memory.md
+│   ├── changelogs.md
+│   └── ...
+├── assets/              # Animated logo GIF, CSS, JS, and Search Index
+├── template.html        # HTML layout template
+├── generate.py          # Python static site & search index compiler
+├── llms.txt             # Concise entry-point index for AI models
+└── llms-full.txt        # Complete concatenated docs text for AI models
+```
 
-1. Edit the Markdown files inside the `src/` directory.
-2. Run the generator script using Python:
+---
+
+## 🛠️ Building & Updating the Site
+
+To compile edits made to any `.md` file in `src/`:
+
+1. Run the build generator:
    ```bash
    python generate.py
    ```
-3. The script will automatically parse the Markdown files, update the navigation, rebuild the `search-index.json` database for the search bar, and regenerate the HTML files.
+2. Commit and push changes:
+   ```bash
+   git add .
+   git commit -m "Docs: Update documentation"
+   git push origin main
+   ```
+The static generator automatically compiles the HTML pages, builds `search-index.json` for client-side search, and regenerates both `llms.txt` and `llms-full.txt`.
