@@ -5,17 +5,10 @@ Matcha **is not an executor** — it does not hook any functions in the Roblox e
 {% endhint %}
 
 {% hint style="success" %}
-**Changelogs (Aug 6 2026)**
+**Changelogs (Aug 22 2026)**
 - Fixed Attributes
 - Fixed `GetAttribute` & `SetAttribute`
-- Fixed `.Text`
-- Fixed `AbsoluteSize` & `AbsolutePosition`
-- Fixed Decompiler
-- Updated to the latest version
-- Fixed Position Fly
-- Optimized some parts for low-end PCs
-- Comparing instances no longer needs `.Address`
-- **::pro:: Early Access:** Added Agent and MCP integration into Lua U *(still on testing)*
+- Fixed Rivals & Operation One Team Check
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)
 {% endhint %}

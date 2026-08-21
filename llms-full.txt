@@ -32,17 +32,10 @@ This is the documentation for the Matcha LuaVM.
 Matcha **is not an executor** — it does not hook any functions in the Roblox engine. Instead it emulates them externally, which makes it completely undetected, but also means it has no direct access to internal Roblox API functions.
 
 > **[success]**
-**Changelogs (Aug 6 2026)**
+**Changelogs (Aug 22 2026)**
 - Fixed Attributes
 - Fixed `GetAttribute` & `SetAttribute`
-- Fixed `.Text`
-- Fixed `AbsoluteSize` & `AbsolutePosition`
-- Fixed Decompiler
-- Updated to the latest version
-- Fixed Position Fly
-- Optimized some parts for low-end PCs
-- Comparing instances no longer needs `.Address`
-- **[Pro] Early Access:** Added Agent and MCP integration into Lua U *(still on testing)*
+- Fixed Rivals & Operation One Team Check
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)
 
@@ -1060,10 +1053,10 @@ function DataModel:HttpPost(url: string, data: string, contentType: string?, hea
 function DataModel:GetService(name: string): Instance
 ```
 
-### isLoaded
+### IsLoaded
 
 ```lua
-function DataModel:isLoaded(): boolean
+function DataModel:IsLoaded(): boolean
 ```
 
 Returns `true` if the game is fully loaded, else `false`.
@@ -3260,6 +3253,15 @@ Group: Reference
 # Changelogs
 
 Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
+
+---
+
+## Aug 22 2026
+
+- Fixed Attributes
+- Fixed `GetAttribute` & `SetAttribute`
+- Fixed Rivals & Operation One Team Check
+- *Run loader to update*
 
 ---
 

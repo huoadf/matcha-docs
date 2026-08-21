@@ -4,6 +4,15 @@ Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
 
 ---
 
+## Aug 22 2026
+
+- Fixed Attributes
+- Fixed `GetAttribute` & `SetAttribute`
+- Fixed Rivals & Operation One Team Check
+- *Run loader to update*
+
+---
+
 ## [08/18/26 17:03:01] — notvault
 
 ::buyer:: ::pro:: 

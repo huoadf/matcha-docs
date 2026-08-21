@@ -130,10 +130,10 @@ function DataModel:HttpPost(url: string, data: string, contentType: string?, hea
 function DataModel:GetService(name: string): Instance
 ```
 
-### isLoaded
+### IsLoaded
 
 ```lua
-function DataModel:isLoaded(): boolean
+function DataModel:IsLoaded(): boolean
 ```
 
 Returns `true` if the game is fully loaded, else `false`.
