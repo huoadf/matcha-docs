@@ -5,9 +5,9 @@ Matcha **is not an executor** — it does not hook any functions in the Roblox e
 {% endhint %}
 
 {% hint style="success" %}
-**Changelogs (Aug 22 2026)**
-- Fixed Attributes
-- Fixed `GetAttribute` & `SetAttribute`
+**Changelogs (Aug 26 2026)**
+- Updated to the latest version (`version-17d504d2c9544583`)
+- Fixed Attributes (`GetAttribute` & `SetAttribute`)
 - Fixed Rivals & Operation One Team Check
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)

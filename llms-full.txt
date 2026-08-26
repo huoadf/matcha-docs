@@ -15,7 +15,7 @@
 >   `"matcha": { "serverUrl": "http://127.0.0.1:8765/mcp" }` inside `"mcpServers"`.
 > To add to Codex: run `codex mcp add matcha --url http://127.0.0.1:8765/mcp`
 
-> **Latest version:** d584fb6c717a43d9 (Aug 6 2026)
+> **Latest version:** version-17d504d2c9544583 (Aug 26 2026)
 > **Website:** https://matcha-latte.win
 
 
@@ -32,9 +32,9 @@ This is the documentation for the Matcha LuaVM.
 Matcha **is not an executor** — it does not hook any functions in the Roblox engine. Instead it emulates them externally, which makes it completely undetected, but also means it has no direct access to internal Roblox API functions.
 
 > **[success]**
-**Changelogs (Aug 22 2026)**
-- Fixed Attributes
-- Fixed `GetAttribute` & `SetAttribute`
+**Changelogs (Aug 26 2026)**
+- Updated to the latest version (`version-17d504d2c9544583`)
+- Fixed Attributes (`GetAttribute` & `SetAttribute`)
 - Fixed Rivals & Operation One Team Check
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)
@@ -3253,6 +3253,15 @@ Group: Reference
 # Changelogs
 
 Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
+
+---
+
+## [08/26/26 17:05:00] — vault [puhh]
+
+[Buyer] [Pro] 
+#### Version: [version-17d504d2c9544583](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-17d504d2c9544583)
+#### Changelogs
+- Updated to the latest version
 
 ---
 
