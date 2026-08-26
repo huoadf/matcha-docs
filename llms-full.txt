@@ -1487,7 +1487,7 @@ Fires every frame, prior to the physics simulation step. Passes the time elapsed
 > **[warning]**
 In the Matcha VM, the `Stepped` event only receives one argument (`deltaTime: number`), unlike the standard Roblox API which receives both `time` and `deltaTime`.
 
-## RemoteEvent
+## RemoteEvent [Pro]
 
 **Methods**
 
@@ -1499,7 +1499,7 @@ RemoteEvent:FireServer(...any)
 
 Fires the `RemoteEvent` to the server with the given arguments. *(Added in Hybrid mode - Jul 20 2026).*
 
-## RemoteFunction
+## RemoteFunction [Pro]
 
 **Methods**
 
@@ -3325,8 +3325,7 @@ Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
 - Fixed Position Fly
 - Optimized some part for low end pc
 - Comparing instance no longer needs .Address
-#### Pro (Early Access) [Pro]
-- Added Agent and MCP integration into Lua U ( still on testing )
+#### Pro (Early Access) [Pro] - Added Agent and MCP integration into Lua U ( still on testing )
 #### Run loader to update
 
 ---
@@ -3387,8 +3386,7 @@ Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
 ## [07/20/26 07:18:54] — vault
 
 #### Changelogs (Jul 20 2026)
-#### Hybrid [Pro]
-- Added Remote Spy
+#### Hybrid [Pro] - Added Remote Spy
 ### Lua VM
 - Added FireServer & InvokeFunction (Hybrid)
 ### Reopen loader to update
@@ -3901,8 +3899,7 @@ Maybe later on updater will be used for feature update or needed update
 
 ## [04/02/26 13:27:37] — vault
 
-### For Pro Version
-#### Changelogs (release3)
+### For Pro Version [Pro] #### Changelogs (release3)
 - Added Unsafe Lua Prompt
 
 ---
@@ -4181,8 +4178,7 @@ Maybe later on updater will be used for feature update or needed update
 - Added Notification Sound toggle
 - Fixed Global config overlapping
 
-+ Exclusive
-- Experimental silent aim now supports third person and accuracy
++ Exclusive [Pro] - Experimental silent aim now supports third person and accuracy
 
 - Updated to the latest version
 
@@ -4280,8 +4276,7 @@ Maybe later on updater will be used for feature update or needed update
 
 - Fixed ERROR_AUTH
 
-+ Exclusive
-- Added back Experimental Silent Aim Method
++ Exclusive [Pro] - Added back Experimental Silent Aim Method
 
 ### Run updater.exe to update application
 
@@ -4650,8 +4645,7 @@ Run updater again
 
 - Fixed Slippery Speed
 
-+ Exclusive
-- Added Timer Keybind for Exclusive
++ Exclusive [Pro] - Added Timer Keybind for Exclusive
 
 ### Run updater.exe to update application
 
@@ -4667,8 +4661,7 @@ Run updater again
 - Added Lighting RealTime Update
 - Added Brightness
 
-+ Exclusive
-- Added another desync method to exclusive version
++ Exclusive [Pro] - Added another desync method to exclusive version
 
 - Updated to the latest version
 
@@ -4764,8 +4757,7 @@ Run updater again
 - Open Matcha now will wait for Roblox until game launches.
 - Improved Teleport Handler.
 
-+ Exclusive
-- Added timer manipulation (speed game up)
++ Exclusive [Pro] - Added timer manipulation (speed game up)
   + Tested
     - Interaction Speed Up
     - Vehicle Speed Up
@@ -4785,8 +4777,7 @@ Run updater again
 - Fixed AbsoluteSize/AbsolutePosition
 - Fixed Team Color
 
-+ Exclusive
-- Fixed Desync for Steal a Brainrot (Video will be inside exclusive anc)
++ Exclusive [Pro] - Fixed Desync for Steal a Brainrot (Video will be inside exclusive anc)
 
 ### Run updater.exe to get latest update
 

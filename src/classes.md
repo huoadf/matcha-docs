@@ -616,7 +616,7 @@ In the Matcha VM, the `Stepped` event only receives one argument (`deltaTime: nu
 {% endhint %}
 
 
-## RemoteEvent
+## RemoteEvent ::pro::
 
 <https://create.roblox.com/docs/reference/engine/classes/RemoteEvent>
 
@@ -631,7 +631,7 @@ RemoteEvent:FireServer(...any)
 Fires the `RemoteEvent` to the server with the given arguments. *(Added in Hybrid mode - Jul 20 2026).*
 
 
-## RemoteFunction
+## RemoteFunction ::pro::
 
 <https://create.roblox.com/docs/reference/engine/classes/RemoteFunction>
 

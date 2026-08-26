@@ -73,8 +73,7 @@ Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
 - Fixed Position Fly
 - Optimized some part for low end pc
 - Comparing instance no longer needs .Address
-#### Pro (Early Access) ::pro::
-- Added Agent and MCP integration into Lua U ( still on testing )
+#### Pro (Early Access) ::pro:: - Added Agent and MCP integration into Lua U ( still on testing )
 #### Run loader to update
 
 ---
@@ -135,8 +134,7 @@ Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
 ## [07/20/26 07:18:54] — vault
 
 #### Changelogs (Jul 20 2026)
-#### Hybrid ::pro::
-- Added Remote Spy
+#### Hybrid ::pro:: - Added Remote Spy
 ### Lua VM
 - Added FireServer & InvokeFunction (Hybrid)
 ### Reopen loader to update
@@ -649,8 +647,7 @@ Maybe later on updater will be used for feature update or needed update
 
 ## [04/02/26 13:27:37] — vault
 
-### For Pro Version
-#### Changelogs (release3)
+### For Pro Version ::pro:: #### Changelogs (release3)
 - Added Unsafe Lua Prompt
 
 ---
@@ -929,8 +926,7 @@ Maybe later on updater will be used for feature update or needed update
 - Added Notification Sound toggle
 - Fixed Global config overlapping
 
-+ Exclusive
-- Experimental silent aim now supports third person and accuracy
++ Exclusive ::pro:: - Experimental silent aim now supports third person and accuracy
 
 - Updated to the latest version
 
@@ -1028,8 +1024,7 @@ Maybe later on updater will be used for feature update or needed update
 
 - Fixed ERROR_AUTH
 
-+ Exclusive
-- Added back Experimental Silent Aim Method
++ Exclusive ::pro:: - Added back Experimental Silent Aim Method
 
 ### Run updater.exe to update application
 
@@ -1398,8 +1393,7 @@ Run updater again
 
 - Fixed Slippery Speed
 
-+ Exclusive
-- Added Timer Keybind for Exclusive
++ Exclusive ::pro:: - Added Timer Keybind for Exclusive
 
 ### Run updater.exe to update application
 
@@ -1415,8 +1409,7 @@ Run updater again
 - Added Lighting RealTime Update
 - Added Brightness
 
-+ Exclusive
-- Added another desync method to exclusive version
++ Exclusive ::pro:: - Added another desync method to exclusive version
 
 - Updated to the latest version
 
@@ -1512,8 +1505,7 @@ Run updater again
 - Open Matcha now will wait for Roblox until game launches.
 - Improved Teleport Handler.
 
-+ Exclusive
-- Added timer manipulation (speed game up)
++ Exclusive ::pro:: - Added timer manipulation (speed game up)
   + Tested
     - Interaction Speed Up
     - Vehicle Speed Up
@@ -1533,8 +1525,7 @@ Run updater again
 - Fixed AbsoluteSize/AbsolutePosition
 - Fixed Team Color
 
-+ Exclusive
-- Fixed Desync for Steal a Brainrot (Video will be inside exclusive anc)
++ Exclusive ::pro:: - Fixed Desync for Steal a Brainrot (Video will be inside exclusive anc)
 
 ### Run updater.exe to get latest update
 
