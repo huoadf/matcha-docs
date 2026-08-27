@@ -452,7 +452,7 @@ llms_full_content = ["""# Matcha — LuaVM Documentation
 >   `"matcha": { "serverUrl": "http://127.0.0.1:8765/mcp" }` inside `"mcpServers"`.
 > To add to Codex: run `codex mcp add matcha --url http://127.0.0.1:8765/mcp`
 
-> **Latest version:** version-17d504d2c9544583 (Aug 26 2026)
+> **Latest version:** version-f5a60436d48947d3 (Aug 27 2026)
 > **Website:** https://matcha-latte.win
 
 """]
