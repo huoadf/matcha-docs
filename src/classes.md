@@ -637,14 +637,11 @@ Fires the `RemoteEvent` to the server with the given arguments. *(Added in Hybri
 
 **Methods**
 
-### InvokeFunction
+### InvokeServer / InvokeFunction
 
 ```lua
+RemoteFunction:InvokeServer(...any): ...any
 RemoteFunction:InvokeFunction(...any): ...any
 ```
 
-Invokes the `RemoteFunction` on the server and yields until it returns a result. *(Added in Hybrid mode - Jul 20 2026).*
-
-{% hint style="warning" %}
-Unlike the standard Roblox `InvokeServer`, Matcha uses `InvokeFunction` to call `RemoteFunction`s externally.
-{% endhint %}
+Invokes the `RemoteFunction` on the server and yields until it returns a result. *(Added in Hybrid mode - Jul 20 2026, `InvokeServer` fully supported as of Sep 11 2026).*

@@ -4,6 +4,34 @@ Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
 
 ---
 
+## [09/11/26 19:10:00] — vault
+
+#### Changelogs ::pro::
+- Fixed Bloxstrike Support
+- Added "Compact" design
+- Added tab icons into classic ui
+- Redesigned Watermark (Glass/Normal), Player List, Keybind List (Glass), Radar
+- Fixed `InvokeServer`
+- Fixed Unsafe Lua Prompt & Hybrid Prompt
+
+---
+
+## [09/09/26 23:33:00] — vault
+
+#### Version: [version-c5aecda2245e4fae](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-c5aecda2245e4fae)
+#### Changelogs
+- Updated to the latest version
+
+---
+
+## [09/02/26 23:40:00] — vault
+
+#### Version: [version-e7d81637d42c4b23](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-e7d81637d42c4b23)
+#### Changelogs
+- Updated to the latest version
+
+---
+
 ## [08/27/26 22:11:00] — vault
 
 #### Version: [version-f5a60436d48947d3](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-f5a60436d48947d3)

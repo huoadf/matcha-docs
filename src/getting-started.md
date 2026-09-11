@@ -5,10 +5,12 @@ Matcha **is not an executor** — it does not hook any functions in the Roblox e
 {% endhint %}
 
 {% hint style="success" %}
-**Changelogs (Aug 27 2026)**
-- Updated to the latest version (`version-f5a60436d48947d3`)
-- Fixed Attributes (`GetAttribute` & `SetAttribute`)
-- Fixed Rivals & Operation One Team Check
+**Changelogs (Sep 11 2026)**
+- Updated to latest version (`version-c5aecda2245e4fae`)
+- Fixed `InvokeServer` (Pro ::pro::)
+- Fixed Bloxstrike Support
+- Added "Compact" design & tab icons
+- Fixed Unsafe Lua Prompt & Hybrid Prompt
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)
 {% endhint %}

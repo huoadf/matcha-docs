@@ -15,7 +15,7 @@
 >   `"matcha": { "serverUrl": "http://127.0.0.1:8765/mcp" }` inside `"mcpServers"`.
 > To add to Codex: run `codex mcp add matcha --url http://127.0.0.1:8765/mcp`
 
-> **Latest version:** version-f5a60436d48947d3 (Aug 27 2026)
+> **Latest version:** version-c5aecda2245e4fae (Sep 11 2026)
 > **Website:** https://matcha-latte.win
 
 
@@ -32,10 +32,12 @@ This is the documentation for the Matcha LuaVM.
 Matcha **is not an executor** — it does not hook any functions in the Roblox engine. Instead it emulates them externally, which makes it completely undetected, but also means it has no direct access to internal Roblox API functions.
 
 > **[success]**
-**Changelogs (Aug 27 2026)**
-- Updated to the latest version (`version-f5a60436d48947d3`)
-- Fixed Attributes (`GetAttribute` & `SetAttribute`)
-- Fixed Rivals & Operation One Team Check
+**Changelogs (Sep 11 2026)**
+- Updated to latest version (`version-c5aecda2245e4fae`)
+- Fixed `InvokeServer` (Pro [Pro])
+- Fixed Bloxstrike Support
+- Added "Compact" design & tab icons
+- Fixed Unsafe Lua Prompt & Hybrid Prompt
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)
 
@@ -1503,16 +1505,14 @@ Fires the `RemoteEvent` to the server with the given arguments. *(Added in Hybri
 
 **Methods**
 
-### InvokeFunction
+### InvokeServer / InvokeFunction
 
 ```lua
+RemoteFunction:InvokeServer(...any): ...any
 RemoteFunction:InvokeFunction(...any): ...any
 ```
 
-Invokes the `RemoteFunction` on the server and yields until it returns a result. *(Added in Hybrid mode - Jul 20 2026).*
-
-> **[warning]**
-Unlike the standard Roblox `InvokeServer`, Matcha uses `InvokeFunction` to call `RemoteFunction`s externally.
+Invokes the `RemoteFunction` on the server and yields until it returns a result. *(Added in Hybrid mode - Jul 20 2026, `InvokeServer` fully supported as of Sep 11 2026).*
 
 ---
 
@@ -3175,9 +3175,8 @@ AI coding assistants and script authors should keep these rules in mind when wri
 - You no longer need to compare `.Address` manually.
 
 ### 7. Remote Event & RemoteFunction Handling (Pro [Pro])
-- Standard Roblox uses `RemoteFunction:InvokeServer(...)`.
-- Matcha uses `RemoteFunction:InvokeFunction(...)` for external RemoteFunction calls.
 - `RemoteEvent:FireServer(...)` is fully supported in Hybrid mode.
+- `RemoteFunction:InvokeServer(...)` and `RemoteFunction:InvokeFunction(...)` are both fully supported in Hybrid mode (Fixed Sep 11 2026).
 
 ---
 
@@ -3194,7 +3193,7 @@ AI coding assistants and script authors should keep these rules in mind when wri
 | `GetAttribute()` | ✅ Yes | Supported (Fixed Aug 6) |
 | `SetAttribute()` | ✅ Yes | Supported (Fixed Aug 6) |
 | `RemoteEvent:FireServer` | ✅ Yes | Supported [Pro] |
-| `RemoteFunction:InvokeFunction` | ✅ Yes | Use `InvokeFunction` [Pro] |
+| `RemoteFunction:InvokeServer` | ✅ Yes | Supported [Pro] (Fixed Sep 11) |
 
 ---
 
@@ -3253,6 +3252,34 @@ Group: Reference
 # Changelogs
 
 Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
+
+---
+
+## [09/11/26 19:10:00] — vault
+
+#### Changelogs [Pro]
+- Fixed Bloxstrike Support
+- Added "Compact" design
+- Added tab icons into classic ui
+- Redesigned Watermark (Glass/Normal), Player List, Keybind List (Glass), Radar
+- Fixed `InvokeServer`
+- Fixed Unsafe Lua Prompt & Hybrid Prompt
+
+---
+
+## [09/09/26 23:33:00] — vault
+
+#### Version: [version-c5aecda2245e4fae](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-c5aecda2245e4fae)
+#### Changelogs
+- Updated to the latest version
+
+---
+
+## [09/02/26 23:40:00] — vault
+
+#### Version: [version-e7d81637d42c4b23](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-e7d81637d42c4b23)
+#### Changelogs
+- Updated to the latest version
 
 ---
 

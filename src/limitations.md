@@ -34,9 +34,8 @@ AI coding assistants and script authors should keep these rules in mind when wri
 - You no longer need to compare `.Address` manually.
 
 ### 7. Remote Event & RemoteFunction Handling (Pro ::pro::)
-- Standard Roblox uses `RemoteFunction:InvokeServer(...)`.
-- Matcha uses `RemoteFunction:InvokeFunction(...)` for external RemoteFunction calls.
 - `RemoteEvent:FireServer(...)` is fully supported in Hybrid mode.
+- `RemoteFunction:InvokeServer(...)` and `RemoteFunction:InvokeFunction(...)` are both fully supported in Hybrid mode (Fixed Sep 11 2026).
 
 ---
 
@@ -53,4 +52,4 @@ AI coding assistants and script authors should keep these rules in mind when wri
 | `GetAttribute()` | ✅ Yes | Supported (Fixed Aug 6) |
 | `SetAttribute()` | ✅ Yes | Supported (Fixed Aug 6) |
 | `RemoteEvent:FireServer` | ✅ Yes | Supported ::pro:: |
-| `RemoteFunction:InvokeFunction` | ✅ Yes | Use `InvokeFunction` ::pro:: |
+| `RemoteFunction:InvokeServer` | ✅ Yes | Supported ::pro:: (Fixed Sep 11) |
