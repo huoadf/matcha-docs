@@ -4,6 +4,17 @@ Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
 
 ---
 
+## [09/13/26 23:03:00] — vault
+
+#### Upcoming Hybrid Features ::pro::
+- Incoming more Hybrid features into Pro soon:
+  - `fireclickdetector`
+  - `fireproximityprompt`
+  - `firetouchinterest`
+- *Upcoming update in max 3 days*
+
+---
+
 ## [09/11/26 19:10:00] — vault
 
 #### Changelogs ::pro::
