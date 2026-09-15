@@ -6,10 +6,8 @@ Matcha **is not an executor** — it does not hook any functions in the Roblox e
 
 {% hint style="success" %}
 **Changelogs (Sep 15 2026)**
-- Updated to latest version (`version-4310300497aa4917`)
-- Fixed Lightings
-- Fixed `InvokeServer` (Pro ::pro::)
-- Fixed Bloxstrike Support & UI redesigns
+- **Version:** [version-4310300497aa4917](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-4310300497aa4917)
+- Updated to the latest version
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)
 {% endhint %}
