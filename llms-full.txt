@@ -31,6 +31,66 @@ This is the documentation for the Matcha LuaVM.
 > **[info]**
 Matcha **is not an executor** — it does not hook any functions in the Roblox engine. Instead it emulates them externally, which makes it completely undetected, but also means it has no direct access to internal Roblox API functions.
 
+Live Counter: Waiting for Vault to add to LuaVM
+
+★ PRO HYBRID UPDATE
+
+Vault announced incoming Pro Hybrid features within max 3 days (announced Sep 13, 11:03 PM): fireclickdetector, fireproximityprompt, firetouchinterest.
+
+0
+Days
+
+00
+Hours
+
+00
+Mins
+
+00
+Secs
+
+⏳ Calculating elapsed time since Vault's announcement...
+
+@keyframes pulseBeacon {
+0% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 4px #8cc63f; }
+50% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 14px #8cc63f; }
+100% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 4px #8cc63f; }
+}
+
+(function() {
+var deadline = new Date("2026-09-16T23:03:00+01:00").getTime();
+function updateVaultCounter() {
+var now = new Date().getTime();
+var dEl = document.getElementById("v-days");
+var hEl = document.getElementById("v-hours");
+var mEl = document.getElementById("v-mins");
+var sEl = document.getElementById("v-secs");
+var statusEl = document.getElementById("v-status-text");
+if (!dEl || !hEl || !mEl || !sEl) return;
+if (now >= deadline) {
+var diffOverdue = now - deadline;
+var days = Math.floor(diffOverdue / (1000 * 60 * 60 * 24));
+var hours = Math.floor((diffOverdue % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+var mins = Math.floor((diffOverdue % (1000 * 60 * 60)) / (1000 * 60));
+var secs = Math.floor((diffOverdue % (1000 * 60)) / 1000);
+dEl.innerText = days;
+hEl.innerText = (hours Overdue by " + days + "d " + hours + "h " + mins + "m " + secs + "s — 3-day window elapsed, waiting on Vault!";
+}
+} else {
+var diffRemain = deadline - now;
+var days = Math.floor(diffRemain / (1000 * 60 * 60 * 24));
+var hours = Math.floor((diffRemain % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+var mins = Math.floor((diffRemain % (1000 * 60 * 60)) / (1000 * 60));
+var secs = Math.floor((diffRemain % (1000 * 60)) / 1000);
+dEl.innerText = days;
+hEl.innerText = (hours " + days + "d " + hours + "h " + mins + "m " + secs + "s (3-day max window)";
+}
+}
+}
+setInterval(updateVaultCounter, 1000);
+updateVaultCounter();
+})();
+
 > **[success]**
 **Changelogs (Sep 15 2026)**
 - **Version:** [version-4310300497aa4917](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-4310300497aa4917)
