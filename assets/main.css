@@ -487,3 +487,10 @@ kbd {
 .ad-field { margin-bottom: 18px; }
 .ad-field-h { display: block; font-weight: 600; font-size: 14px; }
 .ad-field-note { margin: 2px 0 0; }
+
+/* Vault Live Overdue Beacon */
+@keyframes pulseBeaconRed {
+  0% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 4px #f85149; }
+  50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 16px #f85149; }
+  100% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 4px #f85149; }
+}

@@ -308,4 +308,49 @@
     window.hljs.configure({ ignoreUnescapedHTML: true });
     window.hljs.highlightAll();
   }
+
+  // ---- Vault Live Counter (Days Not Added) ----
+  function initVaultCounter() {
+    var dEl = document.getElementById("v-days");
+    var hEl = document.getElementById("v-hours");
+    var mEl = document.getElementById("v-mins");
+    var sEl = document.getElementById("v-secs");
+    var statusEl = document.getElementById("v-status-text");
+    if (!dEl || !hEl || !mEl || !sEl) return;
+
+    // Baseline: 1 day, 14 hours, 20 mins, 0 secs overdue as of Sep 17 2026 13:23
+    var baseOverdueSecs = (1 * 86400) + (14 * 3600) + (20 * 60);
+    var startTime = Date.now();
+
+    function tick() {
+      var elapsed = Math.floor((Date.now() - startTime) / 1000);
+      var totalSecs = baseOverdueSecs + elapsed;
+
+      var days = Math.floor(totalSecs / 86400);
+      var rem = totalSecs % 86400;
+      var hours = Math.floor(rem / 3600);
+      var mins = Math.floor((rem % 3600) / 60);
+      var secs = rem % 60;
+
+      var totalWaitingDays = 3 + days;
+
+      dEl.textContent = days;
+      hEl.textContent = (hours < 10 ? "0" : "") + hours;
+      mEl.textContent = (mins < 10 ? "0" : "") + mins;
+      sEl.textContent = (secs < 10 ? "0" : "") + secs;
+
+      if (statusEl) {
+        statusEl.innerHTML = "<strong>" + days + " day" + (days > 1 ? "s" : "") + " past 3-day deadline</strong> (" + totalWaitingDays + " days, " + hours + "h " + mins + "m total waiting on Vault)";
+      }
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initVaultCounter);
+  } else {
+    initVaultCounter();
+  }
 })();

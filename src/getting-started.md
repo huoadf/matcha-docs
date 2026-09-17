@@ -37,51 +37,6 @@ Vault announced incoming Pro Hybrid features on <strong>Sep 13 at 11:03 PM</stro
 <span>⚠️</span> <span id="v-status-text"><strong>1 day past the 3-day deadline</strong> (3 days, 14 hours total waiting on Vault to add to LuaVM)</span>
 </div>
 </div>
-<style>
-@keyframes pulseBeaconRed {
-0% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 4px #f85149; }
-50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 16px #f85149; }
-100% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 4px #f85149; }
-}
-</style>
-<script>
-(function() {
-// Base elapsed overdue seconds starting at 1 day (counting into 1st full overdue day)
-var initialOverdueSecs = (14 * 3600) + (18 * 60) + 42;
-var startLocalTime = Date.now();
-
-function updateVaultCounter() {
-var elapsedClientSecs = Math.floor((Date.now() - startLocalTime) / 1000);
-var totalOverdueSecs = initialOverdueSecs + elapsedClientSecs;
-
-var totalDaysOverdue = 1 + Math.floor(totalOverdueSecs / 86400);
-var remSecs = totalOverdueSecs % 86400;
-var hours = Math.floor(remSecs / 3600);
-var mins = Math.floor((remSecs % 3600) / 60);
-var secs = remSecs % 60;
-
-var totalWaitingDays = 3 + totalDaysOverdue;
-
-var dEl = document.getElementById("v-days");
-var hEl = document.getElementById("v-hours");
-var mEl = document.getElementById("v-mins");
-var sEl = document.getElementById("v-secs");
-var statusEl = document.getElementById("v-status-text");
-
-if (dEl) dEl.innerText = totalDaysOverdue;
-if (hEl) hEl.innerText = (hours < 10 ? "0" : "") + hours;
-if (mEl) mEl.innerText = (mins < 10 ? "0" : "") + mins;
-if (sEl) sEl.innerText = (secs < 10 ? "0" : "") + secs;
-
-if (statusEl) {
-statusEl.innerHTML = "<strong>" + totalDaysOverdue + " day" + (totalDaysOverdue > 1 ? "s" : "") + " past 3-day deadline</strong> (" + totalWaitingDays + " days, " + hours + "h " + mins + "m total waiting on Vault)";
-}
-}
-
-setInterval(updateVaultCounter, 1000);
-updateVaultCounter();
-})();
-</script>
 
 {% hint style="success" %}
 **Changelogs (Sep 15 2026)**

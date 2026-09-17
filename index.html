@@ -157,44 +157,6 @@
 <span>⚠️</span> <span id="v-status-text"><strong>1 day past the 3-day deadline</strong> (3 days, 14 hours total waiting on Vault to add to LuaVM)</span>
 </div>
 </div>
-<style>
-<p>@keyframes pulseBeaconRed {</p>
-<p>0% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 4px #f85149; }</p>
-<p>50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 16px #f85149; }</p>
-<p>100% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 4px #f85149; }</p>
-<p>}</p>
-</style>
-<script>
-<p>(function() {</p>
-<p>// Base elapsed overdue seconds starting at 1 day (counting into 1st full overdue day)</p>
-<p>var initialOverdueSecs = (14 <em> 3600) + (18 </em> 60) + 42;</p>
-<p>var startLocalTime = Date.now();</p>
-<p>function updateVaultCounter() {</p>
-<p>var elapsedClientSecs = Math.floor((Date.now() - startLocalTime) / 1000);</p>
-<p>var totalOverdueSecs = initialOverdueSecs + elapsedClientSecs;</p>
-<p>var totalDaysOverdue = 1 + Math.floor(totalOverdueSecs / 86400);</p>
-<p>var remSecs = totalOverdueSecs % 86400;</p>
-<p>var hours = Math.floor(remSecs / 3600);</p>
-<p>var mins = Math.floor((remSecs % 3600) / 60);</p>
-<p>var secs = remSecs % 60;</p>
-<p>var totalWaitingDays = 3 + totalDaysOverdue;</p>
-<p>var dEl = document.getElementById("v-days");</p>
-<p>var hEl = document.getElementById("v-hours");</p>
-<p>var mEl = document.getElementById("v-mins");</p>
-<p>var sEl = document.getElementById("v-secs");</p>
-<p>var statusEl = document.getElementById("v-status-text");</p>
-<p>if (dEl) dEl.innerText = totalDaysOverdue;</p>
-<p>if (hEl) hEl.innerText = (hours < 10 ? "0" : "") + hours;</p>
-<p>if (mEl) mEl.innerText = (mins < 10 ? "0" : "") + mins;</p>
-<p>if (sEl) sEl.innerText = (secs < 10 ? "0" : "") + secs;</p>
-<p>if (statusEl) {</p>
-<p>statusEl.innerHTML = "<strong>" + totalDaysOverdue + " day" + (totalDaysOverdue > 1 ? "s" : "") + " past 3-day deadline</strong> (" + totalWaitingDays + " days, " + hours + "h " + mins + "m total waiting on Vault)";</p>
-<p>}</p>
-<p>}</p>
-<p>setInterval(updateVaultCounter, 1000);</p>
-<p>updateVaultCounter();</p>
-<p>})();</p>
-</script>
 <div class="callout callout-success"><span class="callout-ico" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m9 12 2 2 4-4"/></svg></span><div class="callout-body"><p><strong>Changelogs (Sep 15 2026)</strong></p>
 <ul>
 <li><strong>Version:</strong> <a href="https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-4310300497aa4917">version-4310300497aa4917</a></li>
