@@ -31,62 +31,60 @@ This is the documentation for the Matcha LuaVM.
 > **[info]**
 Matcha **is not an executor** — it does not hook any functions in the Roblox engine. Instead it emulates them externally, which makes it completely undetected, but also means it has no direct access to internal Roblox API functions.
 
-Live Counter: Waiting for Vault to add to LuaVM
+Live Counter: Days Not Added (Waiting on Vault)
 
-★ PRO HYBRID UPDATE
+🔴 HYBRID UPDATE OVERDUE
 
-Vault announced incoming Pro Hybrid features within max 3 days (announced Sep 13, 11:03 PM): fireclickdetector, fireproximityprompt, firetouchinterest.
+Vault announced incoming Pro Hybrid features on Sep 13 at 11:03 PM with a promise of "upcoming update max 3 days": fireclickdetector, fireproximityprompt, firetouchinterest. The 3-day deadline passed on Sep 16 at 11:03 PM.
 
-0
-Days
+1
+Days Overdue
 
-00
+14
 Hours
 
-00
+18
 Mins
 
-00
+42
 Secs
 
-⏳ Calculating elapsed time since Vault's announcement...
+⚠️ 1 day past the 3-day deadline (3 days, 14 hours total waiting on Vault to add to LuaVM)
 
-@keyframes pulseBeacon {
-0% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 4px #8cc63f; }
-50% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 14px #8cc63f; }
-100% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 4px #8cc63f; }
+@keyframes pulseBeaconRed {
+0% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 4px #f85149; }
+50% { transform: scale(1.2); opacity: 1; box-shadow: 0 0 16px #f85149; }
+100% { transform: scale(0.95); opacity: 0.8; box-shadow: 0 0 4px #f85149; }
 }
 
 (function() {
-var deadline = new Date("2026-09-16T23:03:00+01:00").getTime();
+// Base elapsed overdue seconds starting at 1 day (counting into 1st full overdue day)
+var initialOverdueSecs = (14 * 3600) + (18 * 60) + 42;
+var startLocalTime = Date.now();
+
 function updateVaultCounter() {
-var now = new Date().getTime();
+var elapsedClientSecs = Math.floor((Date.now() - startLocalTime) / 1000);
+var totalOverdueSecs = initialOverdueSecs + elapsedClientSecs;
+
+var totalDaysOverdue = 1 + Math.floor(totalOverdueSecs / 86400);
+var remSecs = totalOverdueSecs % 86400;
+var hours = Math.floor(remSecs / 3600);
+var mins = Math.floor((remSecs % 3600) / 60);
+var secs = remSecs % 60;
+
+var totalWaitingDays = 3 + totalDaysOverdue;
+
 var dEl = document.getElementById("v-days");
 var hEl = document.getElementById("v-hours");
 var mEl = document.getElementById("v-mins");
 var sEl = document.getElementById("v-secs");
 var statusEl = document.getElementById("v-status-text");
-if (!dEl || !hEl || !mEl || !sEl) return;
-if (now >= deadline) {
-var diffOverdue = now - deadline;
-var days = Math.floor(diffOverdue / (1000 * 60 * 60 * 24));
-var hours = Math.floor((diffOverdue % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-var mins = Math.floor((diffOverdue % (1000 * 60 * 60)) / (1000 * 60));
-var secs = Math.floor((diffOverdue % (1000 * 60)) / 1000);
-dEl.innerText = days;
-hEl.innerText = (hours Overdue by " + days + "d " + hours + "h " + mins + "m " + secs + "s — 3-day window elapsed, waiting on Vault!";
-}
-} else {
-var diffRemain = deadline - now;
-var days = Math.floor(diffRemain / (1000 * 60 * 60 * 24));
-var hours = Math.floor((diffRemain % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-var mins = Math.floor((diffRemain % (1000 * 60 * 60)) / (1000 * 60));
-var secs = Math.floor((diffRemain % (1000 * 60)) / 1000);
-dEl.innerText = days;
-hEl.innerText = (hours " + days + "d " + hours + "h " + mins + "m " + secs + "s (3-day max window)";
+
+if (dEl) dEl.innerText = totalDaysOverdue;
+if (hEl) hEl.innerText = (hours " + totalDaysOverdue + " day" + (totalDaysOverdue > 1 ? "s" : "") + " past 3-day deadline (" + totalWaitingDays + " days, " + hours + "h " + mins + "m total waiting on Vault)";
 }
 }
-}
+
 setInterval(updateVaultCounter, 1000);
 updateVaultCounter();
 })();
