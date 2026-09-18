@@ -39,7 +39,8 @@ Vault announced incoming Pro Hybrid features on <strong>Sep 13 at 11:03 PM</stro
 </div>
 
 {% hint style="success" %}
-**Changelogs (Sep 15 2026)**
+**Changelogs (Sep 18 2026)**
+- Fixed Decompiler
 - **Version:** [version-4310300497aa4917](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-4310300497aa4917)
 - Updated to the latest version
 
