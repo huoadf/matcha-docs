@@ -318,16 +318,29 @@
     var statusEl = document.getElementById("v-status-text");
     if (!dEl || !hEl || !mEl || !sEl) return;
 
-    // Baseline: 1 day, 14 hours, 20 mins, 0 secs overdue as of Sep 17 2026 13:23
-    var baseOverdueSecs = (1 * 86400) + (14 * 3600) + (20 * 60);
-    var startTime = Date.now();
+    // Fixed Global UTC Deadline: Sep 16, 2026 22:03:00 UTC (1789596180000 ms)
+    var deadlineUTC = 1789596180000;
 
     function tick() {
-      var elapsed = Math.floor((Date.now() - startTime) / 1000);
-      var totalSecs = baseOverdueSecs + elapsed;
+      var now = Date.now();
+      
+      // If client machine is not in 2026 (e.g. system clock in 2024/2025), calculate from baseline reference:
+      // Baseline at Sep 18, 2026 12:18 GMT+1 was 137,703 seconds overdue.
+      var totalOverdueSecs;
+      if (now < 1700000000000 || now < deadlineUTC) {
+        // Fallback relative timer from reference moment
+        if (!window.__vaultBaselineStart) {
+          window.__vaultBaselineStart = Date.now();
+        }
+        var baseElapsed = Math.floor((Date.now() - window.__vaultBaselineStart) / 1000);
+        totalOverdueSecs = 137703 + baseElapsed;
+      } else {
+        // Real global date calculation
+        totalOverdueSecs = Math.floor((now - deadlineUTC) / 1000);
+      }
 
-      var days = Math.floor(totalSecs / 86400);
-      var rem = totalSecs % 86400;
+      var days = Math.floor(totalOverdueSecs / 86400);
+      var rem = totalOverdueSecs % 86400;
       var hours = Math.floor(rem / 3600);
       var mins = Math.floor((rem % 3600) / 60);
       var secs = rem % 60;
@@ -340,7 +353,7 @@
       sEl.textContent = (secs < 10 ? "0" : "") + secs;
 
       if (statusEl) {
-        statusEl.innerHTML = "<strong>" + days + " day" + (days > 1 ? "s" : "") + " past 3-day deadline</strong> (" + totalWaitingDays + " days, " + hours + "h " + mins + "m total waiting on Vault)";
+        statusEl.innerHTML = "<strong>" + days + " day" + (days !== 1 ? "s" : "") + " past 3-day deadline</strong> (" + totalWaitingDays + " days, " + hours + "h " + mins + "m total waiting on Vault)";
       }
     }
 
