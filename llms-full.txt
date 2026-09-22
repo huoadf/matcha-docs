@@ -15,7 +15,7 @@
 >   `"matcha": { "serverUrl": "http://127.0.0.1:8765/mcp" }` inside `"mcpServers"`.
 > To add to Codex: run `codex mcp add matcha --url http://127.0.0.1:8765/mcp`
 
-> **Latest version:** version-4310300497aa4917 (Sep 15 2026)
+> **Latest version:** version-2366ba214ec740ca (Sep 22 2026)
 > **Website:** https://matcha-latte.win
 
 
@@ -52,10 +52,11 @@ Secs
 ⚠️ 1 day past the 3-day deadline (3 days, 14 hours total waiting on Vault to add to LuaVM)
 
 > **[success]**
-**Changelogs (Sep 18 2026)**
-- Fixed Decompiler
-- **Version:** [version-4310300497aa4917](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-4310300497aa4917)
+**Changelogs (Sep 22 2026)**
+- **Version:** [version-2366ba214ec740ca](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-2366ba214ec740ca)
 - Updated to the latest version
+- Fixed `RemoteFunction` in Remote Spy (Pro [Pro])
+- Some features might be bugged and required to run loader update
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)
 
@@ -3270,6 +3271,24 @@ Group: Reference
 # Changelogs
 
 Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
+
+---
+
+## [09/22/26 17:03:00] — vault
+
+#### Version: [version-2366ba214ec740ca](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-2366ba214ec740ca)
+#### Changelogs (Sep 22, 2026)
+- Updated to the latest version
+- Some features might be bugged and required to run loader update to get the latest update
+#### Run loader to update
+
+---
+
+## [09/22/26 04:31:00] — vault
+
+#### Changelogs (Sep 22, 2026) [Pro]
+- Fixed `RemoteFunction` in Remote Spy
+#### Run loader to update
 
 ---
 

@@ -4,6 +4,24 @@ Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
 
 ---
 
+## [09/22/26 17:03:00] — vault
+
+#### Version: [version-2366ba214ec740ca](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-2366ba214ec740ca)
+#### Changelogs (Sep 22, 2026)
+- Updated to the latest version
+- Some features might be bugged and required to run loader update to get the latest update
+#### Run loader to update
+
+---
+
+## [09/22/26 04:31:00] — vault
+
+#### Changelogs (Sep 22, 2026) ::pro::
+- Fixed `RemoteFunction` in Remote Spy
+#### Run loader to update
+
+---
+
 ## [09/18/26 13:05:00] — vault
 
 - Fixed Decompiler
