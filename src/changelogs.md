@@ -4,6 +4,14 @@ Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
 
 ---
 
+## [09/23/26 17:28:00] — vault
+
+#### Changelogs (Sep 23, 2026)
+- Fixed Speed, Inf Jump, Jump and Float
+#### Run loader to get the latest update
+
+---
+
 ## [09/22/26 17:03:00] — vault
 
 #### Version: [version-2366ba214ec740ca](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-2366ba214ec740ca)

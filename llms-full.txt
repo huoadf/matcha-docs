@@ -52,13 +52,12 @@ Secs
 ⚠️ 1 day past the 3-day deadline (3 days, 14 hours total waiting on Vault to add to LuaVM)
 
 > **[success]**
-**Changelogs (Sep 22 2026)**
+**Changelogs (Sep 23 2026)**
+- Fixed Speed, Inf Jump, Jump and Float
 - **Version:** [version-2366ba214ec740ca](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-2366ba214ec740ca)
-- Updated to the latest version
 - Fixed `RemoteFunction` in Remote Spy (Pro [Pro])
-- Some features might be bugged and required to run loader update
 
-*Run loader to update* · [Full changelogs →](/matcha/changelogs)
+*Run loader to get the latest update* · [Full changelogs →](/matcha/changelogs)
 
 ## Browse the docs
 
@@ -3271,6 +3270,14 @@ Group: Reference
 # Changelogs
 
 Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
+
+---
+
+## [09/23/26 17:28:00] — vault
+
+#### Changelogs (Sep 23, 2026)
+- Fixed Speed, Inf Jump, Jump and Float
+#### Run loader to get the latest update
 
 ---
 
