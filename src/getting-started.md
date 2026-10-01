@@ -39,10 +39,10 @@ Vault announced incoming Pro Hybrid features on <strong>Sep 13 at 11:03 PM</stro
 </div>
 
 {% hint style="success" %}
-**Changelogs (Sep 23 2026)**
+**Changelogs (Sep 30 2026)**
+- **Version:** [version-02c37bc51a384b8f](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-02c37bc51a384b8f)
+- Updated to the latest version
 - Fixed Speed, Inf Jump, Jump and Float
-- **Version:** [version-2366ba214ec740ca](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-2366ba214ec740ca)
-- Fixed `RemoteFunction` in Remote Spy (Pro ::pro::)
 
 *Run loader to get the latest update* · [Full changelogs →](/matcha/changelogs)
 {% endhint %}
