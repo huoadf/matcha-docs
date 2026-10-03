@@ -4,6 +4,12 @@ Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
 
 ---
 
+## [10/03/26 18:13:00] — Vain
+
+- Decompiler is fixed (no restart/update is needed to use the fixed ver)
+
+---
+
 ## [09/30/26 17:08:00] — vault
 
 #### Version: [version-02c37bc51a384b8f](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-02c37bc51a384b8f)

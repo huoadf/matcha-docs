@@ -39,9 +39,9 @@ Vault announced incoming Pro Hybrid features on <strong>Sep 13 at 11:03 PM</stro
 </div>
 
 {% hint style="success" %}
-**Changelogs (Sep 30 2026)**
+**Changelogs (Oct 3 2026)**
+- Decompiler is fixed *(no restart/update is needed to use the fixed ver)*
 - **Version:** [version-02c37bc51a384b8f](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-02c37bc51a384b8f)
-- Updated to the latest version
 - Fixed Speed, Inf Jump, Jump and Float
 
 *Run loader to get the latest update* · [Full changelogs →](/matcha/changelogs)
