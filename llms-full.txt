@@ -52,12 +52,12 @@ Secs
 ⚠️ 1 day past the 3-day deadline (3 days, 14 hours total waiting on Vault to add to LuaVM)
 
 > **[success]**
-**Changelogs (Oct 3 2026)**
-- Decompiler is fixed *(no restart/update is needed to use the fixed ver)*
+**Changelogs (Oct 4 2026)**
+- Fixed Auth *(Run loader to update - required)*
+- Decompiler is fixed *(no restart/update needed)*
 - **Version:** [version-02c37bc51a384b8f](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-02c37bc51a384b8f)
-- Fixed Speed, Inf Jump, Jump and Float
 
-*Run loader to get the latest update* · [Full changelogs →](/matcha/changelogs)
+*Run loader to update* · [Full changelogs →](/matcha/changelogs)
 
 ## Browse the docs
 
@@ -3270,6 +3270,14 @@ Group: Reference
 # Changelogs
 
 Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
+
+---
+
+## [10/04/26 20:26:00] — vault
+
+#### Changelogs
+- Fixed Auth
+#### Run loader to update (required)
 
 ---
 
