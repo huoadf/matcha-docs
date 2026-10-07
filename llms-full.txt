@@ -15,7 +15,7 @@
 >   `"matcha": { "serverUrl": "http://127.0.0.1:8765/mcp" }` inside `"mcpServers"`.
 > To add to Codex: run `codex mcp add matcha --url http://127.0.0.1:8765/mcp`
 
-> **Latest version:** version-02c37bc51a384b8f (Sep 30 2026)
+> **Latest version:** version-cec3ad5889b447cf (Oct 7 2026)
 > **Website:** https://matcha-latte.win
 
 
@@ -52,10 +52,10 @@ Secs
 ⚠️ 1 day past the 3-day deadline (3 days, 14 hours total waiting on Vault to add to LuaVM)
 
 > **[success]**
-**Changelogs (Oct 4 2026)**
-- Fixed Auth *(Run loader to update - required)*
-- Decompiler is fixed *(no restart/update needed)*
-- **Version:** [version-02c37bc51a384b8f](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-02c37bc51a384b8f)
+**Changelogs (Oct 7 2026)**
+- **Version:** [version-cec3ad5889b447cf](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-cec3ad5889b447cf)
+- Updated to the latest version
+- Fixed Auth *(Run loader to update)*
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)
 
@@ -3270,6 +3270,15 @@ Group: Reference
 # Changelogs
 
 Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
+
+---
+
+## [10/07/26 18:08:00] — vault
+
+#### Version: [version-cec3ad5889b447cf](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-cec3ad5889b447cf)
+#### Changelogs
+- Updated to the latest version
+- I will back at features update in week or sooner
 
 ---
 

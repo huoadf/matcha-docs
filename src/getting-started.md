@@ -39,10 +39,10 @@ Vault announced incoming Pro Hybrid features on <strong>Sep 13 at 11:03 PM</stro
 </div>
 
 {% hint style="success" %}
-**Changelogs (Oct 4 2026)**
-- Fixed Auth *(Run loader to update - required)*
-- Decompiler is fixed *(no restart/update needed)*
-- **Version:** [version-02c37bc51a384b8f](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-02c37bc51a384b8f)
+**Changelogs (Oct 7 2026)**
+- **Version:** [version-cec3ad5889b447cf](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-cec3ad5889b447cf)
+- Updated to the latest version
+- Fixed Auth *(Run loader to update)*
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)
 {% endhint %}
