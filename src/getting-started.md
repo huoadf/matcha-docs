@@ -36,6 +36,9 @@ Vault announced incoming Pro Hybrid features on <strong>Sep 13 at 11:03 PM</stro
 <div id="v-status-note" style="font-size: 0.82rem; color: #ff7b72; display: flex; align-items: center; gap: 0.4rem;">
 <span>⚠️</span> <span id="v-status-text"><strong>1 day past the 3-day deadline</strong> (3 days, 14 hours total waiting on Vault to add to LuaVM)</span>
 </div>
+<div style="margin-top: 0.85rem; font-size: 0.82rem; color: #e6edf3; background: rgba(56, 139, 253, 0.12); border-left: 3px solid #58a6ff; padding: 0.5rem 0.75rem; border-radius: 0 6px 6px 0; line-height: 1.45;">
+💬 <strong>Vault Dev Update (Oct 7):</strong> <em>"I will back at features update in week or sooner"</em> — Feature updates might be dropping soon!
+</div>
 </div>
 
 {% hint style="success" %}
