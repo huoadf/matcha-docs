@@ -42,8 +42,8 @@ Vault announced incoming Pro Hybrid features on <strong>Sep 13 at 11:03 PM</stro
 </div>
 
 {% hint style="success" %}
-**Changelogs (Oct 14 2026)**
-- **Version:** [version-7a0c6d10fcb34a2c](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-7a0c6d10fcb34a2c)
+**Changelogs (Oct 16 2026)**
+- **Version:** [version-11f155f3450f4c8e](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-11f155f3450f4c8e)
 - Updated to the latest version
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)
