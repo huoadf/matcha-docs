@@ -31,28 +31,6 @@ This is the documentation for the Matcha LuaVM.
 > **[info]**
 Matcha **is not an executor** — it does not hook any functions in the Roblox engine. Instead it emulates them externally, which makes it completely undetected, but also means it has no direct access to internal Roblox API functions.
 
-Hybrid Update: Delivered by Vault!
-
-🟢 DELIVERED IN PRO
-
-Vault announced incoming Pro Hybrid features on Sep 13 at 11:03 PM with a promise of "upcoming update max 3 days". After 35 days past deadline (38 days total wait), all 3 promised features (fireclickdetector, fireproximityprompt, firetouchinterest) plus a Remote Spy fix have officially arrived!
-
-35
-Days Waited
-
-23
-Hours
-
-26
-Mins
-
-00
-Secs
-
-✅ Delivered on Oct 21, 2026 (38 days total wait since announcement)
-
-🚀 Released (Oct 21): firetouchinterest, fireclickdetector, and fireproximityprompt are now live in Matcha Pro! Run loader to update.
-
 > **[success]**
 **Changelogs (Oct 21 2026)** [Pro]
 - Added `firetouchinterest(origin_part, target_part, state)` — `0 = Touch`, `1 = Untouch`

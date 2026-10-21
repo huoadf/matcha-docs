@@ -309,29 +309,4 @@
     window.hljs.highlightAll();
   }
 
-  // ---- Vault Live Counter (Delivered Oct 21, 2026) ----
-  function initVaultCounter() {
-    var dEl = document.getElementById("v-days");
-    var hEl = document.getElementById("v-hours");
-    var mEl = document.getElementById("v-mins");
-    var sEl = document.getElementById("v-secs");
-    var statusEl = document.getElementById("v-status-text");
-    if (!dEl || !hEl || !mEl || !sEl) return;
-
-    // Features officially delivered on Oct 21, 2026 at 21:29 UTC (34 days, 23 hrs, 26 mins overdue)
-    dEl.textContent = "35";
-    hEl.textContent = "00";
-    mEl.textContent = "00";
-    sEl.textContent = "00";
-
-    if (statusEl) {
-      statusEl.innerHTML = "<strong>Delivered on Oct 21, 2026!</strong> (35 days past the 3-day deadline, 38 days total wait).";
-    }
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initVaultCounter);
-  } else {
-    initVaultCounter();
-  }
-})();
+  })();
