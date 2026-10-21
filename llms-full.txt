@@ -31,32 +31,34 @@ This is the documentation for the Matcha LuaVM.
 > **[info]**
 Matcha **is not an executor** — it does not hook any functions in the Roblox engine. Instead it emulates them externally, which makes it completely undetected, but also means it has no direct access to internal Roblox API functions.
 
-Live Counter: Days Not Added (Waiting on Vault)
+Hybrid Update: Delivered by Vault!
 
-🔴 HYBRID UPDATE OVERDUE
+🟢 DELIVERED IN PRO
 
-Vault announced incoming Pro Hybrid features on Sep 13 at 11:03 PM with a promise of "upcoming update max 3 days": fireclickdetector, fireproximityprompt, firetouchinterest. The 3-day deadline passed on Sep 16 at 11:03 PM.
+Vault announced incoming Pro Hybrid features on Sep 13 at 11:03 PM with a promise of "upcoming update max 3 days". After 35 days past deadline (38 days total wait), all 3 promised features (fireclickdetector, fireproximityprompt, firetouchinterest) plus a Remote Spy fix have officially arrived!
 
-1
-Days Overdue
+35
+Days Waited
 
-14
+23
 Hours
 
-18
+26
 Mins
 
-42
+00
 Secs
 
-⚠️ 1 day past the 3-day deadline (3 days, 14 hours total waiting on Vault to add to LuaVM)
+✅ Delivered on Oct 21, 2026 (38 days total wait since announcement)
 
-💬 Vault Dev Update (Oct 7): "I will back at features update in week or sooner" — Feature updates might be dropping soon!
+🚀 Released (Oct 21): firetouchinterest, fireclickdetector, and fireproximityprompt are now live in Matcha Pro! Run loader to update.
 
 > **[success]**
-**Changelogs (Oct 16 2026)**
-- **Version:** [version-11f155f3450f4c8e](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-11f155f3450f4c8e)
-- Updated to the latest version
+**Changelogs (Oct 21 2026)** [Pro]
+- Added `firetouchinterest(origin_part, target_part, state)` — `0 = Touch`, `1 = Untouch`
+- Added `fireclickdetector(clickDetector, distance, event)` — events: `MouseClick`, `RightMouseClick`, `MouseHoverEnter`, `MouseHoverLeave` (default `distance = 0.0`, `event = "MouseClick"`)
+- Added `fireproximityprompt(prompt)`
+- Fixed `RemoteFunction` in Remote Spy
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)
 
@@ -287,6 +289,76 @@ function gethwid(): string
 ```
 
 Returns the unique hardware identifier (HWID) of the current machine.
+
+## firetouchinterest [Pro]
+
+```lua
+function firetouchinterest(origin_part: BasePart, target_part: BasePart, state: number)
+```
+
+Fires a touch interest event between two `BasePart` instances.
+
+- **`origin_part`**: The source `BasePart` transmitting the touch (e.g. `LocalPlayer.Character.HumanoidRootPart`).
+- **`target_part`**: The target `BasePart` that contains the `TouchTransmitter` / `.Touched` connection.
+- **`state`**: `0` for **Touch** (`Touched`), `1` for **Untouch** (`TouchEnded`).
+
+```lua
+local player = game.Players.LocalPlayer
+local hrp = player.Character.HumanoidRootPart
+local coin = workspace.Coin
+
+-- Simulate touch
+firetouchinterest(hrp, coin, 0)
+task.wait()
+-- Simulate untouch
+firetouchinterest(hrp, coin, 1)
+```
+
+---
+
+## fireclickdetector [Pro]
+
+```lua
+function fireclickdetector(clickDetector: ClickDetector, distance: number?, event: string?)
+```
+
+Fires a `ClickDetector` interaction from any distance.
+
+- **`clickDetector`**: The target `ClickDetector` instance.
+- **`distance`** *(optional)*: Distance from player in studs (defaults to `0.0`). Setting `0.0` bypasses `MaxActivationDistance`.
+- **`event`** *(optional)*: The event type to trigger (defaults to `"MouseClick"`).
+  - Valid events: `"MouseClick"`, `"RightMouseClick"`, `"MouseHoverEnter"`, `"MouseHoverLeave"`.
+
+```lua
+local cd = workspace.Button.ClickDetector
+
+-- Standard left click from 0 studs distance
+fireclickdetector(cd)
+
+-- Right click
+fireclickdetector(cd, 0.0, "RightMouseClick")
+
+-- Hover enter / leave
+fireclickdetector(cd, 0.0, "MouseHoverEnter")
+fireclickdetector(cd, 0.0, "MouseHoverLeave")
+```
+
+---
+
+## fireproximityprompt [Pro]
+
+```lua
+function fireproximityprompt(prompt: ProximityPrompt)
+```
+
+Instantly triggers and completes a `ProximityPrompt` interaction without requiring the player to wait for the hold duration or be within activation distance.
+
+- **`prompt`**: The `ProximityPrompt` instance to fire.
+
+```lua
+local doorPrompt = workspace.Door.ProximityPrompt
+fireproximityprompt(doorPrompt)
+```
 
 ---
 
@@ -3195,7 +3267,12 @@ AI coding assistants and script authors should keep these rules in mind when wri
 
 ### 7. Remote Event & RemoteFunction Handling (Pro [Pro])
 - `RemoteEvent:FireServer(...)` is fully supported in Hybrid mode.
-- `RemoteFunction:InvokeServer(...)` and `RemoteFunction:InvokeFunction(...)` are both fully supported in Hybrid mode (Fixed Sep 11 2026).
+- `RemoteFunction:InvokeServer(...)` and `RemoteFunction:InvokeFunction(...)` are both fully supported in Hybrid mode (Fixed Sep 11 2026, Remote Spy logging fixed Oct 21 2026).
+
+### 8. Hybrid Interactions (Pro [Pro] - Added Oct 21 2026)
+- `firetouchinterest(origin_part, target_part, state)`: Direct native touch simulation (`0 = Touch`, `1 = Untouch`).
+- `fireclickdetector(clickDetector, distance, event)`: Simulates `MouseClick`, `RightMouseClick`, `MouseHoverEnter`, `MouseHoverLeave`.
+- `fireproximityprompt(prompt)`: Instantly fires ProximityPrompts bypassing hold durations.
 
 ---
 
@@ -3212,7 +3289,10 @@ AI coding assistants and script authors should keep these rules in mind when wri
 | `GetAttribute()` | ✅ Yes | Supported (Fixed Aug 6) |
 | `SetAttribute()` | ✅ Yes | Supported (Fixed Aug 6) |
 | `RemoteEvent:FireServer` | ✅ Yes | Supported [Pro] |
-| `RemoteFunction:InvokeServer` | ✅ Yes | Supported [Pro] (Fixed Sep 11) |
+| `RemoteFunction:InvokeServer` | ✅ Yes | Supported [Pro] (Fixed Sep 11, Spy fixed Oct 21) |
+| `firetouchinterest` | ✅ Yes | Supported [Pro] (Added Oct 21) |
+| `fireclickdetector` | ✅ Yes | Supported [Pro] (Added Oct 21) |
+| `fireproximityprompt` | ✅ Yes | Supported [Pro] (Added Oct 21) |
 
 ---
 
@@ -3271,6 +3351,18 @@ Group: Reference
 # Changelogs
 
 Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
+
+---
+
+## [10/21/26 21:29:00] — vault
+
+#### Changelogs [Pro]
+- Added `firetouchinterest(origin_part, target_part, state)`, state: `0 = Touch` `1 = Untouch`
+- Added `fireclickdetector(clickDetector, distance, event)`, event: `MouseClick` `RightMouseClick` `MouseHoverEnter` `MouseHoverLeave`
+  - Default `distance = 0.0` and `event = "MouseClick"`
+- Added `fireproximityprompt(prompt)`
+- Fixed `RemoteFunction` in Remote Spy
+#### Run loader to update (required)
 
 ---
 

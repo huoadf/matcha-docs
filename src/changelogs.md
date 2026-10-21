@@ -4,6 +4,18 @@ Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
 
 ---
 
+## [10/21/26 21:29:00] — vault
+
+#### Changelogs ::pro::
+- Added `firetouchinterest(origin_part, target_part, state)`, state: `0 = Touch` `1 = Untouch`
+- Added `fireclickdetector(clickDetector, distance, event)`, event: `MouseClick` `RightMouseClick` `MouseHoverEnter` `MouseHoverLeave`
+  - Default `distance = 0.0` and `event = "MouseClick"`
+- Added `fireproximityprompt(prompt)`
+- Fixed `RemoteFunction` in Remote Spy
+#### Run loader to update (required)
+
+---
+
 ## [10/16/26 01:13:00] — vault
 
 #### Version: [version-11f155f3450f4c8e](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-11f155f3450f4c8e)

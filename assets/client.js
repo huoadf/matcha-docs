@@ -309,7 +309,7 @@
     window.hljs.highlightAll();
   }
 
-  // ---- Vault Live Counter (Days Not Added) ----
+  // ---- Vault Live Counter (Delivered Oct 21, 2026) ----
   function initVaultCounter() {
     var dEl = document.getElementById("v-days");
     var hEl = document.getElementById("v-hours");
@@ -318,47 +318,15 @@
     var statusEl = document.getElementById("v-status-text");
     if (!dEl || !hEl || !mEl || !sEl) return;
 
-    // Fixed Global UTC Deadline: Sep 16, 2026 22:03:00 UTC (1789596180000 ms)
-    var deadlineUTC = 1789596180000;
+    // Features officially delivered on Oct 21, 2026 at 21:29 UTC (34 days, 23 hrs, 26 mins overdue)
+    dEl.textContent = "35";
+    hEl.textContent = "00";
+    mEl.textContent = "00";
+    sEl.textContent = "00";
 
-    function tick() {
-      var now = Date.now();
-      
-      // If client machine is not in 2026 (e.g. system clock in 2024/2025), calculate from baseline reference:
-      // Baseline at Sep 18, 2026 12:18 GMT+1 was 137,703 seconds overdue.
-      var totalOverdueSecs;
-      if (now < 1700000000000 || now < deadlineUTC) {
-        // Fallback relative timer from reference moment
-        if (!window.__vaultBaselineStart) {
-          window.__vaultBaselineStart = Date.now();
-        }
-        var baseElapsed = Math.floor((Date.now() - window.__vaultBaselineStart) / 1000);
-        totalOverdueSecs = 137703 + baseElapsed;
-      } else {
-        // Real global date calculation
-        totalOverdueSecs = Math.floor((now - deadlineUTC) / 1000);
-      }
-
-      var days = Math.floor(totalOverdueSecs / 86400);
-      var rem = totalOverdueSecs % 86400;
-      var hours = Math.floor(rem / 3600);
-      var mins = Math.floor((rem % 3600) / 60);
-      var secs = rem % 60;
-
-      var totalWaitingDays = 3 + days;
-
-      dEl.textContent = days;
-      hEl.textContent = (hours < 10 ? "0" : "") + hours;
-      mEl.textContent = (mins < 10 ? "0" : "") + mins;
-      sEl.textContent = (secs < 10 ? "0" : "") + secs;
-
-      if (statusEl) {
-        statusEl.innerHTML = "<strong>" + days + " day" + (days !== 1 ? "s" : "") + " past 3-day deadline</strong> (" + totalWaitingDays + " days, " + hours + "h " + mins + "m total waiting on Vault)";
-      }
+    if (statusEl) {
+      statusEl.innerHTML = "<strong>Delivered on Oct 21, 2026!</strong> (35 days past the 3-day deadline, 38 days total wait).";
     }
-
-    tick();
-    setInterval(tick, 1000);
   }
 
   if (document.readyState === "loading") {

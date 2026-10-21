@@ -186,6 +186,53 @@ setfenv(f, sandbox) -- f now only sees `sandbox` as its globals</code></pre>
 <h2 id="gethwid" tabindex="-1">gethwid <a class="header-anchor" href="#gethwid" aria-hidden="true">#</a></h2>
 <pre><code class="language-lua">function gethwid(): string</code></pre>
 <p>Returns the unique hardware identifier (HWID) of the current machine.</p>
+<h2 id="firetouchinterest-pro" tabindex="-1">firetouchinterest <span class="badge badge-pro"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 8 8"><path fill="currentColor" d="M4 0L4.88 2.76H8L5.56 4.47L6.47 7.24L4 5.53L1.53 7.24L2.44 4.47L0 2.76H3.12L4 0Z"/></svg> Pro</span> <a class="header-anchor" href="#firetouchinterest-pro" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function firetouchinterest(origin_part: BasePart, target_part: BasePart, state: number)</code></pre>
+<p>Fires a touch interest event between two <code>BasePart</code> instances.</p>
+<ul>
+<li><strong><code>origin_part</code></strong>: The source <code>BasePart</code> transmitting the touch (e.g. <code>LocalPlayer.Character.HumanoidRootPart</code>).</li>
+<li><strong><code>target_part</code></strong>: The target <code>BasePart</code> that contains the <code>TouchTransmitter</code> / <code>.Touched</code> connection.</li>
+<li><strong><code>state</code></strong>: <code>0</code> for <strong>Touch</strong> (<code>Touched</code>), <code>1</code> for <strong>Untouch</strong> (<code>TouchEnded</code>).</li>
+</ul>
+<pre><code class="language-lua">local player = game.Players.LocalPlayer
+local hrp = player.Character.HumanoidRootPart
+local coin = workspace.Coin
+
+-- Simulate touch
+firetouchinterest(hrp, coin, 0)
+task.wait()
+-- Simulate untouch
+firetouchinterest(hrp, coin, 1)</code></pre>
+<hr>
+<h2 id="fireclickdetector-pro" tabindex="-1">fireclickdetector <span class="badge badge-pro"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 8 8"><path fill="currentColor" d="M4 0L4.88 2.76H8L5.56 4.47L6.47 7.24L4 5.53L1.53 7.24L2.44 4.47L0 2.76H3.12L4 0Z"/></svg> Pro</span> <a class="header-anchor" href="#fireclickdetector-pro" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function fireclickdetector(clickDetector: ClickDetector, distance: number?, event: string?)</code></pre>
+<p>Fires a <code>ClickDetector</code> interaction from any distance.</p>
+<ul>
+<li><strong><code>clickDetector</code></strong>: The target <code>ClickDetector</code> instance.</li>
+<li><strong><code>distance</code></strong> <em>(optional)</em>: Distance from player in studs (defaults to <code>0.0</code>). Setting <code>0.0</code> bypasses <code>MaxActivationDistance</code>.</li>
+<li><strong><code>event</code></strong> <em>(optional)</em>: The event type to trigger (defaults to <code>"MouseClick"</code>).</li>
+<li>Valid events: <code>"MouseClick"</code>, <code>"RightMouseClick"</code>, <code>"MouseHoverEnter"</code>, <code>"MouseHoverLeave"</code>.</li>
+</ul>
+<pre><code class="language-lua">local cd = workspace.Button.ClickDetector
+
+-- Standard left click from 0 studs distance
+fireclickdetector(cd)
+
+-- Right click
+fireclickdetector(cd, 0.0, "RightMouseClick")
+
+-- Hover enter / leave
+fireclickdetector(cd, 0.0, "MouseHoverEnter")
+fireclickdetector(cd, 0.0, "MouseHoverLeave")</code></pre>
+<hr>
+<h2 id="fireproximityprompt-pro" tabindex="-1">fireproximityprompt <span class="badge badge-pro"><svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 8 8"><path fill="currentColor" d="M4 0L4.88 2.76H8L5.56 4.47L6.47 7.24L4 5.53L1.53 7.24L2.44 4.47L0 2.76H3.12L4 0Z"/></svg> Pro</span> <a class="header-anchor" href="#fireproximityprompt-pro" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function fireproximityprompt(prompt: ProximityPrompt)</code></pre>
+<p>Instantly triggers and completes a <code>ProximityPrompt</code> interaction without requiring the player to wait for the hold duration or be within activation distance.</p>
+<ul>
+<li><strong><code>prompt</code></strong>: The <code>ProximityPrompt</code> instance to fire.</li>
+</ul>
+<pre><code class="language-lua">local doorPrompt = workspace.Door.ProximityPrompt
+fireproximityprompt(doorPrompt)</code></pre>
       </article>
       
       <nav class="pager">
@@ -221,6 +268,9 @@ setfenv(f, sandbox) -- f now only sees `sandbox` as its globals</code></pre>
 <li class="toc-l2"><a href="#setfenv">setfenv</a></li>
 <li class="toc-l2"><a href="#getrbxversion">getrbxversion</a></li>
 <li class="toc-l2"><a href="#gethwid">gethwid</a></li>
+<li class="toc-l2"><a href="#firetouchinterest-pro">firetouchinterest pro</a></li>
+<li class="toc-l2"><a href="#fireclickdetector-pro">fireclickdetector pro</a></li>
+<li class="toc-l2"><a href="#fireproximityprompt-pro">fireproximityprompt pro</a></li>
 </ul>
     </aside>
   </div>

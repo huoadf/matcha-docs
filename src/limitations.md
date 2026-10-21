@@ -35,7 +35,12 @@ AI coding assistants and script authors should keep these rules in mind when wri
 
 ### 7. Remote Event & RemoteFunction Handling (Pro ::pro::)
 - `RemoteEvent:FireServer(...)` is fully supported in Hybrid mode.
-- `RemoteFunction:InvokeServer(...)` and `RemoteFunction:InvokeFunction(...)` are both fully supported in Hybrid mode (Fixed Sep 11 2026).
+- `RemoteFunction:InvokeServer(...)` and `RemoteFunction:InvokeFunction(...)` are both fully supported in Hybrid mode (Fixed Sep 11 2026, Remote Spy logging fixed Oct 21 2026).
+
+### 8. Hybrid Interactions (Pro ::pro:: - Added Oct 21 2026)
+- `firetouchinterest(origin_part, target_part, state)`: Direct native touch simulation (`0 = Touch`, `1 = Untouch`).
+- `fireclickdetector(clickDetector, distance, event)`: Simulates `MouseClick`, `RightMouseClick`, `MouseHoverEnter`, `MouseHoverLeave`.
+- `fireproximityprompt(prompt)`: Instantly fires ProximityPrompts bypassing hold durations.
 
 ---
 
@@ -52,4 +57,7 @@ AI coding assistants and script authors should keep these rules in mind when wri
 | `GetAttribute()` | ✅ Yes | Supported (Fixed Aug 6) |
 | `SetAttribute()` | ✅ Yes | Supported (Fixed Aug 6) |
 | `RemoteEvent:FireServer` | ✅ Yes | Supported ::pro:: |
-| `RemoteFunction:InvokeServer` | ✅ Yes | Supported ::pro:: (Fixed Sep 11) |
+| `RemoteFunction:InvokeServer` | ✅ Yes | Supported ::pro:: (Fixed Sep 11, Spy fixed Oct 21) |
+| `firetouchinterest` | ✅ Yes | Supported ::pro:: (Added Oct 21) |
+| `fireclickdetector` | ✅ Yes | Supported ::pro:: (Added Oct 21) |
+| `fireproximityprompt` | ✅ Yes | Supported ::pro:: (Added Oct 21) |

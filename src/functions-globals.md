@@ -168,3 +168,73 @@ function gethwid(): string
 ```
 
 Returns the unique hardware identifier (HWID) of the current machine.
+
+## firetouchinterest ::pro::
+
+```lua
+function firetouchinterest(origin_part: BasePart, target_part: BasePart, state: number)
+```
+
+Fires a touch interest event between two `BasePart` instances.
+
+- **`origin_part`**: The source `BasePart` transmitting the touch (e.g. `LocalPlayer.Character.HumanoidRootPart`).
+- **`target_part`**: The target `BasePart` that contains the `TouchTransmitter` / `.Touched` connection.
+- **`state`**: `0` for **Touch** (`Touched`), `1` for **Untouch** (`TouchEnded`).
+
+```lua
+local player = game.Players.LocalPlayer
+local hrp = player.Character.HumanoidRootPart
+local coin = workspace.Coin
+
+-- Simulate touch
+firetouchinterest(hrp, coin, 0)
+task.wait()
+-- Simulate untouch
+firetouchinterest(hrp, coin, 1)
+```
+
+---
+
+## fireclickdetector ::pro::
+
+```lua
+function fireclickdetector(clickDetector: ClickDetector, distance: number?, event: string?)
+```
+
+Fires a `ClickDetector` interaction from any distance.
+
+- **`clickDetector`**: The target `ClickDetector` instance.
+- **`distance`** *(optional)*: Distance from player in studs (defaults to `0.0`). Setting `0.0` bypasses `MaxActivationDistance`.
+- **`event`** *(optional)*: The event type to trigger (defaults to `"MouseClick"`).
+  - Valid events: `"MouseClick"`, `"RightMouseClick"`, `"MouseHoverEnter"`, `"MouseHoverLeave"`.
+
+```lua
+local cd = workspace.Button.ClickDetector
+
+-- Standard left click from 0 studs distance
+fireclickdetector(cd)
+
+-- Right click
+fireclickdetector(cd, 0.0, "RightMouseClick")
+
+-- Hover enter / leave
+fireclickdetector(cd, 0.0, "MouseHoverEnter")
+fireclickdetector(cd, 0.0, "MouseHoverLeave")
+```
+
+---
+
+## fireproximityprompt ::pro::
+
+```lua
+function fireproximityprompt(prompt: ProximityPrompt)
+```
+
+Instantly triggers and completes a `ProximityPrompt` interaction without requiring the player to wait for the hold duration or be within activation distance.
+
+- **`prompt`**: The `ProximityPrompt` instance to fire.
+
+```lua
+local doorPrompt = workspace.Door.ProximityPrompt
+fireproximityprompt(doorPrompt)
+```
