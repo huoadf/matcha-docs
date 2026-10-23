@@ -32,11 +32,9 @@ This is the documentation for the Matcha LuaVM.
 Matcha **is not an executor** — it does not hook any functions in the Roblox engine. Instead it emulates them externally, which makes it completely undetected, but also means it has no direct access to internal Roblox API functions.
 
 > **[success]**
-**Changelogs (Oct 21 2026)** [Pro]
-- Added `firetouchinterest(origin_part, target_part, state)` — `0 = Touch`, `1 = Untouch`
-- Added `fireclickdetector(clickDetector, distance, event)` — events: `MouseClick`, `RightMouseClick`, `MouseHoverEnter`, `MouseHoverLeave` (default `distance = 0.0`, `event = "MouseClick"`)
-- Added `fireproximityprompt(prompt)`
-- Fixed `RemoteFunction` in Remote Spy
+**Changelogs (Oct 23 2026)**
+- Fixed Raycast
+- Fixed fov, lighting flickering
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)
 
@@ -3329,6 +3327,15 @@ Group: Reference
 # Changelogs
 
 Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
+
+---
+
+## [10/23/26 18:02:00] — vault
+
+#### Changelogs
+- Fixed Raycast
+- Fixed fov, lighting flickering
+#### Run loader to update
 
 ---
 

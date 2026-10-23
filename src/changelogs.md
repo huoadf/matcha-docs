@@ -4,6 +4,15 @@ Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
 
 ---
 
+## [10/23/26 18:02:00] — vault
+
+#### Changelogs
+- Fixed Raycast
+- Fixed fov, lighting flickering
+#### Run loader to update
+
+---
+
 ## [10/21/26 21:29:00] — vault
 
 #### Changelogs ::pro::

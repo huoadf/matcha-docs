@@ -5,11 +5,9 @@ Matcha **is not an executor** — it does not hook any functions in the Roblox e
 {% endhint %}
 
 {% hint style="success" %}
-**Changelogs (Oct 21 2026)** ::pro::
-- Added `firetouchinterest(origin_part, target_part, state)` — `0 = Touch`, `1 = Untouch`
-- Added `fireclickdetector(clickDetector, distance, event)` — events: `MouseClick`, `RightMouseClick`, `MouseHoverEnter`, `MouseHoverLeave` (default `distance = 0.0`, `event = "MouseClick"`)
-- Added `fireproximityprompt(prompt)`
-- Fixed `RemoteFunction` in Remote Spy
+**Changelogs (Oct 23 2026)**
+- Fixed Raycast
+- Fixed fov, lighting flickering
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)
 {% endhint %}
