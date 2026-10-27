@@ -15,7 +15,7 @@
 >   `"matcha": { "serverUrl": "http://127.0.0.1:8765/mcp" }` inside `"mcpServers"`.
 > To add to Codex: run `codex mcp add matcha --url http://127.0.0.1:8765/mcp`
 
-> **Latest version:** version-11f155f3450f4c8e (Oct 16 2026)
+> **Latest version:** version-5a21b87bbc2641cf (Oct 27 2026)
 > **Website:** https://matcha-latte.win
 
 
@@ -32,9 +32,9 @@ This is the documentation for the Matcha LuaVM.
 Matcha **is not an executor** — it does not hook any functions in the Roblox engine. Instead it emulates them externally, which makes it completely undetected, but also means it has no direct access to internal Roblox API functions.
 
 > **[success]**
-**Changelogs (Oct 23 2026)**
-- Fixed Raycast
-- Fixed fov, lighting flickering
+**Changelogs (Oct 27 2026)**
+- **Version:** [version-5a21b87bbc2641cf](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-5a21b87bbc2641cf)
+- Updated to the latest version
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)
 
@@ -3327,6 +3327,14 @@ Group: Reference
 # Changelogs
 
 Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
+
+---
+
+## [10/27/26 16:07:00] — vault
+
+#### Version: [version-5a21b87bbc2641cf](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-5a21b87bbc2641cf)
+#### Changelogs
+- Updated to the latest version
 
 ---
 
