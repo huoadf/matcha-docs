@@ -5,9 +5,8 @@ Matcha **is not an executor** — it does not hook any functions in the Roblox e
 {% endhint %}
 
 {% hint style="success" %}
-**Changelogs (Nov 10 2026)**
-- **Version:** [version-4ea8e85481e34f46](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-4ea8e85481e34f46)
-- Updated to the latest version
+**Changelogs (Nov 11 2026)**
+- Fixed Decompiler
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)
 {% endhint %}

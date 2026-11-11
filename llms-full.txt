@@ -32,9 +32,8 @@ This is the documentation for the Matcha LuaVM.
 Matcha **is not an executor** — it does not hook any functions in the Roblox engine. Instead it emulates them externally, which makes it completely undetected, but also means it has no direct access to internal Roblox API functions.
 
 > **[success]**
-**Changelogs (Nov 10 2026)**
-- **Version:** [version-4ea8e85481e34f46](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-4ea8e85481e34f46)
-- Updated to the latest version
+**Changelogs (Nov 11 2026)**
+- Fixed Decompiler
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)
 
@@ -121,7 +120,7 @@ function decompile(script: Instance): string
 Returns the decompiled source of `script` (a `LocalScript`, `ModuleScript`, or `Script`) as a string. If decompilation fails, an error message is printed to the console.
 
 > **[success]**
-**Fixed (Aug 6 2026):** Decompiler stability and output has been fixed in the latest version.
+**Fixed (Nov 11 2026):** Decompiler has been fixed in the latest version.
 
 ## WorldToScreen
 
@@ -3327,6 +3326,13 @@ Group: Reference
 # Changelogs
 
 Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
+
+---
+
+## [11/11/26 20:22:00] — vault
+
+#### Changelogs
+- Fixed Decompiler
 
 ---
 
