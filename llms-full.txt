@@ -32,10 +32,10 @@ This is the documentation for the Matcha LuaVM.
 Matcha **is not an executor** — it does not hook any functions in the Roblox engine. Instead it emulates them externally, which makes it completely undetected, but also means it has no direct access to internal Roblox API functions.
 
 > **[success]**
-**Changelogs (Nov 11 2026)**
-- Fixed Decompiler
+**Changelogs (Nov 12 2026)**
+- Fixed Auth
 
-*Run loader to update* · [Full changelogs →](/matcha/changelogs)
+*Run loader to update (required)* · [Full changelogs →](/matcha/changelogs)
 
 ## Browse the docs
 
@@ -3326,6 +3326,14 @@ Group: Reference
 # Changelogs
 
 Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
+
+---
+
+## [11/12/26 01:05:00] — vault
+
+#### Changelogs
+- Fixed Auth
+#### Run loader to update (required)
 
 ---
 

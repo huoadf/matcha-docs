@@ -5,10 +5,10 @@ Matcha **is not an executor** — it does not hook any functions in the Roblox e
 {% endhint %}
 
 {% hint style="success" %}
-**Changelogs (Nov 11 2026)**
-- Fixed Decompiler
+**Changelogs (Nov 12 2026)**
+- Fixed Auth
 
-*Run loader to update* · [Full changelogs →](/matcha/changelogs)
+*Run loader to update (required)* · [Full changelogs →](/matcha/changelogs)
 {% endhint %}
 
 ## Browse the docs
