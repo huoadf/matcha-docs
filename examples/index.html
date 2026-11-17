@@ -222,15 +222,22 @@ if GetPlayerData then
 end</code></pre>
 <hr>
 <h2 id="4-garbage-collector-scanning-getgc-applygc" tabindex="-1">4. Garbage Collector Scanning (<code>getgc</code> / <code>applygc</code>) <a class="header-anchor" href="#4-garbage-collector-scanning-getgc-applygc" aria-hidden="true">#</a></h2>
-<p>Scanning Lua garbage collector entries by key name and updating values.</p>
-<pre><code class="language-lua">local results = getgc("WalkSpeed")
+<p>Scanning Lua garbage collector entries by key names and batch-updating values.</p>
+<pre><code class="language-lua">local a = getgc({
+    "FireRate",
+    "SpreadAngle",
+    "RecoilUpKick",
+    "RecoilSideKick",
+    "MagazineSize"
+})
 
-for _, entry in ipairs(results) do
-    print("Found WalkSpeed:", entry.value, "at", entry.addr)
-end
-
--- Update all matching entries
-applygc(results, "WalkSpeed", 500)</code></pre>
+applygc(a, {
+    FireRate = 0.001,
+    SpreadAngle = 0,
+    RecoilUpKick = 0,
+    RecoilSideKick = 0,
+    MagazineSize = 9999
+})</code></pre>
 <hr>
 <h2 id="5-raycasting" tabindex="-1">5. Raycasting <a class="header-anchor" href="#5-raycasting" aria-hidden="true">#</a></h2>
 <p>Using <code>Workspace:Raycast</code> to detect objects in front of the camera or player.</p>

@@ -122,17 +122,24 @@ end
 
 ## 4. Garbage Collector Scanning (`getgc` / `applygc`)
 
-Scanning Lua garbage collector entries by key name and updating values.
+Scanning Lua garbage collector entries by key names and batch-updating values.
 
 ```lua
-local results = getgc("WalkSpeed")
+local a = getgc({
+    "FireRate",
+    "SpreadAngle",
+    "RecoilUpKick",
+    "RecoilSideKick",
+    "MagazineSize"
+})
 
-for _, entry in ipairs(results) do
-    print("Found WalkSpeed:", entry.value, "at", entry.addr)
-end
-
--- Update all matching entries
-applygc(results, "WalkSpeed", 500)
+applygc(a, {
+    FireRate = 0.001,
+    SpreadAngle = 0,
+    RecoilUpKick = 0,
+    RecoilSideKick = 0,
+    MagazineSize = 9999
+})
 ```
 
 ---
