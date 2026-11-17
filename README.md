@@ -1,7 +1,7 @@
 # Matcha Documentation
 
 [![Docs Live](https://img.shields.io/badge/docs-live-8cc63f?style=flat-square)](https://huoadf.github.io/matcha-docs/)
-[![Matcha Version](https://img.shields.io/badge/roblox_version-4ea8e85481e34f46-blue?style=flat-square)](https://huoadf.github.io/matcha-docs/changelogs/)
+[![Matcha Version](https://img.shields.io/badge/roblox_version-2c6fd5e09aaf4cfa-blue?style=flat-square)](https://huoadf.github.io/matcha-docs/changelogs/)
 [![AI Ready](https://img.shields.io/badge/AI_Ready-llms.txt-purple?style=flat-square)](https://huoadf.github.io/matcha-docs/llms.txt)
 
 Official, comprehensive documentation for the **Matcha LuaVM** — an external, undetected LuaVM emulator for Roblox.

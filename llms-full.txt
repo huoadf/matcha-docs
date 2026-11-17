@@ -15,7 +15,7 @@
 >   `"matcha": { "serverUrl": "http://127.0.0.1:8765/mcp" }` inside `"mcpServers"`.
 > To add to Codex: run `codex mcp add matcha --url http://127.0.0.1:8765/mcp`
 
-> **Latest version:** version-4ea8e85481e34f46 (Nov 10 2026)
+> **Latest version:** version-2c6fd5e09aaf4cfa (Nov 17 2026)
 > **Website:** https://matcha-latte.win
 
 
@@ -33,8 +33,8 @@ Matcha **is not an executor** — it does not hook any functions in the Roblox e
 
 > **[success]**
 **Changelogs (Nov 17 2026)**
-- **Lua VM**: Added `PVInstance:PivotTo`, `PVInstance:GetPivot`, `queue_on_teleport` / `queueonteleport`, `get_aimbot_target`, `get_triggerbot_target`, `get_silent_aim_target`, `ishybridenabled`, and fixed `Instance:IsA`.
-- **General**: Added Silent Aim Hitchance (%, min/max spread), Waypoint improvements (search, scrolling, folders, saved in config), and music overlay upgrades.
+- **Version:** [version-2c6fd5e09aaf4cfa](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-2c6fd5e09aaf4cfa)
+- Updated to the latest version
 
 *Run loader to update* · [Full changelogs →](/matcha/changelogs)
 
@@ -3464,6 +3464,14 @@ Group: Reference
 # Changelogs
 
 Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
+
+---
+
+## [11/17/26 17:04:00] — vault
+
+#### Version: [version-2c6fd5e09aaf4cfa](https://rdd.whatexpsare.online/?channel=LIVE&binaryType=WindowsPlayer&version=version-2c6fd5e09aaf4cfa)
+#### Changelogs
+- Updated to the latest version
 
 ---
 
