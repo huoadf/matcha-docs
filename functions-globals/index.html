@@ -231,6 +231,45 @@ fireclickdetector(cd, 0.0, "MouseHoverLeave")</code></pre>
 </ul>
 <pre><code class="language-lua">local doorPrompt = workspace.Door.ProximityPrompt
 fireproximityprompt(doorPrompt)</code></pre>
+<hr>
+<h2 id="queue-on-teleport-queueonteleport" tabindex="-1">queue_on_teleport / queueonteleport <a class="header-anchor" href="#queue-on-teleport-queueonteleport" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function queue_on_teleport(source: string)
+function queueonteleport(source: string)</code></pre>
+<p>Queues Lua script <code>source</code> to be automatically executed whenever the player teleports to a new server or place.</p>
+<pre><code class="language-lua">queue_on_teleport([[print("Hello World from queued teleport!")]])</code></pre>
+<hr>
+<h2 id="get-aimbot-target" tabindex="-1">get_aimbot_target <a class="header-anchor" href="#get-aimbot-target" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function get_aimbot_target(): Instance?</code></pre>
+<p>Returns the <code>Instance</code> (typically the target player character or aim part) currently locked onto or selected by Matcha's internal Aimbot, or <code>nil</code> if no target is active.</p>
+<pre><code class="language-lua">local target = get_aimbot_target()
+if target then
+    print("Aimbot target:", target:GetFullName())
+end</code></pre>
+<hr>
+<h2 id="get-triggerbot-target" tabindex="-1">get_triggerbot_target <a class="header-anchor" href="#get-triggerbot-target" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function get_triggerbot_target(): Instance?</code></pre>
+<p>Returns the <code>Instance</code> currently evaluated under the crosshair/cursor by Matcha's Triggerbot, or <code>nil</code> if none.</p>
+<pre><code class="language-lua">local target = get_triggerbot_target()
+if target then
+    print("Triggerbot target:", target.Name)
+end</code></pre>
+<hr>
+<h2 id="get-silent-aim-target" tabindex="-1">get_silent_aim_target <a class="header-anchor" href="#get-silent-aim-target" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function get_silent_aim_target(): Instance?</code></pre>
+<p>Returns the <code>Instance</code> currently targeted by Matcha's Silent Aim system, or <code>nil</code> if no target is acquired.</p>
+<pre><code class="language-lua">local target = get_silent_aim_target()
+if target then
+    print("Silent aim target:", target:GetFullName())
+end</code></pre>
+<hr>
+<h2 id="ishybridenabled" tabindex="-1">ishybridenabled <a class="header-anchor" href="#ishybridenabled" aria-hidden="true">#</a></h2>
+<pre><code class="language-lua">function ishybridenabled(): boolean</code></pre>
+<p>Returns <code>true</code> if Matcha is running with <strong>Hybrid Mode</strong> (Pro) enabled, allowing remote interaction and hybrid functions (<code>FireServer</code>, <code>InvokeServer</code>, <code>firetouchinterest</code>, etc.), or <code>false</code> otherwise.</p>
+<pre><code class="language-lua">if ishybridenabled() then
+    print("Hybrid Mode active - Remote interactions ready")
+else
+    print("Standard external VM mode")
+end</code></pre>
       </article>
       
       <nav class="pager">
@@ -269,6 +308,11 @@ fireproximityprompt(doorPrompt)</code></pre>
 <li class="toc-l2"><a href="#firetouchinterest-pro">firetouchinterest pro</a></li>
 <li class="toc-l2"><a href="#fireclickdetector-pro">fireclickdetector pro</a></li>
 <li class="toc-l2"><a href="#fireproximityprompt-pro">fireproximityprompt pro</a></li>
+<li class="toc-l2"><a href="#queue-on-teleport-queueonteleport">queue_on_teleport / queueonteleport</a></li>
+<li class="toc-l2"><a href="#get-aimbot-target">get_aimbot_target</a></li>
+<li class="toc-l2"><a href="#get-triggerbot-target">get_triggerbot_target</a></li>
+<li class="toc-l2"><a href="#get-silent-aim-target">get_silent_aim_target</a></li>
+<li class="toc-l2"><a href="#ishybridenabled">ishybridenabled</a></li>
 </ul>
     </aside>
   </div>

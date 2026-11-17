@@ -4,6 +4,32 @@ Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
 
 ---
 
+## [11/17/26 15:48:00] — vault
+
+#### General
+- Added Hitchance to silent aim: hitchance %, min spread, max spread
+- Fixed health based color for health text
+- Changed the look for visualize waypoint
+- Visualize Waypoint now will be saved in config
+- Waypoint list: search bar, mouse-wheel scrolling, and sorting by name or date
+- Added Waypoint Folders drag-and-drop or right-click to move waypoints
+- Added animated album cover to compact design on music overlay
+- Redesigned marble liquid type in music overlay
+- Fix profile picture doesn't load on watermark on classic ui
+
+#### Lua VM
+- Fixed `Instance:IsA(string: class) : boolean`
+- Added `PVInstance:PivotTo(CFrame: cframe) : nil`
+- Added `PVInstance:GetPivot() : CFrame?`
+- Added `queue_on_teleport(string: source) : nil` / `queueonteleport(string: source) : nil`
+- Added `get_aimbot_target() : instance?`
+- Added `get_triggerbot_target() : instance?`
+- Added `get_silent_aim_target() : instance?`
+- Added `ishybridenabled() : boolean`
+#### Run loader to update
+
+---
+
 ## [11/12/26 01:05:00] — vault
 
 #### Changelogs

@@ -238,3 +238,88 @@ Instantly triggers and completes a `ProximityPrompt` interaction without requiri
 local doorPrompt = workspace.Door.ProximityPrompt
 fireproximityprompt(doorPrompt)
 ```
+
+---
+
+## queue_on_teleport / queueonteleport
+
+```lua
+function queue_on_teleport(source: string)
+function queueonteleport(source: string)
+```
+
+Queues Lua script `source` to be automatically executed whenever the player teleports to a new server or place.
+
+```lua
+queue_on_teleport([[print("Hello World from queued teleport!")]])
+```
+
+---
+
+## get_aimbot_target
+
+```lua
+function get_aimbot_target(): Instance?
+```
+
+Returns the `Instance` (typically the target player character or aim part) currently locked onto or selected by Matcha's internal Aimbot, or `nil` if no target is active.
+
+```lua
+local target = get_aimbot_target()
+if target then
+    print("Aimbot target:", target:GetFullName())
+end
+```
+
+---
+
+## get_triggerbot_target
+
+```lua
+function get_triggerbot_target(): Instance?
+```
+
+Returns the `Instance` currently evaluated under the crosshair/cursor by Matcha's Triggerbot, or `nil` if none.
+
+```lua
+local target = get_triggerbot_target()
+if target then
+    print("Triggerbot target:", target.Name)
+end
+```
+
+---
+
+## get_silent_aim_target
+
+```lua
+function get_silent_aim_target(): Instance?
+```
+
+Returns the `Instance` currently targeted by Matcha's Silent Aim system, or `nil` if no target is acquired.
+
+```lua
+local target = get_silent_aim_target()
+if target then
+    print("Silent aim target:", target:GetFullName())
+end
+```
+
+---
+
+## ishybridenabled
+
+```lua
+function ishybridenabled(): boolean
+```
+
+Returns `true` if Matcha is running with **Hybrid Mode** (Pro) enabled, allowing remote interaction and hybrid functions (`FireServer`, `InvokeServer`, `firetouchinterest`, etc.), or `false` otherwise.
+
+```lua
+if ishybridenabled() then
+    print("Hybrid Mode active - Remote interactions ready")
+else
+    print("Standard external VM mode")
+end
+```
+

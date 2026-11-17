@@ -5,10 +5,11 @@ Matcha **is not an executor** — it does not hook any functions in the Roblox e
 {% endhint %}
 
 {% hint style="success" %}
-**Changelogs (Nov 12 2026)**
-- Fixed Auth
+**Changelogs (Nov 17 2026)**
+- **Lua VM**: Added `PVInstance:PivotTo`, `PVInstance:GetPivot`, `queue_on_teleport` / `queueonteleport`, `get_aimbot_target`, `get_triggerbot_target`, `get_silent_aim_target`, `ishybridenabled`, and fixed `Instance:IsA`.
+- **General**: Added Silent Aim Hitchance (%, min/max spread), Waypoint improvements (search, scrolling, folders, saved in config), and music overlay upgrades.
 
-*Run loader to update (required)* · [Full changelogs →](/matcha/changelogs)
+*Run loader to update* · [Full changelogs →](/matcha/changelogs)
 {% endhint %}
 
 ## Browse the docs

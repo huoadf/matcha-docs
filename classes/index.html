@@ -185,6 +185,22 @@
 <pre><code class="language-lua">Humanoid.MaxHealth: number</code></pre>
 <h3 id="health" tabindex="-1">Health <a class="header-anchor" href="#health" aria-hidden="true">#</a></h3>
 <pre><code class="language-lua">Humanoid.Health: number</code></pre>
+<h2 id="pvinstance" tabindex="-1">PVInstance <a class="header-anchor" href="#pvinstance" aria-hidden="true">#</a></h2>
+<a href="https://create.roblox.com/docs/reference/engine/classes/PVInstance">https://create.roblox.com/docs/reference/engine/classes/PVInstance</a>
+<p>Abstract base class for <code>BasePart</code> and <code>Model</code> providing coordinate frame and pivot manipulation.</p>
+<p><strong>Methods</strong></p>
+<h3 id="pivotto" tabindex="-1">PivotTo <a class="header-anchor" href="#pivotto" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function PVInstance:PivotTo(cframe: CFrame)</code></pre>
+<p>Sets the pivot <code>CFrame</code> of the <code>PVInstance</code> (and transforms the entire Model or BasePart accordingly).</p>
+<pre><code class="language-lua">local model = workspace:FindFirstChild("MyModel")
+if model then
+    model:PivotTo(CFrame.new(0, 50, 0))
+end</code></pre>
+<h3 id="getpivot" tabindex="-1">GetPivot <a class="header-anchor" href="#getpivot" aria-hidden="true">#</a></h3>
+<pre><code class="language-lua">function PVInstance:GetPivot(): CFrame?</code></pre>
+<p>Returns the current world pivot <code>CFrame</code> of the <code>PVInstance</code>.</p>
+<pre><code class="language-lua">local pivot = workspace.Part:GetPivot()
+print("Pivot position:", pivot.Position)</code></pre>
 <h2 id="model" tabindex="-1">Model <a class="header-anchor" href="#model" aria-hidden="true">#</a></h2>
 <a href="https://create.roblox.com/docs/reference/engine/classes/Model">https://create.roblox.com/docs/reference/engine/classes/Model</a>
 <p><strong>Properties</strong></p>
@@ -242,7 +258,8 @@
 <h3 id="findfirstchild" tabindex="-1">FindFirstChild <a class="header-anchor" href="#findfirstchild" aria-hidden="true">#</a></h3>
 <pre><code class="language-lua">function Instance:FindFirstChild(name: string): Instance</code></pre>
 <h3 id="isa" tabindex="-1">IsA <a class="header-anchor" href="#isa" aria-hidden="true">#</a></h3>
-<pre><code class="language-lua">function Instance:IsA(name: string): boolean</code></pre>
+<pre><code class="language-lua">function Instance:IsA(class: string): boolean</code></pre>
+<p>Returns <code>true</code> if the instance belongs to <code>class</code> or inherits from <code>class</code>, otherwise <code>false</code>. <em>(Fixed in Nov 17 2026 build).</em></p>
 <h3 id="getfullname" tabindex="-1">GetFullName <a class="header-anchor" href="#getfullname" aria-hidden="true">#</a></h3>
 <pre><code class="language-lua">function Instance:GetFullName(): string</code></pre>
 <h3 id="getchildren" tabindex="-1">GetChildren <a class="header-anchor" href="#getchildren" aria-hidden="true">#</a></h3>
@@ -401,6 +418,9 @@ RemoteFunction:InvokeFunction(...any): ...any</code></pre>
 <li class="toc-l2"><a href="#humanoid">Humanoid</a></li>
 <li class="toc-l3"><a href="#maxhealth">MaxHealth</a></li>
 <li class="toc-l3"><a href="#health">Health</a></li>
+<li class="toc-l2"><a href="#pvinstance">PVInstance</a></li>
+<li class="toc-l3"><a href="#pivotto">PivotTo</a></li>
+<li class="toc-l3"><a href="#getpivot">GetPivot</a></li>
 <li class="toc-l2"><a href="#model">Model</a></li>
 <li class="toc-l3"><a href="#primarypart">PrimaryPart</a></li>
 <li class="toc-l2"><a href="#workspace">Workspace</a></li>

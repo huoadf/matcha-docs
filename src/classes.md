@@ -181,6 +181,43 @@ Humanoid.Health: number
 ```
 
 
+## PVInstance
+
+<https://create.roblox.com/docs/reference/engine/classes/PVInstance>
+
+Abstract base class for `BasePart` and `Model` providing coordinate frame and pivot manipulation.
+
+**Methods**
+
+### PivotTo
+
+```lua
+function PVInstance:PivotTo(cframe: CFrame)
+```
+
+Sets the pivot `CFrame` of the `PVInstance` (and transforms the entire Model or BasePart accordingly).
+
+```lua
+local model = workspace:FindFirstChild("MyModel")
+if model then
+    model:PivotTo(CFrame.new(0, 50, 0))
+end
+```
+
+### GetPivot
+
+```lua
+function PVInstance:GetPivot(): CFrame?
+```
+
+Returns the current world pivot `CFrame` of the `PVInstance`.
+
+```lua
+local pivot = workspace.Part:GetPivot()
+print("Pivot position:", pivot.Position)
+```
+
+
 ## Model
 
 <https://create.roblox.com/docs/reference/engine/classes/Model>
@@ -333,8 +370,10 @@ function Instance:FindFirstChild(name: string): Instance
 ### IsA
 
 ```lua
-function Instance:IsA(name: string): boolean
+function Instance:IsA(class: string): boolean
 ```
+
+Returns `true` if the instance belongs to `class` or inherits from `class`, otherwise `false`. *(Fixed in Nov 17 2026 build).*
 
 ### GetFullName
 

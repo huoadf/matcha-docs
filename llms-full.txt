@@ -32,10 +32,11 @@ This is the documentation for the Matcha LuaVM.
 Matcha **is not an executor** — it does not hook any functions in the Roblox engine. Instead it emulates them externally, which makes it completely undetected, but also means it has no direct access to internal Roblox API functions.
 
 > **[success]**
-**Changelogs (Nov 12 2026)**
-- Fixed Auth
+**Changelogs (Nov 17 2026)**
+- **Lua VM**: Added `PVInstance:PivotTo`, `PVInstance:GetPivot`, `queue_on_teleport` / `queueonteleport`, `get_aimbot_target`, `get_triggerbot_target`, `get_silent_aim_target`, `ishybridenabled`, and fixed `Instance:IsA`.
+- **General**: Added Silent Aim Hitchance (%, min/max spread), Waypoint improvements (search, scrolling, folders, saved in config), and music overlay upgrades.
 
-*Run loader to update (required)* · [Full changelogs →](/matcha/changelogs)
+*Run loader to update* · [Full changelogs →](/matcha/changelogs)
 
 ## Browse the docs
 
@@ -333,6 +334,90 @@ Instantly triggers and completes a `ProximityPrompt` interaction without requiri
 ```lua
 local doorPrompt = workspace.Door.ProximityPrompt
 fireproximityprompt(doorPrompt)
+```
+
+---
+
+## queue_on_teleport / queueonteleport
+
+```lua
+function queue_on_teleport(source: string)
+function queueonteleport(source: string)
+```
+
+Queues Lua script `source` to be automatically executed whenever the player teleports to a new server or place.
+
+```lua
+queue_on_teleport([[print("Hello World from queued teleport!")]])
+```
+
+---
+
+## get_aimbot_target
+
+```lua
+function get_aimbot_target(): Instance?
+```
+
+Returns the `Instance` (typically the target player character or aim part) currently locked onto or selected by Matcha's internal Aimbot, or `nil` if no target is active.
+
+```lua
+local target = get_aimbot_target()
+if target then
+    print("Aimbot target:", target:GetFullName())
+end
+```
+
+---
+
+## get_triggerbot_target
+
+```lua
+function get_triggerbot_target(): Instance?
+```
+
+Returns the `Instance` currently evaluated under the crosshair/cursor by Matcha's Triggerbot, or `nil` if none.
+
+```lua
+local target = get_triggerbot_target()
+if target then
+    print("Triggerbot target:", target.Name)
+end
+```
+
+---
+
+## get_silent_aim_target
+
+```lua
+function get_silent_aim_target(): Instance?
+```
+
+Returns the `Instance` currently targeted by Matcha's Silent Aim system, or `nil` if no target is acquired.
+
+```lua
+local target = get_silent_aim_target()
+if target then
+    print("Silent aim target:", target:GetFullName())
+end
+```
+
+---
+
+## ishybridenabled
+
+```lua
+function ishybridenabled(): boolean
+```
+
+Returns `true` if Matcha is running with **Hybrid Mode** (Pro) enabled, allowing remote interaction and hybrid functions (`FireServer`, `InvokeServer`, `firetouchinterest`, etc.), or `false` otherwise.
+
+```lua
+if ishybridenabled() then
+    print("Hybrid Mode active - Remote interactions ready")
+else
+    print("Standard external VM mode")
+end
 ```
 
 ---
@@ -1167,6 +1252,40 @@ Humanoid.MaxHealth: number
 Humanoid.Health: number
 ```
 
+## PVInstance
+
+Abstract base class for `BasePart` and `Model` providing coordinate frame and pivot manipulation.
+
+**Methods**
+
+### PivotTo
+
+```lua
+function PVInstance:PivotTo(cframe: CFrame)
+```
+
+Sets the pivot `CFrame` of the `PVInstance` (and transforms the entire Model or BasePart accordingly).
+
+```lua
+local model = workspace:FindFirstChild("MyModel")
+if model then
+    model:PivotTo(CFrame.new(0, 50, 0))
+end
+```
+
+### GetPivot
+
+```lua
+function PVInstance:GetPivot(): CFrame?
+```
+
+Returns the current world pivot `CFrame` of the `PVInstance`.
+
+```lua
+local pivot = workspace.Part:GetPivot()
+print("Pivot position:", pivot.Position)
+```
+
 ## Model
 
 **Properties**
@@ -1303,8 +1422,10 @@ function Instance:FindFirstChild(name: string): Instance
 ### IsA
 
 ```lua
-function Instance:IsA(name: string): boolean
+function Instance:IsA(class: string): boolean
 ```
+
+Returns `true` if the instance belongs to `class` or inherits from `class`, otherwise `false`. *(Fixed in Nov 17 2026 build).*
 
 ### GetFullName
 
@@ -3268,6 +3389,14 @@ AI coding assistants and script authors should keep these rules in mind when wri
 | `firetouchinterest` | ✅ Yes | Supported [Pro] (Added Oct 21) |
 | `fireclickdetector` | ✅ Yes | Supported [Pro] (Added Oct 21) |
 | `fireproximityprompt` | ✅ Yes | Supported [Pro] (Added Oct 21) |
+| `PVInstance:PivotTo` | ✅ Yes | Supported (Added Nov 17) |
+| `PVInstance:GetPivot` | ✅ Yes | Supported (Added Nov 17) |
+| `queue_on_teleport` | ✅ Yes | Supported (Added Nov 17) |
+| `get_aimbot_target` | ✅ Yes | Supported (Added Nov 17) |
+| `get_triggerbot_target` | ✅ Yes | Supported (Added Nov 17) |
+| `get_silent_aim_target` | ✅ Yes | Supported (Added Nov 17) |
+| `ishybridenabled` | ✅ Yes | Supported (Added Nov 17) |
+| `Instance:IsA` | ✅ Yes | Fixed (Nov 17) |
 
 ---
 
@@ -3326,6 +3455,32 @@ Group: Reference
 # Changelogs
 
 Complete, unfiltered release logs and updates for Matcha from 2025 to 2026.
+
+---
+
+## [11/17/26 15:48:00] — vault
+
+#### General
+- Added Hitchance to silent aim: hitchance %, min spread, max spread
+- Fixed health based color for health text
+- Changed the look for visualize waypoint
+- Visualize Waypoint now will be saved in config
+- Waypoint list: search bar, mouse-wheel scrolling, and sorting by name or date
+- Added Waypoint Folders drag-and-drop or right-click to move waypoints
+- Added animated album cover to compact design on music overlay
+- Redesigned marble liquid type in music overlay
+- Fix profile picture doesn't load on watermark on classic ui
+
+#### Lua VM
+- Fixed `Instance:IsA(string: class) : boolean`
+- Added `PVInstance:PivotTo(CFrame: cframe) : nil`
+- Added `PVInstance:GetPivot() : CFrame?`
+- Added `queue_on_teleport(string: source) : nil` / `queueonteleport(string: source) : nil`
+- Added `get_aimbot_target() : instance?`
+- Added `get_triggerbot_target() : instance?`
+- Added `get_silent_aim_target() : instance?`
+- Added `ishybridenabled() : boolean`
+#### Run loader to update
 
 ---
 

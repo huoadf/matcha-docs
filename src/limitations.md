@@ -61,3 +61,11 @@ AI coding assistants and script authors should keep these rules in mind when wri
 | `firetouchinterest` | ✅ Yes | Supported ::pro:: (Added Oct 21) |
 | `fireclickdetector` | ✅ Yes | Supported ::pro:: (Added Oct 21) |
 | `fireproximityprompt` | ✅ Yes | Supported ::pro:: (Added Oct 21) |
+| `PVInstance:PivotTo` | ✅ Yes | Supported (Added Nov 17) |
+| `PVInstance:GetPivot` | ✅ Yes | Supported (Added Nov 17) |
+| `queue_on_teleport` | ✅ Yes | Supported (Added Nov 17) |
+| `get_aimbot_target` | ✅ Yes | Supported (Added Nov 17) |
+| `get_triggerbot_target` | ✅ Yes | Supported (Added Nov 17) |
+| `get_silent_aim_target` | ✅ Yes | Supported (Added Nov 17) |
+| `ishybridenabled` | ✅ Yes | Supported (Added Nov 17) |
+| `Instance:IsA` | ✅ Yes | Fixed (Nov 17) |
