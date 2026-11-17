@@ -28,16 +28,22 @@ local function createBox(player)
     boxes[player] = box
 end
 
-for _, player in ipairs(Players:GetPlayers()) do
-    createBox(player)
-end
-
-Players.PlayerAdded:Connect(createBox)
-
-Players.PlayerRemoving:Connect(function(player)
-    if boxes[player] then
-        boxes[player]:Remove()
-        boxes[player] = nil
+task.spawn(function()
+    while true do
+        local active = {}
+        for _, player in ipairs(Players:GetPlayers()) do
+            active[player] = true
+            if not boxes[player] then
+                createBox(player)
+            end
+        end
+        for player, box in pairs(boxes) do
+            if not active[player] then
+                box:Remove()
+                boxes[player] = nil
+            end
+        end
+        task.wait(1)
     end
 end)
 
@@ -114,19 +120,19 @@ end
 
 ---
 
-## 4. Garbage Collector Scanning (`getgc`)
+## 4. Garbage Collector Scanning (`getgc` / `applygc`)
 
-Iterating through Lua garbage collector objects to find tables, functions, or upvalues.
+Scanning Lua garbage collector entries by key name and updating values.
 
 ```lua
-local gc = getgc(true) -- Get all tables and functions
+local results = getgc("WalkSpeed")
 
-for _, item in ipairs(gc) do
-    if type(item) == "table" and rawget(item, "WalkSpeed") then
-        print("Found Movement Config Table!")
-        item.WalkSpeed = 500
-    end
+for _, entry in ipairs(results) do
+    print("Found WalkSpeed:", entry.value, "at", entry.addr)
 end
+
+-- Update all matching entries
+applygc(results, "WalkSpeed", 500)
 ```
 
 ---

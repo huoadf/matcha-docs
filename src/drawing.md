@@ -330,14 +330,24 @@ connection = RunService.Heartbeat:Connect(function()
     end
 end)
 
--- Initialize ESP for current players
-for _, player in ipairs(Players:GetPlayers()) do
-    addESP(player)
-end
-
--- Hook player join/leave events
-Players.PlayerAdded:Connect(addESP)
-Players.PlayerRemoving:Connect(removeESP)
+-- Sync ESP for current & newly joined players
+task.spawn(function()
+    while true do
+        local current = {}
+        for _, player in ipairs(Players:GetPlayers()) do
+            current[player] = true
+            if not espObjects[player] then
+                addESP(player)
+            end
+        end
+        for player in pairs(espObjects) do
+            if not current[player] then
+                removeESP(player)
+            end
+        end
+        task.wait(1)
+    end
+end)
 
 print("Matcha ESP script loaded! Draw overlays are now active.")
 ```

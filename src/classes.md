@@ -475,20 +475,6 @@ Players.LocalPlayer: Player
 function Players:GetPlayers(): Table
 ```
 
-**Events**
-
-### PlayerAdded
-
-```lua
-Players.PlayerAdded:Connect(function(player))
-```
-
-### PlayerRemoving
-
-```lua
-Players.PlayerRemoving:Connect(function(player))
-```
-
 
 ## Player
 

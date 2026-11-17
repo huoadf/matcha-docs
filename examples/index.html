@@ -144,16 +144,22 @@ local function createBox(player)
     boxes[player] = box
 end
 
-for _, player in ipairs(Players:GetPlayers()) do
-    createBox(player)
-end
-
-Players.PlayerAdded:Connect(createBox)
-
-Players.PlayerRemoving:Connect(function(player)
-    if boxes[player] then
-        boxes[player]:Remove()
-        boxes[player] = nil
+task.spawn(function()
+    while true do
+        local active = {}
+        for _, player in ipairs(Players:GetPlayers()) do
+            active[player] = true
+            if not boxes[player] then
+                createBox(player)
+            end
+        end
+        for player, box in pairs(boxes) do
+            if not active[player] then
+                box:Remove()
+                boxes[player] = nil
+            end
+        end
+        task.wait(1)
     end
 end)
 
@@ -215,16 +221,16 @@ if GetPlayerData then
     print("Received player data:", data)
 end</code></pre>
 <hr>
-<h2 id="4-garbage-collector-scanning-getgc" tabindex="-1">4. Garbage Collector Scanning (<code>getgc</code>) <a class="header-anchor" href="#4-garbage-collector-scanning-getgc" aria-hidden="true">#</a></h2>
-<p>Iterating through Lua garbage collector objects to find tables, functions, or upvalues.</p>
-<pre><code class="language-lua">local gc = getgc(true) -- Get all tables and functions
+<h2 id="4-garbage-collector-scanning-getgc-applygc" tabindex="-1">4. Garbage Collector Scanning (<code>getgc</code> / <code>applygc</code>) <a class="header-anchor" href="#4-garbage-collector-scanning-getgc-applygc" aria-hidden="true">#</a></h2>
+<p>Scanning Lua garbage collector entries by key name and updating values.</p>
+<pre><code class="language-lua">local results = getgc("WalkSpeed")
 
-for _, item in ipairs(gc) do
-    if type(item) == "table" and rawget(item, "WalkSpeed") then
-        print("Found Movement Config Table!")
-        item.WalkSpeed = 500
-    end
-end</code></pre>
+for _, entry in ipairs(results) do
+    print("Found WalkSpeed:", entry.value, "at", entry.addr)
+end
+
+-- Update all matching entries
+applygc(results, "WalkSpeed", 500)</code></pre>
 <hr>
 <h2 id="5-raycasting" tabindex="-1">5. Raycasting <a class="header-anchor" href="#5-raycasting" aria-hidden="true">#</a></h2>
 <p>Using <code>Workspace:Raycast</code> to detect objects in front of the camera or player.</p>
@@ -258,7 +264,7 @@ end</code></pre>
 <li class="toc-l2"><a href="#1-2d-box-esp-overlay">1. 2D Box ESP Overlay</a></li>
 <li class="toc-l2"><a href="#2-memory-read-write-unlimited-health-speed">2. Memory Read / Write (Unlimited Health / Speed)</a></li>
 <li class="toc-l2"><a href="#3-remote-event-invocation-pro-pro">3. Remote Event Invocation (Pro pro)</a></li>
-<li class="toc-l2"><a href="#4-garbage-collector-scanning-getgc">4. Garbage Collector Scanning (getgc)</a></li>
+<li class="toc-l2"><a href="#4-garbage-collector-scanning-getgc-applygc">4. Garbage Collector Scanning (getgc / applygc)</a></li>
 <li class="toc-l2"><a href="#5-raycasting">5. Raycasting</a></li>
 </ul>
     </aside>
