@@ -45,7 +45,9 @@
       </div>
     </div>
     
-    <div class="topbar-spacer"></div>
+    <div class="topbar-spacer" style="display: flex; align-items: center; justify-content: center;">
+      <span style="font-size: 11px; color: var(--text-muted); opacity: 0.75; letter-spacing: 0.2px;">Credits: roguekitty._ (Kitty)</span>
+    </div>
     
     <button class="searchbtn" data-search-open>
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -222,7 +224,7 @@ if GetPlayerData then
 end</code></pre>
 <hr>
 <h2 id="4-garbage-collector-scanning-getgc-applygc" tabindex="-1">4. Garbage Collector Scanning (<code>getgc</code> / <code>applygc</code>) <a class="header-anchor" href="#4-garbage-collector-scanning-getgc-applygc" aria-hidden="true">#</a></h2>
-<p>Scanning Lua garbage collector entries by key names and batch-updating values. <em>(Credit: <code>roguekitty._</code> / Kitty)</em></p>
+<p>Scanning Lua garbage collector entries by key names and batch-updating values.</p>
 <pre><code class="language-lua">local a = getgc({
     "FireRate",
     "SpreadAngle",

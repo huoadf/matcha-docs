@@ -3289,7 +3289,7 @@ end
 
 ## 4. Garbage Collector Scanning (`getgc` / `applygc`)
 
-Scanning Lua garbage collector entries by key names and batch-updating values. *(Credit: `roguekitty._` / Kitty)*
+Scanning Lua garbage collector entries by key names and batch-updating values.
 
 ```lua
 local a = getgc({
